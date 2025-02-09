@@ -1,4 +1,3 @@
-
 import { 
   Home, 
   Settings, 
@@ -71,20 +70,8 @@ const Dashboard = () => {
 
               <div className="pt-4 space-y-1">
                 <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
-                  <Calendar className="w-5 h-5 mr-3" />
-                  ARTNAV FAIR 2025
-                </a>
-                <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
-                  <Calendar className="w-5 h-5 mr-3" />
-                  Welcome to Artnav Fair 2025
-                </a>
-                <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
                   <Plus className="w-5 h-5 mr-3" />
-                  new
-                </a>
-                <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
-                  <Plus className="w-5 h-5 mr-3" />
-                  + Add a new fair
+                  Add a new fair
                 </a>
               </div>
             </div>

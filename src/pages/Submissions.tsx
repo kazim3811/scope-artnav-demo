@@ -3,6 +3,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowLeftToLine, Eye } from "lucide-react";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import MainLayout from "@/components/layouts/MainLayout";
 
 const Submissions = () => {
@@ -33,7 +34,48 @@ const Submissions = () => {
 
       <main className="p-8">
         <div className="mb-8">
-          <div className="flex gap-4 mb-6">
+          <Tabs defaultValue="gallery-applications" className="mb-6">
+            <TabsList className="bg-transparent border-b w-full rounded-none h-auto p-0 space-x-8">
+              <TabsTrigger 
+                value="gallery-applications" 
+                className="border-b-2 border-transparent data-[state=active]:border-black rounded-none bg-transparent px-0 h-10"
+              >
+                Gallery Applications
+              </TabsTrigger>
+              <TabsTrigger 
+                value="gallery-submissions" 
+                className="border-b-2 border-transparent data-[state=active]:border-black rounded-none bg-transparent px-0 h-10"
+              >
+                Gallery Submissions
+              </TabsTrigger>
+              <TabsTrigger 
+                value="represented-artists" 
+                className="border-b-2 border-transparent data-[state=active]:border-black rounded-none bg-transparent px-0 h-10"
+              >
+                Represented Artists
+              </TabsTrigger>
+              <TabsTrigger 
+                value="results-manager" 
+                className="border-b-2 border-transparent data-[state=active]:border-black rounded-none bg-transparent px-0 h-10"
+              >
+                Results Manager
+              </TabsTrigger>
+              <TabsTrigger 
+                value="public-user-applications" 
+                className="border-b-2 border-transparent data-[state=active]:border-black rounded-none bg-transparent px-0 h-10"
+              >
+                Public User Applications
+              </TabsTrigger>
+              <TabsTrigger 
+                value="committee-sheets" 
+                className="border-b-2 border-transparent data-[state=active]:border-black rounded-none bg-transparent px-0 h-10"
+              >
+                Committee Sheets
+              </TabsTrigger>
+            </TabsList>
+          </Tabs>
+
+          <div className="flex justify-end gap-4 mb-6">
             <Button variant="outline" className="flex items-center gap-2">
               <span>All Result</span>
             </Button>

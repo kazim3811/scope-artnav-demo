@@ -4,9 +4,21 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowLeftToLine, Eye } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import MainLayout from "@/components/layouts/MainLayout";
+import { useState } from "react";
 
 const Submissions = () => {
+  const [search, setSearch] = useState("");
+  const [applicationForm, setApplicationForm] = useState("any");
+
   const submissions = [
     { id: 1, name: "*Frieze Test* Anouka", status: "Not Submitted" },
     { id: 2, name: "*Frieze Test* by Rebeka", status: "Not Submitted" },
@@ -17,6 +29,10 @@ const Submissions = () => {
     { id: 7, name: "3812 Gallery", status: "Not Submitted" },
     { id: 8, name: "47 Canal", status: "Not Submitted" },
   ];
+
+  const filteredSubmissions = submissions.filter((submission) =>
+    submission.name.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <MainLayout>
@@ -75,6 +91,38 @@ const Submissions = () => {
             </TabsList>
           </Tabs>
 
+          <div className="grid grid-cols-2 gap-4 mb-6">
+            <div>
+              <label htmlFor="gallery-search" className="block text-sm font-medium text-gray-700 mb-1">
+                Gallery Name
+              </label>
+              <Input
+                id="gallery-search"
+                type="text"
+                placeholder="Search gallery..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="max-w-md"
+              />
+            </div>
+            <div>
+              <label htmlFor="application-form" className="block text-sm font-medium text-gray-700 mb-1">
+                Application Form
+              </label>
+              <Select value={applicationForm} onValueChange={setApplicationForm}>
+                <SelectTrigger id="application-form" className="max-w-md">
+                  <SelectValue placeholder="Any" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="any">Any</SelectItem>
+                  <SelectItem value="scope">SCOPE</SelectItem>
+                  <SelectItem value="volta">VOLTA</SelectItem>
+                  <SelectItem value="focus">FOCUS</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+
           <div className="flex justify-end gap-4 mb-6">
             <Button variant="outline" className="flex items-center gap-2">
               <span>All Result</span>
@@ -96,12 +144,12 @@ const Submissions = () => {
                   </TableHead>
                   <TableHead className="w-24"></TableHead>
                   <TableHead>Gallery Name</TableHead>
-                  <TableHead>Application From</TableHead>
+                  <TableHead>Application Form</TableHead>
                   <TableHead>Notes</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {submissions.map((submission) => (
+                {filteredSubmissions.map((submission) => (
                   <TableRow key={submission.id}>
                     <TableCell>
                       <Checkbox />

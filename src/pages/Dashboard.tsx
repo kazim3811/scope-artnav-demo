@@ -67,7 +67,7 @@ const Dashboard = () => {
                 <span className="text-[#8E9196]">/</span>
                 <span className="text-[#8E9196]">Modules</span>
               </div>
-              <Button variant="outline" className="border-[#9b87f5] text-[#9b87f5] hover:bg-[#9b87f5] hover:text-white">
+              <Button variant="outline" className="border-[#1A1F2C] text-[#1A1F2C] hover:bg-[#1A1F2C] hover:text-white">
                 Edit Fair
               </Button>
             </div>
@@ -95,11 +95,11 @@ const Dashboard = () => {
                 <div className="space-y-4">
                   <div className="flex items-center justify-end space-x-3">
                     <span className="text-sm text-[#8E9196]">Enabled</span>
-                    <Switch className="data-[state=checked]:bg-[#9b87f5]" />
+                    <Switch className="data-[state=checked]:bg-[#1A1F2C]" />
                   </div>
                   <div className="flex items-center justify-end space-x-3">
                     <span className="text-sm text-[#8E9196]">Opened</span>
-                    <Switch className="data-[state=checked]:bg-[#9b87f5]" />
+                    <Switch className="data-[state=checked]:bg-[#1A1F2C]" />
                   </div>
                 </div>
               </div>

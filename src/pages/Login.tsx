@@ -41,7 +41,7 @@ const Login = () => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full p-3 bg-[#f3f3f3] border-0 focus-visible:ring-1 focus-visible:ring-[#9b87f5]"
+                  className="w-full p-3 bg-[#f3f3f3] border-0 focus-visible:ring-1 focus-visible:ring-[#1A1F2C]"
                   placeholder="admin@artnav.com"
                 />
               </div>
@@ -57,7 +57,7 @@ const Login = () => {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full p-3 bg-[#f3f3f3] border-0 focus-visible:ring-1 focus-visible:ring-[#9b87f5]"
+                  className="w-full p-3 bg-[#f3f3f3] border-0 focus-visible:ring-1 focus-visible:ring-[#1A1F2C]"
                 />
               </div>
 
@@ -66,14 +66,14 @@ const Login = () => {
                   id="remember"
                   checked={rememberMe}
                   onCheckedChange={(checked) => setRememberMe(checked as boolean)}
-                  className="data-[state=checked]:bg-[#9b87f5] data-[state=checked]:border-[#9b87f5]"
+                  className="data-[state=checked]:bg-[#1A1F2C] data-[state=checked]:border-[#1A1F2C]"
                 />
                 <label htmlFor="remember" className="text-sm text-[#8E9196]">
                   Remember me
                 </label>
               </div>
 
-              <Button type="submit" className="w-full bg-[#9b87f5] text-white hover:bg-[#7E69AB] transition-colors">
+              <Button type="submit" className="w-full bg-[#1A1F2C] text-white hover:bg-black transition-colors">
                 Sign in
               </Button>
             </form>
@@ -91,7 +91,6 @@ const Login = () => {
 
         <div className="w-1/2 relative bg-[#f3f3f3]">
           <div className="absolute inset-0 flex items-center justify-center">
-            {/* Placeholder for the image */}
             <div className="text-[#8E9196]">Placeholder Image</div>
           </div>
         </div>

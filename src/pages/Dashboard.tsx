@@ -1,3 +1,4 @@
+
 import { 
   Home, 
   Settings, 
@@ -13,12 +14,19 @@ import {
   Mail,
   FileSpreadsheet,
   History,
-  UserCircle
+  UserCircle,
+  ChevronDown,
+  ChevronRight
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { useState } from "react";
 
 const Dashboard = () => {
+  const [isOpen, setIsOpen] = useState(true);
+  const [openSubmenu, setOpenSubmenu] = useState<string | null>("cms");
+
   return (
     <div className="min-h-screen bg-[#f3f3f3]">
       <div className="flex">
@@ -35,45 +43,85 @@ const Dashboard = () => {
                 Dashboard
               </a>
               
-              <div className="pt-4">
-                <h2 className="px-4 text-sm font-semibold text-[#8E9196] uppercase">Fairs</h2>
-                <div className="mt-2 space-y-1">
-                  <div className="space-y-1">
-                    <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
-                      SCOPE DEMO
-                    </a>
-                    <div className="pl-4 space-y-1">
+              <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+                <CollapsibleTrigger className="flex items-center w-full px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
+                  {isOpen ? (
+                    <ChevronDown className="w-5 h-5 mr-3" />
+                  ) : (
+                    <ChevronRight className="w-5 h-5 mr-3" />
+                  )}
+                  Fairs
+                </CollapsibleTrigger>
+                <CollapsibleContent>
+                  <div className="pl-4 mt-2">
+                    <Collapsible>
+                      <CollapsibleTrigger className="flex items-center w-full px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
+                        SCOPE DEMO
+                      </CollapsibleTrigger>
+                      <CollapsibleContent className="pl-4">
+                        {/* CMS Section */}
+                        <Collapsible open={openSubmenu === "cms"} onOpenChange={() => setOpenSubmenu(openSubmenu === "cms" ? null : "cms")}>
+                          <CollapsibleTrigger className="flex items-center w-full px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
+                            <Edit className="w-5 h-5 mr-3" />
+                            CMS
+                          </CollapsibleTrigger>
+                          <CollapsibleContent className="pl-7">
+                            <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
+                              Applications
+                            </a>
+                          </CollapsibleContent>
+                        </Collapsible>
+
+                        {/* Files Section */}
+                        <Collapsible open={openSubmenu === "files"} onOpenChange={() => setOpenSubmenu(openSubmenu === "files" ? null : "files")}>
+                          <CollapsibleTrigger className="flex items-center w-full px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
+                            <FolderOpen className="w-5 h-5 mr-3" />
+                            Files
+                          </CollapsibleTrigger>
+                          <CollapsibleContent className="pl-7">
+                            <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
+                              Applications
+                            </a>
+                          </CollapsibleContent>
+                        </Collapsible>
+
+                        {/* Submissions Section */}
+                        <Collapsible open={openSubmenu === "submissions"} onOpenChange={() => setOpenSubmenu(openSubmenu === "submissions" ? null : "submissions")}>
+                          <CollapsibleTrigger className="flex items-center w-full px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
+                            <Inbox className="w-5 h-5 mr-3" />
+                            Submissions
+                          </CollapsibleTrigger>
+                          <CollapsibleContent className="pl-7">
+                            <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
+                              Applications
+                            </a>
+                          </CollapsibleContent>
+                        </Collapsible>
+
+                        {/* Reports Section */}
+                        <Collapsible open={openSubmenu === "reports"} onOpenChange={() => setOpenSubmenu(openSubmenu === "reports" ? null : "reports")}>
+                          <CollapsibleTrigger className="flex items-center w-full px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
+                            <BarChart2 className="w-5 h-5 mr-3" />
+                            Reports
+                          </CollapsibleTrigger>
+                          <CollapsibleContent className="pl-7">
+                            <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
+                              Applications
+                            </a>
+                          </CollapsibleContent>
+                        </Collapsible>
+                      </CollapsibleContent>
+                    </Collapsible>
+
+                    <div className="pt-4 space-y-1">
                       <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
-                        <Edit className="w-5 h-5 mr-3" />
-                        CMS
-                      </a>
-                      <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
-                        <FileText className="w-5 h-5 mr-3" />
-                        Application
-                      </a>
-                      <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
-                        <Inbox className="w-5 h-5 mr-3" />
-                        Submissions
-                      </a>
-                      <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
-                        <FolderOpen className="w-5 h-5 mr-3" />
-                        Files
-                      </a>
-                      <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
-                        <BarChart2 className="w-5 h-5 mr-3" />
-                        Reports
+                        <Plus className="w-5 h-5 mr-3" />
+                        Add a new fair
                       </a>
                     </div>
                   </div>
-                </div>
-              </div>
-
-              <div className="pt-4 space-y-1">
-                <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
-                  <Plus className="w-5 h-5 mr-3" />
-                  Add a new fair
-                </a>
-              </div>
+                </CollapsibleContent>
+              </Collapsible>
             </div>
 
             <div className="pt-8">

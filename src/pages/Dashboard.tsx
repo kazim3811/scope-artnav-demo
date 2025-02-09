@@ -44,26 +44,30 @@ const Dashboard = () => {
               </a>
               
               <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-                <CollapsibleTrigger className="flex items-center w-full px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
+                <CollapsibleTrigger className="flex items-center justify-between w-full px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
+                  <span>Fairs</span>
                   {isOpen ? (
-                    <ChevronDown className="w-5 h-5 mr-3" />
+                    <ChevronDown className="w-4 h-4" />
                   ) : (
-                    <ChevronRight className="w-5 h-5 mr-3" />
+                    <ChevronRight className="w-4 h-4" />
                   )}
-                  Fairs
                 </CollapsibleTrigger>
                 <CollapsibleContent>
                   <div className="pl-4 mt-2">
                     <Collapsible>
-                      <CollapsibleTrigger className="flex items-center w-full px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
-                        SCOPE DEMO
+                      <CollapsibleTrigger className="flex items-center justify-between w-full px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
+                        <span>SCOPE DEMO</span>
+                        <ChevronDown className="w-4 h-4" />
                       </CollapsibleTrigger>
                       <CollapsibleContent className="pl-4">
                         {/* CMS Section */}
                         <Collapsible open={openSubmenu === "cms"} onOpenChange={() => setOpenSubmenu(openSubmenu === "cms" ? null : "cms")}>
-                          <CollapsibleTrigger className="flex items-center w-full px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
-                            <Edit className="w-5 h-5 mr-3" />
-                            CMS
+                          <CollapsibleTrigger className="flex items-center justify-between w-full px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
+                            <div className="flex items-center">
+                              <Edit className="w-5 h-5 mr-3" />
+                              <span>CMS</span>
+                            </div>
+                            <ChevronDown className="w-4 h-4" />
                           </CollapsibleTrigger>
                           <CollapsibleContent className="pl-7">
                             <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
@@ -74,9 +78,12 @@ const Dashboard = () => {
 
                         {/* Files Section */}
                         <Collapsible open={openSubmenu === "files"} onOpenChange={() => setOpenSubmenu(openSubmenu === "files" ? null : "files")}>
-                          <CollapsibleTrigger className="flex items-center w-full px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
-                            <FolderOpen className="w-5 h-5 mr-3" />
-                            Files
+                          <CollapsibleTrigger className="flex items-center justify-between w-full px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
+                            <div className="flex items-center">
+                              <FolderOpen className="w-5 h-5 mr-3" />
+                              <span>Files</span>
+                            </div>
+                            <ChevronRight className="w-4 h-4" />
                           </CollapsibleTrigger>
                           <CollapsibleContent className="pl-7">
                             <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
@@ -87,9 +94,12 @@ const Dashboard = () => {
 
                         {/* Submissions Section */}
                         <Collapsible open={openSubmenu === "submissions"} onOpenChange={() => setOpenSubmenu(openSubmenu === "submissions" ? null : "submissions")}>
-                          <CollapsibleTrigger className="flex items-center w-full px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
-                            <Inbox className="w-5 h-5 mr-3" />
-                            Submissions
+                          <CollapsibleTrigger className="flex items-center justify-between w-full px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
+                            <div className="flex items-center">
+                              <Inbox className="w-5 h-5 mr-3" />
+                              <span>Submissions</span>
+                            </div>
+                            <ChevronRight className="w-4 h-4" />
                           </CollapsibleTrigger>
                           <CollapsibleContent className="pl-7">
                             <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
@@ -100,9 +110,12 @@ const Dashboard = () => {
 
                         {/* Reports Section */}
                         <Collapsible open={openSubmenu === "reports"} onOpenChange={() => setOpenSubmenu(openSubmenu === "reports" ? null : "reports")}>
-                          <CollapsibleTrigger className="flex items-center w-full px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
-                            <BarChart2 className="w-5 h-5 mr-3" />
-                            Reports
+                          <CollapsibleTrigger className="flex items-center justify-between w-full px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
+                            <div className="flex items-center">
+                              <BarChart2 className="w-5 h-5 mr-3" />
+                              <span>Reports</span>
+                            </div>
+                            <ChevronRight className="w-4 h-4" />
                           </CollapsibleTrigger>
                           <CollapsibleContent className="pl-7">
                             <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">

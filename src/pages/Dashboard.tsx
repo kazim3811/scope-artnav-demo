@@ -1,4 +1,3 @@
-
 import { 
   Home, 
   Settings, 
@@ -190,12 +189,9 @@ const Dashboard = () => {
           </header>
 
           <main className="p-8">
-            <div className="mb-8">
-              <img
-                src="/lovable-uploads/02bf7219-49f2-463c-a0e6-1a118e1c6f7d.png"
-                alt="SCOPE Demo"
-                className="w-full h-64 object-cover rounded-xl"
-              />
+            <div className="mb-8 bg-[#1A1F2C] rounded-xl p-16 text-center">
+              <h1 className="text-4xl font-bold text-white mb-4">ARTNAV SCOPE FAIR 2025</h1>
+              <p className="text-gray-300 text-lg">Experience the future of art fairs</p>
             </div>
 
             <p className="text-[#8E9196] mb-8">

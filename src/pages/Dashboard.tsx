@@ -1,40 +1,40 @@
 
-import { Home, Settings, Users, FileText, BarChart2, FolderOpen } from "lucide-react";
+import { Home, Settings, Users, FileText, BarChart2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 
 const Dashboard = () => {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#f3f3f3]">
       <div className="flex">
         {/* Sidebar */}
-        <div className="w-64 min-h-screen bg-white border-r">
-          <div className="p-4 border-b">
-            <h1 className="text-xl font-semibold">ARTNAV PORTAL</h1>
+        <div className="w-64 min-h-screen bg-white border-r border-gray-200">
+          <div className="p-6 border-b border-gray-200">
+            <h1 className="text-xl font-bold text-[#1A1F2C]">ARTNAV PORTAL</h1>
           </div>
           
           <nav className="p-4">
             <div className="space-y-1">
-              <a href="#" className="flex items-center px-4 py-2 text-gray-700 bg-gray-100 rounded-lg">
+              <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] bg-[#f3f3f3] rounded-lg">
                 <Home className="w-5 h-5 mr-3" />
                 Dashboard
               </a>
               
               <div className="pt-4">
-                <h2 className="px-4 text-sm font-semibold text-gray-500 uppercase">Fairs</h2>
+                <h2 className="px-4 text-sm font-semibold text-[#8E9196] uppercase">Fairs</h2>
                 <div className="mt-2 space-y-1">
-                  <a href="#" className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">
+                  <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
                     SCOPE DEMO
                   </a>
                 </div>
               </div>
 
               <div className="pt-4">
-                <a href="#" className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">
+                <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
                   <FileText className="w-5 h-5 mr-3" />
                   Files
                 </a>
-                <a href="#" className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">
+                <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
                   <BarChart2 className="w-5 h-5 mr-3" />
                   Reports
                 </a>
@@ -42,13 +42,13 @@ const Dashboard = () => {
             </div>
 
             <div className="pt-8">
-              <h2 className="px-4 text-sm font-semibold text-gray-500 uppercase">Admin Menu</h2>
+              <h2 className="px-4 text-sm font-semibold text-[#8E9196] uppercase">Admin Menu</h2>
               <div className="mt-2 space-y-1">
-                <a href="#" className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">
+                <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
                   <Settings className="w-5 h-5 mr-3" />
                   Settings
                 </a>
-                <a href="#" className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">
+                <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
                   <Users className="w-5 h-5 mr-3" />
                   Users
                 </a>
@@ -59,15 +59,17 @@ const Dashboard = () => {
 
         {/* Main Content */}
         <div className="flex-1">
-          <header className="bg-white border-b">
+          <header className="bg-white border-b border-gray-200">
             <div className="flex items-center justify-between px-8 py-4">
               <div className="flex items-center space-x-4">
-                <span className="text-gray-500">Fair</span>
-                <span className="text-gray-700">SCOPE DEMO</span>
-                <span className="text-gray-500">/</span>
-                <span className="text-gray-500">Modules</span>
+                <span className="text-[#8E9196]">Fair</span>
+                <span className="text-[#1A1F2C] font-medium">SCOPE DEMO</span>
+                <span className="text-[#8E9196]">/</span>
+                <span className="text-[#8E9196]">Modules</span>
               </div>
-              <Button variant="outline">Edit Fair</Button>
+              <Button variant="outline" className="border-[#9b87f5] text-[#9b87f5] hover:bg-[#9b87f5] hover:text-white">
+                Edit Fair
+              </Button>
             </div>
           </header>
 
@@ -80,24 +82,24 @@ const Dashboard = () => {
               />
             </div>
 
-            <p className="text-gray-600 mb-8">
+            <p className="text-[#8E9196] mb-8">
               This is a demonstration account set up to enabling Portal configuration to SCOPE needs
             </p>
 
-            <div className="bg-white p-6 rounded-xl shadow-sm">
+            <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
               <div className="flex items-start justify-between">
                 <div>
-                  <h3 className="text-lg font-semibold">Application</h3>
-                  <p className="text-gray-500">default description.</p>
+                  <h3 className="text-lg font-semibold text-[#1A1F2C]">Application</h3>
+                  <p className="text-[#8E9196] mt-1">default description.</p>
                 </div>
                 <div className="space-y-4">
-                  <div className="flex items-center justify-end space-x-2">
-                    <span className="text-sm text-gray-600">Enabled</span>
-                    <Switch />
+                  <div className="flex items-center justify-end space-x-3">
+                    <span className="text-sm text-[#8E9196]">Enabled</span>
+                    <Switch className="data-[state=checked]:bg-[#9b87f5]" />
                   </div>
-                  <div className="flex items-center justify-end space-x-2">
-                    <span className="text-sm text-gray-600">Opened</span>
-                    <Switch />
+                  <div className="flex items-center justify-end space-x-3">
+                    <span className="text-sm text-[#8E9196]">Opened</span>
+                    <Switch className="data-[state=checked]:bg-[#9b87f5]" />
                   </div>
                 </div>
               </div>

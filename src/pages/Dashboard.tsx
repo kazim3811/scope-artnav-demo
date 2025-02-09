@@ -1,5 +1,21 @@
 
-import { Home, Settings, Users, FileText, BarChart2 } from "lucide-react";
+import { 
+  Home, 
+  Settings, 
+  Users, 
+  FileText, 
+  BarChart2,
+  Edit,
+  Inbox,
+  FolderOpen,
+  Calendar,
+  Plus,
+  Grid,
+  Mail,
+  FileSpreadsheet,
+  History,
+  UserCircle
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 
@@ -15,7 +31,7 @@ const Dashboard = () => {
           
           <nav className="p-4">
             <div className="space-y-1">
-              <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] bg-[#f3f3f3] rounded-lg">
+              <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
                 <Home className="w-5 h-5 mr-3" />
                 Dashboard
               </a>
@@ -23,20 +39,52 @@ const Dashboard = () => {
               <div className="pt-4">
                 <h2 className="px-4 text-sm font-semibold text-[#8E9196] uppercase">Fairs</h2>
                 <div className="mt-2 space-y-1">
-                  <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
-                    SCOPE DEMO
-                  </a>
+                  <div className="space-y-1">
+                    <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
+                      SCOPE DEMO
+                    </a>
+                    <div className="pl-4 space-y-1">
+                      <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
+                        <Edit className="w-5 h-5 mr-3" />
+                        CMS
+                      </a>
+                      <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
+                        <FileText className="w-5 h-5 mr-3" />
+                        Application
+                      </a>
+                      <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
+                        <Inbox className="w-5 h-5 mr-3" />
+                        Submissions
+                      </a>
+                      <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
+                        <FolderOpen className="w-5 h-5 mr-3" />
+                        Files
+                      </a>
+                      <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
+                        <BarChart2 className="w-5 h-5 mr-3" />
+                        Reports
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <div className="pt-4">
+              <div className="pt-4 space-y-1">
                 <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
-                  <FileText className="w-5 h-5 mr-3" />
-                  Files
+                  <Calendar className="w-5 h-5 mr-3" />
+                  ARTNAV FAIR 2025
                 </a>
                 <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
-                  <BarChart2 className="w-5 h-5 mr-3" />
-                  Reports
+                  <Calendar className="w-5 h-5 mr-3" />
+                  Welcome to Artnav Fair 2025
+                </a>
+                <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
+                  <Plus className="w-5 h-5 mr-3" />
+                  new
+                </a>
+                <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
+                  <Plus className="w-5 h-5 mr-3" />
+                  + Add a new fair
                 </a>
               </div>
             </div>
@@ -51,6 +99,26 @@ const Dashboard = () => {
                 <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
                   <Users className="w-5 h-5 mr-3" />
                   Users
+                </a>
+                <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
+                  <Grid className="w-5 h-5 mr-3" />
+                  Accounts
+                </a>
+                <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
+                  <Mail className="w-5 h-5 mr-3" />
+                  Email Templates
+                </a>
+                <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
+                  <FileSpreadsheet className="w-5 h-5 mr-3" />
+                  Form Templates
+                </a>
+                <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
+                  <History className="w-5 h-5 mr-3" />
+                  Order History
+                </a>
+                <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
+                  <UserCircle className="w-5 h-5 mr-3" />
+                  Profile
                 </a>
               </div>
             </div>

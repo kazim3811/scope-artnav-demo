@@ -59,7 +59,6 @@ const Dashboard = () => {
                         <ChevronDown className="w-4 h-4" />
                       </CollapsibleTrigger>
                       <CollapsibleContent className="pl-4">
-                        {/* CMS Section */}
                         <Collapsible open={openSubmenu === "cms"} onOpenChange={() => setOpenSubmenu(openSubmenu === "cms" ? null : "cms")}>
                           <CollapsibleTrigger className="flex items-center justify-between w-full px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
                             <div className="flex items-center">
@@ -75,7 +74,6 @@ const Dashboard = () => {
                           </CollapsibleContent>
                         </Collapsible>
 
-                        {/* Files Section */}
                         <Collapsible open={openSubmenu === "files"} onOpenChange={() => setOpenSubmenu(openSubmenu === "files" ? null : "files")}>
                           <CollapsibleTrigger className="flex items-center justify-between w-full px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
                             <div className="flex items-center">
@@ -91,7 +89,6 @@ const Dashboard = () => {
                           </CollapsibleContent>
                         </Collapsible>
 
-                        {/* Submissions Section */}
                         <Collapsible open={openSubmenu === "submissions"} onOpenChange={() => setOpenSubmenu(openSubmenu === "submissions" ? null : "submissions")}>
                           <CollapsibleTrigger className="flex items-center justify-between w-full px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
                             <div className="flex items-center">
@@ -101,13 +98,12 @@ const Dashboard = () => {
                             <ChevronRight className="w-4 h-4" />
                           </CollapsibleTrigger>
                           <CollapsibleContent className="pl-7">
-                            <a href="#" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
+                            <a href="/submissions" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
                               Applications
                             </a>
                           </CollapsibleContent>
                         </Collapsible>
 
-                        {/* Reports Section */}
                         <Collapsible open={openSubmenu === "reports"} onOpenChange={() => setOpenSubmenu(openSubmenu === "reports" ? null : "reports")}>
                           <CollapsibleTrigger className="flex items-center justify-between w-full px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
                             <div className="flex items-center">

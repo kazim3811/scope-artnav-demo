@@ -1,4 +1,3 @@
-
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -180,38 +179,6 @@ const Submissions = () => {
             </TabsList>
           </Tabs>
 
-          <div className="grid grid-cols-2 gap-4 mb-6">
-            <div>
-              <label htmlFor="gallery-search" className="block text-sm font-medium text-gray-700 mb-1">
-                Gallery Name
-              </label>
-              <Input
-                id="gallery-search"
-                type="text"
-                placeholder="Search gallery..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="max-w-md"
-              />
-            </div>
-            <div>
-              <label htmlFor="application-form" className="block text-sm font-medium text-gray-700 mb-1">
-                Application Form
-              </label>
-              <Select value={applicationForm} onValueChange={setApplicationForm}>
-                <SelectTrigger id="application-form" className="max-w-md">
-                  <SelectValue placeholder="Any" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="any">Any</SelectItem>
-                  <SelectItem value="scope">SCOPE</SelectItem>
-                  <SelectItem value="volta">VOLTA</SelectItem>
-                  <SelectItem value="focus">FOCUS</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-
           <div className="flex justify-end gap-4 mb-6">
             <Select value={statusFilter} onValueChange={setStatusFilter}>
               <SelectTrigger className="w-[150px]">
@@ -357,4 +324,3 @@ const Submissions = () => {
 };
 
 export default Submissions;
-

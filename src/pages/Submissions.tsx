@@ -1,9 +1,9 @@
+
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowLeftToLine, Eye } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -21,8 +21,6 @@ import MainLayout from "@/components/layouts/MainLayout";
 import { useState } from "react";
 
 const Submissions = () => {
-  const [search, setSearch] = useState("");
-  const [applicationForm, setApplicationForm] = useState("any");
   const [statusFilter, setStatusFilter] = useState("all");
   const [paymentStatusFilter, setPaymentStatusFilter] = useState("all");
   const [curatorialFilter, setCuratorialFilter] = useState("all");
@@ -87,12 +85,11 @@ const Submissions = () => {
   ];
 
   const filteredSubmissions = submissions.filter((submission) => {
-    const nameMatches = submission.name.toLowerCase().includes(search.toLowerCase());
     const statusMatches = statusFilter === "all" || submission.status === statusFilter;
     const paymentMatches = paymentStatusFilter === "all" || submission.paymentStatus === paymentStatusFilter;
     const curatorialMatches = curatorialFilter === "all" || submission.curatorial === curatorialFilter;
 
-    return nameMatches && statusMatches && paymentMatches && curatorialMatches;
+    return statusMatches && paymentMatches && curatorialMatches;
   });
 
   const getStatusColor = (status: string) => {
@@ -180,38 +177,6 @@ const Submissions = () => {
           </Tabs>
 
           <div className="flex justify-end gap-4 mb-6">
-            <Select value={statusFilter} onValueChange={setStatusFilter}>
-              <SelectTrigger className="w-[150px]">
-                <SelectValue placeholder="All Status" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Status</SelectItem>
-                <SelectItem value="Not Submitted">Not Submitted</SelectItem>
-                <SelectItem value="Completed">Completed</SelectItem>
-              </SelectContent>
-            </Select>
-            <Select value={paymentStatusFilter} onValueChange={setPaymentStatusFilter}>
-              <SelectTrigger className="w-[150px]">
-                <SelectValue placeholder="All Payments" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Payments</SelectItem>
-                <SelectItem value="Ready to Invoice">Ready to Invoice</SelectItem>
-                <SelectItem value="Payment Due">Payment Due</SelectItem>
-                <SelectItem value="Paid">Paid</SelectItem>
-              </SelectContent>
-            </Select>
-            <Select value={curatorialFilter} onValueChange={setCuratorialFilter}>
-              <SelectTrigger className="w-[150px]">
-                <SelectValue placeholder="All Results" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Results</SelectItem>
-                <SelectItem value="Under Review">Under Review</SelectItem>
-                <SelectItem value="Approved">Approved</SelectItem>
-                <SelectItem value="Rejected">Rejected</SelectItem>
-              </SelectContent>
-            </Select>
             <Button variant="outline">Manual Update</Button>
           </div>
 
@@ -224,9 +189,53 @@ const Submissions = () => {
                   </TableHead>
                   <TableHead className="w-24"></TableHead>
                   <TableHead>Gallery Name</TableHead>
-                  <TableHead>Application Form</TableHead>
-                  <TableHead>Payment Status</TableHead>
-                  <TableHead>Curatorial</TableHead>
+                  <TableHead>
+                    <div className="flex flex-col gap-2">
+                      <span>Application Form</span>
+                      <Select value={statusFilter} onValueChange={setStatusFilter}>
+                        <SelectTrigger className="h-8">
+                          <SelectValue placeholder="All Status" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">All Status</SelectItem>
+                          <SelectItem value="Not Submitted">Not Submitted</SelectItem>
+                          <SelectItem value="Completed">Completed</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </TableHead>
+                  <TableHead>
+                    <div className="flex flex-col gap-2">
+                      <span>Payment Status</span>
+                      <Select value={paymentStatusFilter} onValueChange={setPaymentStatusFilter}>
+                        <SelectTrigger className="h-8">
+                          <SelectValue placeholder="All Payments" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">All Payments</SelectItem>
+                          <SelectItem value="Ready to Invoice">Ready to Invoice</SelectItem>
+                          <SelectItem value="Payment Due">Payment Due</SelectItem>
+                          <SelectItem value="Paid">Paid</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </TableHead>
+                  <TableHead>
+                    <div className="flex flex-col gap-2">
+                      <span>Curatorial</span>
+                      <Select value={curatorialFilter} onValueChange={setCuratorialFilter}>
+                        <SelectTrigger className="h-8">
+                          <SelectValue placeholder="All Results" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">All Results</SelectItem>
+                          <SelectItem value="Under Review">Under Review</SelectItem>
+                          <SelectItem value="Approved">Approved</SelectItem>
+                          <SelectItem value="Rejected">Rejected</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </TableHead>
                   <TableHead>Notes</TableHead>
                 </TableRow>
               </TableHeader>

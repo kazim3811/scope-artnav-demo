@@ -12,6 +12,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import MainLayout from "@/components/layouts/MainLayout";
 import { useState } from "react";
 
@@ -22,58 +28,58 @@ const Submissions = () => {
   const submissions = [
     { 
       id: 1, 
-      name: "*Frieze Test* Anouka", 
+      name: "ARTNAV gallery 1 2025", 
       status: "Not Submitted",
-      paymentStatus: "Payment Due",
+      paymentStatus: "Ready to Invoice",
       curatorial: "Under Review"
     },
     { 
       id: 2, 
-      name: "*Frieze Test* by Rebeka", 
+      name: "ARTNAV gallery 2 2025", 
       status: "Not Submitted",
-      paymentStatus: "Paid",
+      paymentStatus: "Ready to Invoice",
       curatorial: "Approved"
     },
     { 
       id: 3, 
-      name: "*Frieze Test* FLA25 AH", 
+      name: "ARTNAV gallery 3 2025", 
       status: "Not Submitted",
-      paymentStatus: "Payment Due",
+      paymentStatus: "Ready to Invoice",
       curatorial: "Under Review"
     },
     { 
       id: 4, 
-      name: "*Frieze Test* FLFM24", 
+      name: "ARTNAV gallery 4 2025", 
       status: "Not Submitted",
-      paymentStatus: "Payment Due",
+      paymentStatus: "Ready to Invoice",
       curatorial: "Rejected"
     },
     { 
       id: 5, 
-      name: "*Frieze Test* RE Test", 
+      name: "ARTNAV gallery 5 2025", 
       status: "Not Submitted",
-      paymentStatus: "Paid",
+      paymentStatus: "Ready to Invoice",
       curatorial: "Under Review"
     },
     { 
       id: 6, 
-      name: "1 Mira Madrid", 
+      name: "ARTNAV gallery 6 2025", 
       status: "Completed",
-      paymentStatus: "Paid",
+      paymentStatus: "Ready to Invoice",
       curatorial: "Approved"
     },
     { 
       id: 7, 
-      name: "3812 Gallery", 
+      name: "ARTNAV gallery 7 2025", 
       status: "Not Submitted",
-      paymentStatus: "Payment Due",
+      paymentStatus: "Ready to Invoice",
       curatorial: "Under Review"
     },
     { 
       id: 8, 
-      name: "47 Canal", 
+      name: "ARTNAV gallery 8 2025", 
       status: "Not Submitted",
-      paymentStatus: "Payment Due",
+      paymentStatus: "Ready to Invoice",
       curatorial: "Under Review"
     },
   ];
@@ -84,6 +90,7 @@ const Submissions = () => {
 
   const getStatusColor = (status: string) => {
     switch (status) {
+      case "Ready to Invoice":
       case "Payment Due":
         return "bg-yellow-100 text-yellow-800";
       case "Paid":
@@ -101,6 +108,11 @@ const Submissions = () => {
       default:
         return "bg-gray-100 text-gray-800";
     }
+  };
+
+  const handleStatusUpdate = (submissionId: number, type: 'payment' | 'application', newStatus: string) => {
+    console.log(`Updating ${type} status for submission ${submissionId} to ${newStatus}`);
+    // Here you would typically update the state or make an API call
   };
 
   return (
@@ -199,9 +211,19 @@ const Submissions = () => {
             <Button variant="outline" className="flex items-center gap-2">
               <span>All Status</span>
             </Button>
-            <Button variant="outline" className="flex items-center gap-2">
-              <span>All Terms & Conditions</span>
-            </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline">Manual Updates</Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem onSelect={() => handleStatusUpdate(1, 'payment', 'Paid')}>
+                  Update Payment Status
+                </DropdownMenuItem>
+                <DropdownMenuItem onSelect={() => handleStatusUpdate(1, 'application', 'Completed')}>
+                  Update Application Status
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
 
           <div className="bg-white rounded-lg shadow-sm">

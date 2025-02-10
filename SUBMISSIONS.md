@@ -36,11 +36,18 @@ This document outlines the key features and functionality of the Gallery Submiss
 2. Actions (View/Return)
 3. Gallery Name
 4. Application Form
-5. Notes
+5. Payment Status
+6. Curatorial
+7. Notes
 
 ### Status Indicators
 - Not Submitted (red)
 - Completed (green)
+- Payment Due (yellow)
+- Paid (green)
+- Under Review (blue)
+- Approved (green)
+- Rejected (red)
 
 ## Layout
 The page uses a main layout component that includes:

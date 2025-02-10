@@ -20,19 +20,88 @@ const Submissions = () => {
   const [applicationForm, setApplicationForm] = useState("any");
 
   const submissions = [
-    { id: 1, name: "*Frieze Test* Anouka", status: "Not Submitted" },
-    { id: 2, name: "*Frieze Test* by Rebeka", status: "Not Submitted" },
-    { id: 3, name: "*Frieze Test* FLA25 AH", status: "Not Submitted" },
-    { id: 4, name: "*Frieze Test* FLFM24", status: "Not Submitted" },
-    { id: 5, name: "*Frieze Test* RE Test", status: "Not Submitted" },
-    { id: 6, name: "1 Mira Madrid", status: "Completed" },
-    { id: 7, name: "3812 Gallery", status: "Not Submitted" },
-    { id: 8, name: "47 Canal", status: "Not Submitted" },
+    { 
+      id: 1, 
+      name: "*Frieze Test* Anouka", 
+      status: "Not Submitted",
+      paymentStatus: "Payment Due",
+      curatorial: "Under Review"
+    },
+    { 
+      id: 2, 
+      name: "*Frieze Test* by Rebeka", 
+      status: "Not Submitted",
+      paymentStatus: "Paid",
+      curatorial: "Approved"
+    },
+    { 
+      id: 3, 
+      name: "*Frieze Test* FLA25 AH", 
+      status: "Not Submitted",
+      paymentStatus: "Payment Due",
+      curatorial: "Under Review"
+    },
+    { 
+      id: 4, 
+      name: "*Frieze Test* FLFM24", 
+      status: "Not Submitted",
+      paymentStatus: "Payment Due",
+      curatorial: "Rejected"
+    },
+    { 
+      id: 5, 
+      name: "*Frieze Test* RE Test", 
+      status: "Not Submitted",
+      paymentStatus: "Paid",
+      curatorial: "Under Review"
+    },
+    { 
+      id: 6, 
+      name: "1 Mira Madrid", 
+      status: "Completed",
+      paymentStatus: "Paid",
+      curatorial: "Approved"
+    },
+    { 
+      id: 7, 
+      name: "3812 Gallery", 
+      status: "Not Submitted",
+      paymentStatus: "Payment Due",
+      curatorial: "Under Review"
+    },
+    { 
+      id: 8, 
+      name: "47 Canal", 
+      status: "Not Submitted",
+      paymentStatus: "Payment Due",
+      curatorial: "Under Review"
+    },
   ];
 
   const filteredSubmissions = submissions.filter((submission) =>
     submission.name.toLowerCase().includes(search.toLowerCase())
   );
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case "Payment Due":
+        return "bg-yellow-100 text-yellow-800";
+      case "Paid":
+        return "bg-green-100 text-green-800";
+      case "Under Review":
+        return "bg-blue-100 text-blue-800";
+      case "Approved":
+        return "bg-green-100 text-green-800";
+      case "Rejected":
+        return "bg-red-100 text-red-800";
+      case "Completed":
+        return "bg-green-100 text-green-800";
+      case "Not Submitted":
+        return "bg-red-100 text-red-800";
+      default:
+        return "bg-gray-100 text-gray-800";
+    }
+  };
 
   return (
     <MainLayout>
@@ -145,6 +214,8 @@ const Submissions = () => {
                   <TableHead className="w-24"></TableHead>
                   <TableHead>Gallery Name</TableHead>
                   <TableHead>Application Form</TableHead>
+                  <TableHead>Payment Status</TableHead>
+                  <TableHead>Curatorial</TableHead>
                   <TableHead>Notes</TableHead>
                 </TableRow>
               </TableHeader>
@@ -163,13 +234,23 @@ const Submissions = () => {
                     <TableCell>{submission.name}</TableCell>
                     <TableCell>
                       <span
-                        className={`px-2 py-1 rounded text-sm ${
-                          submission.status === "Completed"
-                            ? "bg-green-100 text-green-800"
-                            : "bg-red-100 text-red-800"
-                        }`}
+                        className={`px-2 py-1 rounded text-sm ${getStatusColor(submission.status)}`}
                       >
                         {submission.status}
+                      </span>
+                    </TableCell>
+                    <TableCell>
+                      <span
+                        className={`px-2 py-1 rounded text-sm ${getStatusColor(submission.paymentStatus)}`}
+                      >
+                        {submission.paymentStatus}
+                      </span>
+                    </TableCell>
+                    <TableCell>
+                      <span
+                        className={`px-2 py-1 rounded text-sm ${getStatusColor(submission.curatorial)}`}
+                      >
+                        {submission.curatorial}
                       </span>
                     </TableCell>
                     <TableCell>

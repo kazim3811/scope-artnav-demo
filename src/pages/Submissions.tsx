@@ -1,3 +1,4 @@
+
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -23,6 +24,9 @@ import { useState } from "react";
 const Submissions = () => {
   const [search, setSearch] = useState("");
   const [applicationForm, setApplicationForm] = useState("any");
+  const [statusFilter, setStatusFilter] = useState("all");
+  const [paymentStatusFilter, setPaymentStatusFilter] = useState("all");
+  const [curatorialFilter, setCuratorialFilter] = useState("all");
 
   const submissions = [
     { 
@@ -83,9 +87,14 @@ const Submissions = () => {
     },
   ];
 
-  const filteredSubmissions = submissions.filter((submission) =>
-    submission.name.toLowerCase().includes(search.toLowerCase())
-  );
+  const filteredSubmissions = submissions.filter((submission) => {
+    const nameMatches = submission.name.toLowerCase().includes(search.toLowerCase());
+    const statusMatches = statusFilter === "all" || submission.status === statusFilter;
+    const paymentMatches = paymentStatusFilter === "all" || submission.paymentStatus === paymentStatusFilter;
+    const curatorialMatches = curatorialFilter === "all" || submission.curatorial === curatorialFilter;
+
+    return nameMatches && statusMatches && paymentMatches && curatorialMatches;
+  });
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -204,12 +213,38 @@ const Submissions = () => {
           </div>
 
           <div className="flex justify-end gap-4 mb-6">
-            <Button variant="outline" className="flex items-center gap-2">
-              <span>All Result</span>
-            </Button>
-            <Button variant="outline" className="flex items-center gap-2">
-              <span>All Status</span>
-            </Button>
+            <Select value={statusFilter} onValueChange={setStatusFilter}>
+              <SelectTrigger className="w-[150px]">
+                <SelectValue placeholder="All Status" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Status</SelectItem>
+                <SelectItem value="Not Submitted">Not Submitted</SelectItem>
+                <SelectItem value="Completed">Completed</SelectItem>
+              </SelectContent>
+            </Select>
+            <Select value={paymentStatusFilter} onValueChange={setPaymentStatusFilter}>
+              <SelectTrigger className="w-[150px]">
+                <SelectValue placeholder="All Payments" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Payments</SelectItem>
+                <SelectItem value="Ready to Invoice">Ready to Invoice</SelectItem>
+                <SelectItem value="Payment Due">Payment Due</SelectItem>
+                <SelectItem value="Paid">Paid</SelectItem>
+              </SelectContent>
+            </Select>
+            <Select value={curatorialFilter} onValueChange={setCuratorialFilter}>
+              <SelectTrigger className="w-[150px]">
+                <SelectValue placeholder="All Results" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Results</SelectItem>
+                <SelectItem value="Under Review">Under Review</SelectItem>
+                <SelectItem value="Approved">Approved</SelectItem>
+                <SelectItem value="Rejected">Rejected</SelectItem>
+              </SelectContent>
+            </Select>
             <Button variant="outline">Manual Update</Button>
           </div>
 
@@ -322,3 +357,4 @@ const Submissions = () => {
 };
 
 export default Submissions;
+

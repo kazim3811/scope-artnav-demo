@@ -1,4 +1,3 @@
-
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -135,25 +134,13 @@ const Submissions = () => {
 
       <main className="p-8">
         <div className="mb-8">
-          <Tabs defaultValue="gallery-applications" className="mb-6">
+          <Tabs defaultValue="gallery-submissions" className="mb-6">
             <TabsList className="bg-transparent border-b w-full rounded-none h-auto p-0 space-x-8">
-              <TabsTrigger 
-                value="gallery-applications" 
-                className="border-b-2 border-transparent data-[state=active]:border-black rounded-none bg-transparent px-0 h-10"
-              >
-                Gallery Applications
-              </TabsTrigger>
               <TabsTrigger 
                 value="gallery-submissions" 
                 className="border-b-2 border-transparent data-[state=active]:border-black rounded-none bg-transparent px-0 h-10"
               >
                 Gallery Submissions
-              </TabsTrigger>
-              <TabsTrigger 
-                value="represented-artists" 
-                className="border-b-2 border-transparent data-[state=active]:border-black rounded-none bg-transparent px-0 h-10"
-              >
-                Represented Artists
               </TabsTrigger>
               <TabsTrigger 
                 value="results-manager" 

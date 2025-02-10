@@ -1,4 +1,3 @@
-
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -110,7 +109,7 @@ const Submissions = () => {
     }
   };
 
-  const handleStatusUpdate = (submissionId: number, type: 'payment' | 'application', newStatus: string) => {
+  const handleStatusUpdate = (submissionId: number, type: 'payment' | 'application' | 'curatorial', newStatus: string) => {
     console.log(`Updating ${type} status for submission ${submissionId} to ${newStatus}`);
     // Here you would typically update the state or make an API call
   };
@@ -211,19 +210,7 @@ const Submissions = () => {
             <Button variant="outline" className="flex items-center gap-2">
               <span>All Status</span>
             </Button>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline">Manual Updates</Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem onSelect={() => handleStatusUpdate(1, 'payment', 'Paid')}>
-                  Update Payment Status
-                </DropdownMenuItem>
-                <DropdownMenuItem onSelect={() => handleStatusUpdate(1, 'application', 'Completed')}>
-                  Update Application Status
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <Button variant="outline">Manual Update</Button>
           </div>
 
           <div className="bg-white rounded-lg shadow-sm">
@@ -255,25 +242,67 @@ const Submissions = () => {
                     </TableCell>
                     <TableCell>{submission.name}</TableCell>
                     <TableCell>
-                      <span
-                        className={`px-2 py-1 rounded text-sm ${getStatusColor(submission.status)}`}
-                      >
-                        {submission.status}
-                      </span>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button variant="ghost" className="p-0 h-auto font-normal">
+                            <span className={`px-2 py-1 rounded text-sm ${getStatusColor(submission.status)}`}>
+                              {submission.status}
+                            </span>
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                          <DropdownMenuItem onSelect={() => handleStatusUpdate(submission.id, 'application', 'Not Submitted')}>
+                            Not Submitted
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onSelect={() => handleStatusUpdate(submission.id, 'application', 'Completed')}>
+                            Completed
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
                     </TableCell>
                     <TableCell>
-                      <span
-                        className={`px-2 py-1 rounded text-sm ${getStatusColor(submission.paymentStatus)}`}
-                      >
-                        {submission.paymentStatus}
-                      </span>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button variant="ghost" className="p-0 h-auto font-normal">
+                            <span className={`px-2 py-1 rounded text-sm ${getStatusColor(submission.paymentStatus)}`}>
+                              {submission.paymentStatus}
+                            </span>
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                          <DropdownMenuItem onSelect={() => handleStatusUpdate(submission.id, 'payment', 'Ready to Invoice')}>
+                            Ready to Invoice
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onSelect={() => handleStatusUpdate(submission.id, 'payment', 'Payment Due')}>
+                            Payment Due
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onSelect={() => handleStatusUpdate(submission.id, 'payment', 'Paid')}>
+                            Paid
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
                     </TableCell>
                     <TableCell>
-                      <span
-                        className={`px-2 py-1 rounded text-sm ${getStatusColor(submission.curatorial)}`}
-                      >
-                        {submission.curatorial}
-                      </span>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button variant="ghost" className="p-0 h-auto font-normal">
+                            <span className={`px-2 py-1 rounded text-sm ${getStatusColor(submission.curatorial)}`}>
+                              {submission.curatorial}
+                            </span>
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                          <DropdownMenuItem onSelect={() => handleStatusUpdate(submission.id, 'curatorial', 'Under Review')}>
+                            Under Review
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onSelect={() => handleStatusUpdate(submission.id, 'curatorial', 'Approved')}>
+                            Approved
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onSelect={() => handleStatusUpdate(submission.id, 'curatorial', 'Rejected')}>
+                            Rejected
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
                     </TableCell>
                     <TableCell>
                       <div className="flex items-center justify-between">

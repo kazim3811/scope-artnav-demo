@@ -91,6 +91,12 @@ const Submissions = () => {
     return statusMatches && paymentMatches && curatorialMatches;
   });
 
+  const curatorialSubmissions = submissions.filter(submission => 
+    submission.curatorial === "Under Review" || 
+    submission.curatorial === "Approved" || 
+    submission.curatorial === "Rejected"
+  );
+
   const getStatusColor = (status: string) => {
     switch (status) {
       case "Ready to Invoice":
@@ -118,6 +124,153 @@ const Submissions = () => {
     // Here you would typically update the state or make an API call
   };
 
+  const SubmissionsTable = ({ submissions }: { submissions: typeof filteredSubmissions }) => (
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead className="w-12">
+            <Checkbox />
+          </TableHead>
+          <TableHead className="w-24"></TableHead>
+          <TableHead>Gallery Name</TableHead>
+          <TableHead>
+            <div className="flex flex-col gap-2">
+              <span>Application Form</span>
+              <Select value={statusFilter} onValueChange={setStatusFilter}>
+                <SelectTrigger className="h-8">
+                  <SelectValue placeholder="All Status" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Status</SelectItem>
+                  <SelectItem value="Not Submitted">Not Submitted</SelectItem>
+                  <SelectItem value="Completed">Completed</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </TableHead>
+          <TableHead>
+            <div className="flex flex-col gap-2">
+              <span>Payment Status</span>
+              <Select value={paymentStatusFilter} onValueChange={setPaymentStatusFilter}>
+                <SelectTrigger className="h-8">
+                  <SelectValue placeholder="All Payments" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Payments</SelectItem>
+                  <SelectItem value="Ready to Invoice">Ready to Invoice</SelectItem>
+                  <SelectItem value="Payment Due">Payment Due</SelectItem>
+                  <SelectItem value="Paid">Paid</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </TableHead>
+          <TableHead>
+            <div className="flex flex-col gap-2">
+              <span>Curatorial</span>
+              <Select value={curatorialFilter} onValueChange={setCuratorialFilter}>
+                <SelectTrigger className="h-8">
+                  <SelectValue placeholder="All Results" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Results</SelectItem>
+                  <SelectItem value="Under Review">Under Review</SelectItem>
+                  <SelectItem value="Approved">Approved</SelectItem>
+                  <SelectItem value="Rejected">Rejected</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </TableHead>
+          <TableHead>Notes</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {submissions.map((submission) => (
+          <TableRow key={submission.id}>
+            <TableCell>
+              <Checkbox />
+            </TableCell>
+            <TableCell>
+              <div className="flex space-x-2">
+                <ArrowLeftToLine className="w-4 h-4" />
+                <Eye className="w-4 h-4" />
+              </div>
+            </TableCell>
+            <TableCell>{submission.name}</TableCell>
+            <TableCell>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="p-0 h-auto font-normal">
+                    <span className={`px-2 py-1 rounded text-sm ${getStatusColor(submission.status)}`}>
+                      {submission.status}
+                    </span>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem onSelect={() => handleStatusUpdate(submission.id, 'application', 'Not Submitted')}>
+                    Not Submitted
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onSelect={() => handleStatusUpdate(submission.id, 'application', 'Completed')}>
+                    Completed
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </TableCell>
+            <TableCell>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="p-0 h-auto font-normal">
+                    <span className={`px-2 py-1 rounded text-sm ${getStatusColor(submission.paymentStatus)}`}>
+                      {submission.paymentStatus}
+                    </span>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem onSelect={() => handleStatusUpdate(submission.id, 'payment', 'Ready to Invoice')}>
+                    Ready to Invoice
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onSelect={() => handleStatusUpdate(submission.id, 'payment', 'Payment Due')}>
+                    Payment Due
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onSelect={() => handleStatusUpdate(submission.id, 'payment', 'Paid')}>
+                    Paid
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </TableCell>
+            <TableCell>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="p-0 h-auto font-normal">
+                    <span className={`px-2 py-1 rounded text-sm ${getStatusColor(submission.curatorial)}`}>
+                      {submission.curatorial}
+                    </span>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem onSelect={() => handleStatusUpdate(submission.id, 'curatorial', 'Under Review')}>
+                    Under Review
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onSelect={() => handleStatusUpdate(submission.id, 'curatorial', 'Approved')}>
+                    Approved
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onSelect={() => handleStatusUpdate(submission.id, 'curatorial', 'Rejected')}>
+                    Rejected
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </TableCell>
+            <TableCell>
+              <div className="flex items-center justify-between">
+                <span className="text-gray-500 italic">Empty</span>
+                <Button variant="ghost" className="h-4 w-4 p-0">⋮</Button>
+              </div>
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  );
+
   return (
     <MainLayout>
       <header className="bg-white border-b border-gray-200">
@@ -134,184 +287,42 @@ const Submissions = () => {
 
       <main className="p-8">
         <div className="mb-8">
-          <Tabs defaultValue="gallery-submissions" className="mb-6">
-            <TabsList className="bg-transparent border-b w-full rounded-none h-auto p-0 space-x-8">
-              <TabsTrigger 
-                value="gallery-submissions" 
-                className="border-b-2 border-transparent data-[state=active]:border-black rounded-none bg-transparent px-0 h-10"
-              >
-                Gallery Submissions
-              </TabsTrigger>
-              <TabsTrigger 
-                value="results-manager" 
-                className="border-b-2 border-transparent data-[state=active]:border-black rounded-none bg-transparent px-0 h-10"
-              >
-                Results Manager
-              </TabsTrigger>
-              <TabsTrigger 
-                value="public-user-applications" 
-                className="border-b-2 border-transparent data-[state=active]:border-black rounded-none bg-transparent px-0 h-10"
-              >
-                Public User Applications
-              </TabsTrigger>
-              <TabsTrigger 
-                value="committee-sheets" 
-                className="border-b-2 border-transparent data-[state=active]:border-black rounded-none bg-transparent px-0 h-10"
-              >
-                Committee Sheets
-              </TabsTrigger>
-            </TabsList>
-          </Tabs>
-
           <div className="flex justify-end gap-4 mb-6">
             <Button variant="outline">Manual Update</Button>
           </div>
 
           <div className="bg-white rounded-lg shadow-sm">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="w-12">
-                    <Checkbox />
-                  </TableHead>
-                  <TableHead className="w-24"></TableHead>
-                  <TableHead>Gallery Name</TableHead>
-                  <TableHead>
-                    <div className="flex flex-col gap-2">
-                      <span>Application Form</span>
-                      <Select value={statusFilter} onValueChange={setStatusFilter}>
-                        <SelectTrigger className="h-8">
-                          <SelectValue placeholder="All Status" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="all">All Status</SelectItem>
-                          <SelectItem value="Not Submitted">Not Submitted</SelectItem>
-                          <SelectItem value="Completed">Completed</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </TableHead>
-                  <TableHead>
-                    <div className="flex flex-col gap-2">
-                      <span>Payment Status</span>
-                      <Select value={paymentStatusFilter} onValueChange={setPaymentStatusFilter}>
-                        <SelectTrigger className="h-8">
-                          <SelectValue placeholder="All Payments" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="all">All Payments</SelectItem>
-                          <SelectItem value="Ready to Invoice">Ready to Invoice</SelectItem>
-                          <SelectItem value="Payment Due">Payment Due</SelectItem>
-                          <SelectItem value="Paid">Paid</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </TableHead>
-                  <TableHead>
-                    <div className="flex flex-col gap-2">
-                      <span>Curatorial</span>
-                      <Select value={curatorialFilter} onValueChange={setCuratorialFilter}>
-                        <SelectTrigger className="h-8">
-                          <SelectValue placeholder="All Results" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="all">All Results</SelectItem>
-                          <SelectItem value="Under Review">Under Review</SelectItem>
-                          <SelectItem value="Approved">Approved</SelectItem>
-                          <SelectItem value="Rejected">Rejected</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </TableHead>
-                  <TableHead>Notes</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {filteredSubmissions.map((submission) => (
-                  <TableRow key={submission.id}>
-                    <TableCell>
-                      <Checkbox />
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex space-x-2">
-                        <ArrowLeftToLine className="w-4 h-4" />
-                        <Eye className="w-4 h-4" />
-                      </div>
-                    </TableCell>
-                    <TableCell>{submission.name}</TableCell>
-                    <TableCell>
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button variant="ghost" className="p-0 h-auto font-normal">
-                            <span className={`px-2 py-1 rounded text-sm ${getStatusColor(submission.status)}`}>
-                              {submission.status}
-                            </span>
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent>
-                          <DropdownMenuItem onSelect={() => handleStatusUpdate(submission.id, 'application', 'Not Submitted')}>
-                            Not Submitted
-                          </DropdownMenuItem>
-                          <DropdownMenuItem onSelect={() => handleStatusUpdate(submission.id, 'application', 'Completed')}>
-                            Completed
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    </TableCell>
-                    <TableCell>
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button variant="ghost" className="p-0 h-auto font-normal">
-                            <span className={`px-2 py-1 rounded text-sm ${getStatusColor(submission.paymentStatus)}`}>
-                              {submission.paymentStatus}
-                            </span>
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent>
-                          <DropdownMenuItem onSelect={() => handleStatusUpdate(submission.id, 'payment', 'Ready to Invoice')}>
-                            Ready to Invoice
-                          </DropdownMenuItem>
-                          <DropdownMenuItem onSelect={() => handleStatusUpdate(submission.id, 'payment', 'Payment Due')}>
-                            Payment Due
-                          </DropdownMenuItem>
-                          <DropdownMenuItem onSelect={() => handleStatusUpdate(submission.id, 'payment', 'Paid')}>
-                            Paid
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    </TableCell>
-                    <TableCell>
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button variant="ghost" className="p-0 h-auto font-normal">
-                            <span className={`px-2 py-1 rounded text-sm ${getStatusColor(submission.curatorial)}`}>
-                              {submission.curatorial}
-                            </span>
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent>
-                          <DropdownMenuItem onSelect={() => handleStatusUpdate(submission.id, 'curatorial', 'Under Review')}>
-                            Under Review
-                          </DropdownMenuItem>
-                          <DropdownMenuItem onSelect={() => handleStatusUpdate(submission.id, 'curatorial', 'Approved')}>
-                            Approved
-                          </DropdownMenuItem>
-                          <DropdownMenuItem onSelect={() => handleStatusUpdate(submission.id, 'curatorial', 'Rejected')}>
-                            Rejected
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex items-center justify-between">
-                        <span className="text-gray-500 italic">Empty</span>
-                        <Button variant="ghost" className="h-4 w-4 p-0">⋮</Button>
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+            <Tabs defaultValue="submissions" className="w-full">
+              <TabsList className="w-full justify-start border-b rounded-none h-auto p-0">
+                <TabsTrigger 
+                  value="submissions" 
+                  className="px-4 py-2 border-b-2 border-transparent data-[state=active]:border-black rounded-none bg-transparent"
+                >
+                  Gallery Submissions
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="curatorial" 
+                  className="px-4 py-2 border-b-2 border-transparent data-[state=active]:border-black rounded-none bg-transparent"
+                >
+                  Curatorial
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="public-user-applications" 
+                  className="px-4 py-2 border-b-2 border-transparent data-[state=active]:border-black rounded-none bg-transparent"
+                >
+                  Public User Applications
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="committee-sheets" 
+                  className="px-4 py-2 border-b-2 border-transparent data-[state=active]:border-black rounded-none bg-transparent"
+                >
+                  Committee Sheets
+                </TabsTrigger>
+              </TabsList>
+              <div className="mt-4">
+                <SubmissionsTable submissions={filteredSubmissions} />
+              </div>
+            </Tabs>
           </div>
         </div>
       </main>

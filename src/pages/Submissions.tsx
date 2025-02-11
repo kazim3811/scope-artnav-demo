@@ -106,38 +106,16 @@ const Submissions = () => {
     submission.curatorial === "Under Review"
   );
 
-  const mockImageDetails = [
-    {
-      id: 1,
-      images: [
-        "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
-        "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158"
-      ],
-      title: "Gallery Exhibition Space",
-      description: "Main exhibition area featuring contemporary artworks",
-      dimensions: "40ft x 60ft",
-      lighting: "LED track lighting with adjustable color temperature",
-      wallFinish: "White matte finish",
-      additionalNotes: "Space includes movable partition walls for flexible layout",
-      submittedBy: "John Smith",
-      submissionDate: "2024-02-11",
-    },
-    {
-      id: 2,
-      images: [
-        "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
-        "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158"
-      ],
-      title: "Contemporary Art Gallery",
-      description: "Modern gallery space with high ceilings",
-      dimensions: "50ft x 70ft",
-      lighting: "Natural skylight with supplementary LED lighting",
-      wallFinish: "Off-white textured finish",
-      additionalNotes: "Features built-in storage and preparation area",
-      submittedBy: "Jane Doe",
-      submissionDate: "2024-02-12",
-    }
-  ];
+  const mockImageDetails = {
+    title: "Gallery Exhibition Space",
+    description: "Main exhibition area featuring contemporary artworks",
+    dimensions: "40ft x 60ft",
+    lighting: "LED track lighting with adjustable color temperature",
+    wallFinish: "White matte finish",
+    additionalNotes: "Space includes movable partition walls for flexible layout",
+    submittedBy: "John Smith",
+    submissionDate: "2024-02-11",
+  };
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -348,7 +326,7 @@ const Submissions = () => {
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => setSelectedDetails(mockImageDetails.find(detail => detail.id === submission.id))}
+                  onClick={() => setSelectedDetails(mockImageDetails)}
                 >
                   View Details
                 </Button>
@@ -371,18 +349,13 @@ const Submissions = () => {
               <DialogTitle>{selectedSubmission.name} - Gallery Images</DialogTitle>
             </DialogHeader>
             <div className="grid grid-cols-2 gap-4">
-              {mockImageDetails[0].images.map((image, index) => (
-                <div 
-                  key={index}
-                  className="aspect-video bg-gray-100 rounded-lg overflow-hidden"
-                >
-                  <img 
-                    src={image} 
-                    alt={`Gallery image ${index + 1}`}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              ))}
+              {/* Placeholder for gallery images */}
+              <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center cursor-pointer hover:bg-gray-200 transition-colors">
+                <span className="text-gray-500">Click to Expand Image</span>
+              </div>
+              <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center cursor-pointer hover:bg-gray-200 transition-colors">
+                <span className="text-gray-500">Click to Expand Image</span>
+              </div>
             </div>
           </DialogContent>
         </Dialog>
@@ -396,15 +369,12 @@ const Submissions = () => {
               <DialogTitle>Gallery Image Details</DialogTitle>
             </DialogHeader>
             <div className="space-y-4">
-              {Object.entries(selectedDetails).map(([key, value]) => {
-                if (key === 'id' || key === 'images') return null;
-                return (
-                  <div key={key} className="space-y-1">
-                    <h4 className="text-sm font-medium capitalize">{key.replace(/([A-Z])/g, ' $1').trim()}</h4>
-                    <p className="text-sm text-gray-500">{value as string}</p>
-                  </div>
-                );
-              })}
+              {Object.entries(selectedDetails).map(([key, value]) => (
+                <div key={key} className="space-y-1">
+                  <h4 className="text-sm font-medium capitalize">{key.replace(/([A-Z])/g, ' $1').trim()}</h4>
+                  <p className="text-sm text-gray-500">{value as string}</p>
+                </div>
+              ))}
             </div>
           </DialogContent>
         </Dialog>

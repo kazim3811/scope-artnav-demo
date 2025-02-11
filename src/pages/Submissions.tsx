@@ -1,3 +1,4 @@
+
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -9,6 +10,7 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
+  DialogTrigger,
 } from "@/components/ui/dialog";
 import {
   Select,
@@ -32,7 +34,7 @@ const Submissions = () => {
   const [statusFilter, setStatusFilter] = useState("all");
   const [paymentStatusFilter, setPaymentStatusFilter] = useState("all");
   const [curatorialFilter, setCuratorialFilter] = useState("all");
-  const [selectedSubmission, setSelectedSubmission<any>] = useState(null);
+  const [selectedSubmission, setSelectedSubmission] = useState<any>(null);
   const [moreInfoReason, setMoreInfoReason] = useState("");
 
   const submissions = [

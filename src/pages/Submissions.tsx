@@ -164,19 +164,19 @@ const Submissions = () => {
       id: 1,
       images: [
         {
-          url: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
-          artworkName: "Convergence",
+          url: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07",
+          artworkName: "Sunset Blooms",
           artistName: "Sarah Chen",
-          aboutWork: "A dynamic exploration of digital landscapes, merging natural forms with technological elements. The piece reflects on our increasingly hybrid existence between digital and physical realms.",
+          aboutWork: "A dynamic exploration of natural landscapes, merging organic forms with vibrant colors. The piece reflects on our connection with nature through the beauty of flowers.",
           medium: "Digital Print on Canvas",
           dimensions: "48\" x 36\"",
           year: "2024"
         },
         {
-          url: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
-          artworkName: "Urban Symphony",
+          url: "https://images.unsplash.com/photo-1582562124811-c09040d0a901",
+          artworkName: "Floral Patterns",
           artistName: "Marcus Rivera",
-          aboutWork: "An abstract interpretation of city life, capturing the rhythm and energy of urban spaces through bold geometric patterns and layered textures.",
+          aboutWork: "An abstract interpretation of traditional floral textiles, capturing the delicate patterns and textures found in nature through a contemporary lens.",
           medium: "Mixed Media on Canvas",
           dimensions: "60\" x 48\"",
           year: "2023"

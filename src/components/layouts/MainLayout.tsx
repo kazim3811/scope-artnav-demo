@@ -70,7 +70,12 @@ const MainLayout = ({ children }: MainLayoutProps) => {
                             <ChevronDown className="w-4 h-4" />
                           </CollapsibleTrigger>
                           <CollapsibleContent className="pl-7">
-                            <a href="/applications" className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg">
+                            <a 
+                              href="/applications" 
+                              target="_blank" 
+                              rel="noopener noreferrer" 
+                              className="flex items-center px-4 py-2 text-[#1A1F2C] hover:bg-[#f3f3f3] rounded-lg"
+                            >
                               Applications
                             </a>
                           </CollapsibleContent>

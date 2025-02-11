@@ -1,15 +1,13 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { ArrowLeftToLine, Eye, CheckCircle2, XCircle, HelpCircle } from "lucide-react";
+import { ArrowLeftToLine, Eye } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import {
   Select,
@@ -34,6 +32,7 @@ const Submissions = () => {
   const [paymentStatusFilter, setPaymentStatusFilter] = useState("all");
   const [curatorialFilter, setCuratorialFilter] = useState("all");
   const [selectedSubmission, setSelectedSubmission] = useState<any>(null);
+  const [selectedDetails, setSelectedDetails] = useState<any>(null);
   const [moreInfoReason, setMoreInfoReason] = useState("");
 
   const submissions = [
@@ -107,6 +106,17 @@ const Submissions = () => {
     submission.curatorial === "Under Review"
   );
 
+  const mockImageDetails = {
+    title: "Gallery Exhibition Space",
+    description: "Main exhibition area featuring contemporary artworks",
+    dimensions: "40ft x 60ft",
+    lighting: "LED track lighting with adjustable color temperature",
+    wallFinish: "White matte finish",
+    additionalNotes: "Space includes movable partition walls for flexible layout",
+    submittedBy: "John Smith",
+    submissionDate: "2024-02-11",
+  };
+
   const getStatusColor = (status: string) => {
     switch (status) {
       case "Ready to Invoice":
@@ -132,31 +142,6 @@ const Submissions = () => {
   const handleStatusUpdate = (submissionId: number, type: 'payment' | 'application' | 'curatorial', newStatus: string) => {
     console.log(`Updating ${type} status for submission ${submissionId} to ${newStatus}`);
     // Here you would typically update the state or make an API call
-  };
-
-  const handleImageReview = (submissionId: number, action: 'approve' | 'reject' | 'more-info', reason?: string) => {
-    const submission = submissions.find(s => s.id === submissionId);
-    let message = "";
-    
-    switch(action) {
-      case 'approve':
-        message = `Approved images for ${submission?.name}`;
-        break;
-      case 'reject':
-        message = `Rejected images for ${submission?.name}`;
-        break;
-      case 'more-info':
-        message = `Requested more information for ${submission?.name}`;
-        break;
-    }
-
-    toast({
-      title: "Review Updated",
-      description: message,
-    });
-
-    setSelectedSubmission(null);
-    setMoreInfoReason("");
   };
 
   const SubmissionsTable = ({ submissions }: { submissions: typeof filteredSubmissions }) => (
@@ -316,8 +301,8 @@ const Submissions = () => {
             </TableHead>
             <TableHead>Gallery Name</TableHead>
             <TableHead>Images</TableHead>
+            <TableHead>View Details</TableHead>
             <TableHead>Status</TableHead>
-            <TableHead>Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -338,106 +323,58 @@ const Submissions = () => {
                 </Button>
               </TableCell>
               <TableCell>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setSelectedDetails(mockImageDetails)}
+                >
+                  View Details
+                </Button>
+              </TableCell>
+              <TableCell>
                 <span className={`px-2 py-1 rounded text-sm ${getStatusColor(submission.curatorial)}`}>
                   {submission.curatorial}
                 </span>
-              </TableCell>
-              <TableCell>
-                <div className="flex space-x-2">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="text-green-600 hover:text-green-700"
-                    onClick={() => handleImageReview(submission.id, 'approve')}
-                  >
-                    <CheckCircle2 className="w-4 h-4" />
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="text-red-600 hover:text-red-700"
-                    onClick={() => handleImageReview(submission.id, 'reject')}
-                  >
-                    <XCircle className="w-4 h-4" />
-                  </Button>
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="text-blue-600 hover:text-blue-700"
-                      >
-                        <HelpCircle className="w-4 h-4" />
-                      </Button>
-                    </DialogTrigger>
-                    <DialogContent>
-                      <DialogHeader>
-                        <DialogTitle>Request More Information</DialogTitle>
-                        <DialogDescription>
-                          Specify what additional information is needed from the gallery.
-                        </DialogDescription>
-                      </DialogHeader>
-                      <div className="space-y-4 py-4">
-                        <textarea
-                          className="w-full p-2 border rounded-md"
-                          placeholder="Enter your request..."
-                          value={moreInfoReason}
-                          onChange={(e) => setMoreInfoReason(e.target.value)}
-                          rows={4}
-                        />
-                        <Button 
-                          onClick={() => {
-                            handleImageReview(submission.id, 'more-info', moreInfoReason);
-                          }}
-                        >
-                          Send Request
-                        </Button>
-                      </div>
-                    </DialogContent>
-                  </Dialog>
-                </div>
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
 
+      {/* Image Preview Dialog */}
       {selectedSubmission && (
         <Dialog open={!!selectedSubmission} onOpenChange={() => setSelectedSubmission(null)}>
           <DialogContent className="max-w-4xl">
             <DialogHeader>
-              <DialogTitle>{selectedSubmission.name} - Images</DialogTitle>
+              <DialogTitle>{selectedSubmission.name} - Gallery Images</DialogTitle>
             </DialogHeader>
             <div className="grid grid-cols-2 gap-4">
               {/* Placeholder for gallery images */}
-              <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
-                <span className="text-gray-500">Image Preview</span>
+              <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center cursor-pointer hover:bg-gray-200 transition-colors">
+                <span className="text-gray-500">Click to Expand Image</span>
               </div>
-              <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
-                <span className="text-gray-500">Image Preview</span>
+              <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center cursor-pointer hover:bg-gray-200 transition-colors">
+                <span className="text-gray-500">Click to Expand Image</span>
               </div>
             </div>
-            <div className="flex justify-end space-x-2 mt-4">
-              <Button
-                variant="outline"
-                onClick={() => setSelectedSubmission(null)}
-              >
-                Close
-              </Button>
-              <Button
-                variant="default"
-                className="bg-green-600 hover:bg-green-700"
-                onClick={() => handleImageReview(selectedSubmission.id, 'approve')}
-              >
-                Approve
-              </Button>
-              <Button
-                variant="default"
-                className="bg-red-600 hover:bg-red-700"
-                onClick={() => handleImageReview(selectedSubmission.id, 'reject')}
-              >
-                Reject
-              </Button>
+          </DialogContent>
+        </Dialog>
+      )}
+
+      {/* Details Dialog */}
+      {selectedDetails && (
+        <Dialog open={!!selectedDetails} onOpenChange={() => setSelectedDetails(null)}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Gallery Image Details</DialogTitle>
+            </DialogHeader>
+            <div className="space-y-4">
+              {Object.entries(selectedDetails).map(([key, value]) => (
+                <div key={key} className="space-y-1">
+                  <h4 className="text-sm font-medium capitalize">{key.replace(/([A-Z])/g, ' $1').trim()}</h4>
+                  <p className="text-sm text-gray-500">{value as string}</p>
+                </div>
+              ))}
             </div>
           </DialogContent>
         </Dialog>

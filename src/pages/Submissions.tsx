@@ -1,4 +1,3 @@
-
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -487,48 +486,6 @@ const Submissions = () => {
                   </div>
                 </div>
               ))}
-            </div>
-          </DialogContent>
-        </Dialog>
-      )}
-
-      {/* Details Dialog */}
-      {selectedSubmission && (
-        <Dialog open={!!selectedSubmission} onOpenChange={() => setSelectedSubmission(null)}>
-          <DialogContent className="max-w-4xl">
-            <DialogHeader>
-              <DialogTitle>{selectedSubmission.name} - Images</DialogTitle>
-            </DialogHeader>
-            <div className="grid grid-cols-2 gap-4">
-              {/* Placeholder for gallery images */}
-              <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
-                <span className="text-gray-500">Image Preview</span>
-              </div>
-              <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
-                <span className="text-gray-500">Image Preview</span>
-              </div>
-            </div>
-            <div className="flex justify-end space-x-2 mt-4">
-              <Button
-                variant="outline"
-                onClick={() => setSelectedSubmission(null)}
-              >
-                Close
-              </Button>
-              <Button
-                variant="default"
-                className="bg-green-600 hover:bg-green-700"
-                onClick={() => handleImageReview(selectedSubmission.id, 'approve')}
-              >
-                Approve
-              </Button>
-              <Button
-                variant="default"
-                className="bg-red-600 hover:bg-red-700"
-                onClick={() => handleImageReview(selectedSubmission.id, 'reject')}
-              >
-                Reject
-              </Button>
             </div>
           </DialogContent>
         </Dialog>

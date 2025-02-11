@@ -457,7 +457,7 @@ const Submissions = () => {
                           {artwork.artworkName}
                         </h3>
                         <p className="text-base font-medium text-gray-700 mt-1">
-                          by {artwork.artistName}
+                          <span className="text-gray-900">Artist Name:</span> {artwork.artistName}
                         </p>
                       </div>
                       

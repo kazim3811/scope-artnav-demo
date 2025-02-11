@@ -9,7 +9,6 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import {
   Select,
@@ -33,7 +32,7 @@ const Submissions = () => {
   const [statusFilter, setStatusFilter] = useState("all");
   const [paymentStatusFilter, setPaymentStatusFilter] = useState("all");
   const [curatorialFilter, setCuratorialFilter] = useState("all");
-  const [selectedSubmission, setSelectedSubmission] = useState<any>(null);
+  const [selectedSubmission, setSelectedSubmission<any>] = useState(null);
   const [moreInfoReason, setMoreInfoReason] = useState("");
 
   const submissions = [
@@ -158,6 +157,33 @@ const Submissions = () => {
     setSelectedSubmission(null);
     setMoreInfoReason("");
   };
+
+  const mockArtworkDetails = [
+    {
+      id: 1,
+      images: [
+        {
+          url: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
+          artworkName: "Convergence",
+          artistName: "Sarah Chen",
+          aboutWork: "A dynamic exploration of digital landscapes, merging natural forms with technological elements. The piece reflects on our increasingly hybrid existence between digital and physical realms.",
+          medium: "Digital Print on Canvas",
+          dimensions: "48\" x 36\"",
+          year: "2024"
+        },
+        {
+          url: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
+          artworkName: "Urban Symphony",
+          artistName: "Marcus Rivera",
+          aboutWork: "An abstract interpretation of city life, capturing the rhythm and energy of urban spaces through bold geometric patterns and layered textures.",
+          medium: "Mixed Media on Canvas",
+          dimensions: "60\" x 48\"",
+          year: "2023"
+        }
+      ],
+      galleryName: "Contemporary Visions Gallery"
+    }
+  ];
 
   const SubmissionsTable = ({ submissions }: { submissions: typeof filteredSubmissions }) => (
     <Table>
@@ -402,6 +428,69 @@ const Submissions = () => {
         </TableBody>
       </Table>
 
+      {/* Image Preview Dialog */}
+      {selectedSubmission && (
+        <Dialog open={!!selectedSubmission} onOpenChange={() => setSelectedSubmission(null)}>
+          <DialogContent className="max-w-6xl">
+            <DialogHeader>
+              <DialogTitle>{selectedSubmission.name} - Submitted Artworks</DialogTitle>
+            </DialogHeader>
+            <div className="space-y-8 max-h-[80vh] overflow-y-auto py-4">
+              {mockArtworkDetails[0].images.map((artwork, index) => (
+                <div key={index} className="border rounded-lg p-6 bg-gray-50">
+                  <div className="grid grid-cols-2 gap-8">
+                    {/* Image Column */}
+                    <div className="space-y-4">
+                      <div className="aspect-[4/3] rounded-lg overflow-hidden">
+                        <img 
+                          src={artwork.url} 
+                          alt={artwork.artworkName}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    </div>
+                    {/* Details Column */}
+                    <div className="space-y-4">
+                      <div>
+                        <h3 className="text-xl font-semibold text-gray-900">
+                          {artwork.artworkName}
+                        </h3>
+                        <p className="text-base font-medium text-gray-700 mt-1">
+                          by {artwork.artistName}
+                        </p>
+                      </div>
+                      
+                      <div className="space-y-3">
+                        <div>
+                          <h4 className="text-sm font-medium text-gray-900">About the Work</h4>
+                          <p className="text-sm text-gray-600 mt-1">{artwork.aboutWork}</p>
+                        </div>
+                        
+                        <div className="grid grid-cols-2 gap-4">
+                          <div>
+                            <h4 className="text-sm font-medium text-gray-900">Medium</h4>
+                            <p className="text-sm text-gray-600">{artwork.medium}</p>
+                          </div>
+                          <div>
+                            <h4 className="text-sm font-medium text-gray-900">Dimensions</h4>
+                            <p className="text-sm text-gray-600">{artwork.dimensions}</p>
+                          </div>
+                          <div>
+                            <h4 className="text-sm font-medium text-gray-900">Year</h4>
+                            <p className="text-sm text-gray-600">{artwork.year}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </DialogContent>
+        </Dialog>
+      )}
+
+      {/* Details Dialog */}
       {selectedSubmission && (
         <Dialog open={!!selectedSubmission} onOpenChange={() => setSelectedSubmission(null)}>
           <DialogContent className="max-w-4xl">

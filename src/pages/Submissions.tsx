@@ -1,8 +1,9 @@
+
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowLeftToLine, Eye } from "lucide-react";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import {
   Select,
   SelectContent,
@@ -92,9 +93,7 @@ const Submissions = () => {
   });
 
   const curatorialSubmissions = submissions.filter(submission => 
-    submission.curatorial === "Under Review" || 
-    submission.curatorial === "Approved" || 
-    submission.curatorial === "Rejected"
+    submission.curatorial === "Under Review"
   );
 
   const getStatusColor = (status: string) => {
@@ -320,7 +319,18 @@ const Submissions = () => {
                 </TabsTrigger>
               </TabsList>
               <div className="mt-4">
-                <SubmissionsTable submissions={filteredSubmissions} />
+                <TabsContent value="submissions">
+                  <SubmissionsTable submissions={filteredSubmissions} />
+                </TabsContent>
+                <TabsContent value="curatorial">
+                  <SubmissionsTable submissions={curatorialSubmissions} />
+                </TabsContent>
+                <TabsContent value="public-user-applications">
+                  <div className="p-4 text-center text-gray-500">No public user applications available</div>
+                </TabsContent>
+                <TabsContent value="committee-sheets">
+                  <div className="p-4 text-center text-gray-500">No committee sheets available</div>
+                </TabsContent>
               </div>
             </Tabs>
           </div>

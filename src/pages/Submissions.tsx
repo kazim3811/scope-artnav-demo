@@ -65,56 +65,64 @@ const Submissions = () => {
       name: "ARTNAV gallery 1 2025", 
       status: "Not Submitted",
       paymentStatus: "Ready to Invoice",
-      curatorial: "Under Review"
+      curatorial: "Under Review",
+      invoicingStatus: "Not Started"
     },
     { 
       id: 2, 
       name: "ARTNAV gallery 2 2025", 
       status: "Not Submitted",
       paymentStatus: "Ready to Invoice",
-      curatorial: "Approved"
+      curatorial: "Approved",
+      invoicingStatus: "Invoice Sent"
     },
     { 
       id: 3, 
       name: "ARTNAV gallery 3 2025", 
       status: "Not Submitted",
       paymentStatus: "Ready to Invoice",
-      curatorial: "Under Review"
+      curatorial: "Under Review",
+      invoicingStatus: "Not Started"
     },
     { 
       id: 4, 
       name: "ARTNAV gallery 4 2025", 
       status: "Not Submitted",
       paymentStatus: "Ready to Invoice",
-      curatorial: "Rejected"
+      curatorial: "Rejected",
+      invoicingStatus: "Not Started"
     },
     { 
       id: 5, 
       name: "ARTNAV gallery 5 2025", 
       status: "Not Submitted",
       paymentStatus: "Ready to Invoice",
-      curatorial: "Under Review"
+      curatorial: "Under Review",
+      invoicingStatus: "Not Started"
     },
     { 
       id: 6, 
       name: "ARTNAV gallery 6 2025", 
       status: "Completed",
       paymentStatus: "Ready to Invoice",
-      curatorial: "Approved"
+      curatorial: "Approved",
+      invoicingStatus: "Paid"
     },
     { 
       id: 7, 
       name: "ARTNAV gallery 7 2025", 
       status: "Not Submitted",
       paymentStatus: "Ready to Invoice",
-      curatorial: "Under Review"
+      curatorial: "Under Review",
+      invoicingStatus: "Not Started"
     },
     { 
       id: 8, 
       name: "ARTNAV gallery 8 2025", 
       status: "Not Submitted",
       paymentStatus: "Ready to Invoice",
-      curatorial: "Under Review"
+      curatorial: "Approved",
+      invoicingStatus: "Invoice Sent"
     },
   ];
 
@@ -128,6 +136,10 @@ const Submissions = () => {
 
   const curatorialSubmissions = submissions.filter(submission => 
     submission.curatorial === "Under Review"
+  );
+
+  const approvedSubmissions = submissions.filter(submission => 
+    submission.curatorial === "Approved"
   );
 
   const getStatusColor = (status: string) => {
@@ -618,10 +630,10 @@ const Submissions = () => {
                   Curatorial
                 </TabsTrigger>
                 <TabsTrigger 
-                  value="public-user-applications" 
+                  value="curatorial-approved" 
                   className="px-4 py-2 border-b-2 border-transparent data-[state=active]:border-black rounded-none bg-transparent"
                 >
-                  Public User Applications
+                  Curatorial Approved
                 </TabsTrigger>
                 <TabsTrigger 
                   value="committee-sheets" 
@@ -638,8 +650,60 @@ const Submissions = () => {
                 <TabsContent value="curatorial">
                   <CuratorialTable submissions={curatorialSubmissions} />
                 </TabsContent>
-                <TabsContent value="public-user-applications">
-                  <div className="p-4 text-center text-gray-500">No public user applications available</div>
+                <TabsContent value="curatorial-approved">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="w-12">
+                          <Checkbox />
+                        </TableHead>
+                        <TableHead>Gallery Name</TableHead>
+                        <TableHead>Status</TableHead>
+                        <TableHead>Payment Status</TableHead>
+                        <TableHead>Curatorial Status</TableHead>
+                        <TableHead>Invoicing Status</TableHead>
+                        <TableHead>Actions</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {approvedSubmissions.map((submission) => (
+                        <TableRow key={submission.id}>
+                          <TableCell>
+                            <Checkbox />
+                          </TableCell>
+                          <TableCell>{submission.name}</TableCell>
+                          <TableCell>
+                            <span className={`px-2 py-1 rounded text-sm ${getStatusColor(submission.status)}`}>
+                              {submission.status}
+                            </span>
+                          </TableCell>
+                          <TableCell>
+                            <span className={`px-2 py-1 rounded text-sm ${getStatusColor(submission.paymentStatus)}`}>
+                              {submission.paymentStatus}
+                            </span>
+                          </TableCell>
+                          <TableCell>
+                            <span className={`px-2 py-1 rounded text-sm ${getStatusColor(submission.curatorial)}`}>
+                              {submission.curatorial}
+                            </span>
+                          </TableCell>
+                          <TableCell>
+                            <span className={`px-2 py-1 rounded text-sm ${getStatusColor(submission.invoicingStatus)}`}>
+                              {submission.invoicingStatus}
+                            </span>
+                          </TableCell>
+                          <TableCell>
+                            <div className="flex space-x-2">
+                              <Eye 
+                                className="w-4 h-4 cursor-pointer hover:text-blue-600" 
+                                onClick={() => setPreviewApplication(submission.id)}
+                              />
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
                 </TabsContent>
                 <TabsContent value="committee-sheets">
                   <div className="p-4 text-center text-gray-500">No committee sheets available</div>

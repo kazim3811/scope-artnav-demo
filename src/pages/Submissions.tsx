@@ -35,6 +35,7 @@ const Submissions = () => {
   const [curatorialFilter, setCuratorialFilter] = useState("all");
   const [selectedSubmission, setSelectedSubmission] = useState<any>(null);
   const [moreInfoReason, setMoreInfoReason] = useState("");
+  const [previewApplication, setPreviewApplication] = useState<number | null>(null);
 
   const submissions = [
     { 
@@ -254,7 +255,10 @@ const Submissions = () => {
             <TableCell>
               <div className="flex space-x-2">
                 <ArrowLeftToLine className="w-4 h-4" />
-                <Eye className="w-4 h-4" />
+                <Eye 
+                  className="w-4 h-4 cursor-pointer hover:text-blue-600" 
+                  onClick={() => setPreviewApplication(submission.id)}
+                />
               </div>
             </TableCell>
             <TableCell>{submission.name}</TableCell>
@@ -493,6 +497,69 @@ const Submissions = () => {
     </div>
   );
 
+  const ApplicationPreviewDialog = () => (
+    <Dialog open={previewApplication !== null} onOpenChange={() => setPreviewApplication(null)}>
+      <DialogContent className="max-w-4xl">
+        <DialogHeader>
+          <DialogTitle>Gallery Application Preview</DialogTitle>
+          <DialogDescription>
+            Application details submitted by the gallery
+          </DialogDescription>
+        </DialogHeader>
+        <div className="space-y-6 py-4">
+          <div className="grid grid-cols-2 gap-6">
+            <div className="space-y-2">
+              <h4 className="font-medium text-gray-900">Gallery Information</h4>
+              <div className="space-y-1">
+                <p className="text-sm"><span className="font-medium">Gallery Name:</span> {mockApplicationData.galleryName}</p>
+                <p className="text-sm"><span className="font-medium">Website:</span> {mockApplicationData.website}</p>
+                <p className="text-sm"><span className="font-medium">Year Established:</span> {mockApplicationData.yearEstablished}</p>
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <h4 className="font-medium text-gray-900">Primary Contact</h4>
+              <div className="space-y-1">
+                <p className="text-sm"><span className="font-medium">Name:</span> {mockApplicationData.primaryContact.name}</p>
+                <p className="text-sm"><span className="font-medium">Position:</span> {mockApplicationData.primaryContact.position}</p>
+                <p className="text-sm"><span className="font-medium">Email:</span> {mockApplicationData.primaryContact.email}</p>
+                <p className="text-sm"><span className="font-medium">Phone:</span> {mockApplicationData.primaryContact.phone}</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <h4 className="font-medium text-gray-900">Exhibition Details</h4>
+            <div className="space-y-1">
+              <p className="text-sm"><span className="font-medium">Primary Exhibition Type:</span> {mockApplicationData.exhibitType}</p>
+              <p className="text-sm"><span className="font-medium">Booth Preference:</span> {mockApplicationData.boothPreference}</p>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <h4 className="font-medium text-gray-900">Represented Artists</h4>
+            <div className="grid grid-cols-2 gap-2">
+              {mockApplicationData.representedArtists.map((artist, index) => (
+                <p key={index} className="text-sm">{artist}</p>
+              ))}
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <h4 className="font-medium text-gray-900">Experience & Program</h4>
+            <div className="space-y-1">
+              <p className="text-sm"><span className="font-medium">Previous Fairs:</span> {mockApplicationData.previousFairs}</p>
+              <div>
+                <p className="text-sm font-medium mb-1">Proposed Program:</p>
+                <p className="text-sm text-gray-600">{mockApplicationData.proposedProgram}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+
   return (
     <MainLayout>
       <header className="bg-white border-b border-gray-200">
@@ -544,6 +611,7 @@ const Submissions = () => {
               <div className="mt-4">
                 <TabsContent value="submissions">
                   <SubmissionsTable submissions={filteredSubmissions} />
+                  <ApplicationPreviewDialog />
                 </TabsContent>
                 <TabsContent value="curatorial">
                   <CuratorialTable submissions={curatorialSubmissions} />

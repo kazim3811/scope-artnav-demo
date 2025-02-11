@@ -37,6 +37,28 @@ const Submissions = () => {
   const [moreInfoReason, setMoreInfoReason] = useState("");
   const [previewApplication, setPreviewApplication] = useState<number | null>(null);
 
+  const mockApplicationData = {
+    galleryName: "ARTNAV Gallery",
+    primaryContact: {
+      name: "Sarah Johnson",
+      email: "sarah@artnavgallery.com",
+      phone: "+1 (555) 123-4567",
+      position: "Gallery Director"
+    },
+    website: "www.artnavgallery.com",
+    exhibitType: "Contemporary",
+    boothPreference: "100sqm corner $15000",
+    representedArtists: [
+      "Emma Chen - Mixed Media",
+      "Marcus Rivera - Digital Art",
+      "Sophie Lee - Contemporary Sculpture",
+      "David Patel - Abstract Painting"
+    ],
+    yearEstablished: "2015",
+    previousFairs: "Art Basel Miami 2023, Frieze London 2023",
+    proposedProgram: "Our booth will showcase emerging contemporary artists working across various mediums, highlighting innovative approaches to traditional techniques and materials. The presentation will focus on the intersection of digital and traditional art practices."
+  };
+
   const submissions = [
     { 
       id: 1, 

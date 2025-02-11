@@ -1,9 +1,16 @@
-
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { ArrowLeftToLine, Eye } from "lucide-react";
+import { ArrowLeftToLine, Eye, CheckCircle2, XCircle, HelpCircle } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import {
   Select,
   SelectContent,
@@ -19,11 +26,15 @@ import {
 } from "@/components/ui/dropdown-menu";
 import MainLayout from "@/components/layouts/MainLayout";
 import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 const Submissions = () => {
+  const { toast } = useToast();
   const [statusFilter, setStatusFilter] = useState("all");
   const [paymentStatusFilter, setPaymentStatusFilter] = useState("all");
   const [curatorialFilter, setCuratorialFilter] = useState("all");
+  const [selectedSubmission, setSelectedSubmission] = useState<any>(null);
+  const [moreInfoReason, setMoreInfoReason] = useState("");
 
   const submissions = [
     { 
@@ -121,6 +132,31 @@ const Submissions = () => {
   const handleStatusUpdate = (submissionId: number, type: 'payment' | 'application' | 'curatorial', newStatus: string) => {
     console.log(`Updating ${type} status for submission ${submissionId} to ${newStatus}`);
     // Here you would typically update the state or make an API call
+  };
+
+  const handleImageReview = (submissionId: number, action: 'approve' | 'reject' | 'more-info', reason?: string) => {
+    const submission = submissions.find(s => s.id === submissionId);
+    let message = "";
+    
+    switch(action) {
+      case 'approve':
+        message = `Approved images for ${submission?.name}`;
+        break;
+      case 'reject':
+        message = `Rejected images for ${submission?.name}`;
+        break;
+      case 'more-info':
+        message = `Requested more information for ${submission?.name}`;
+        break;
+    }
+
+    toast({
+      title: "Review Updated",
+      description: message,
+    });
+
+    setSelectedSubmission(null);
+    setMoreInfoReason("");
   };
 
   const SubmissionsTable = ({ submissions }: { submissions: typeof filteredSubmissions }) => (
@@ -270,6 +306,145 @@ const Submissions = () => {
     </Table>
   );
 
+  const CuratorialTable = ({ submissions }: { submissions: typeof filteredSubmissions }) => (
+    <div className="space-y-4">
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-12">
+              <Checkbox />
+            </TableHead>
+            <TableHead>Gallery Name</TableHead>
+            <TableHead>Images</TableHead>
+            <TableHead>Status</TableHead>
+            <TableHead>Actions</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {submissions.map((submission) => (
+            <TableRow key={submission.id}>
+              <TableCell>
+                <Checkbox />
+              </TableCell>
+              <TableCell>{submission.name}</TableCell>
+              <TableCell>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => setSelectedSubmission(submission)}
+                >
+                  <Eye className="w-4 h-4 mr-2" />
+                  View Images
+                </Button>
+              </TableCell>
+              <TableCell>
+                <span className={`px-2 py-1 rounded text-sm ${getStatusColor(submission.curatorial)}`}>
+                  {submission.curatorial}
+                </span>
+              </TableCell>
+              <TableCell>
+                <div className="flex space-x-2">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="text-green-600 hover:text-green-700"
+                    onClick={() => handleImageReview(submission.id, 'approve')}
+                  >
+                    <CheckCircle2 className="w-4 h-4" />
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="text-red-600 hover:text-red-700"
+                    onClick={() => handleImageReview(submission.id, 'reject')}
+                  >
+                    <XCircle className="w-4 h-4" />
+                  </Button>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="text-blue-600 hover:text-blue-700"
+                      >
+                        <HelpCircle className="w-4 h-4" />
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                      <DialogHeader>
+                        <DialogTitle>Request More Information</DialogTitle>
+                        <DialogDescription>
+                          Specify what additional information is needed from the gallery.
+                        </DialogDescription>
+                      </DialogHeader>
+                      <div className="space-y-4 py-4">
+                        <textarea
+                          className="w-full p-2 border rounded-md"
+                          placeholder="Enter your request..."
+                          value={moreInfoReason}
+                          onChange={(e) => setMoreInfoReason(e.target.value)}
+                          rows={4}
+                        />
+                        <Button 
+                          onClick={() => {
+                            handleImageReview(submission.id, 'more-info', moreInfoReason);
+                          }}
+                        >
+                          Send Request
+                        </Button>
+                      </div>
+                    </DialogContent>
+                  </Dialog>
+                </div>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+
+      {selectedSubmission && (
+        <Dialog open={!!selectedSubmission} onOpenChange={() => setSelectedSubmission(null)}>
+          <DialogContent className="max-w-4xl">
+            <DialogHeader>
+              <DialogTitle>{selectedSubmission.name} - Images</DialogTitle>
+            </DialogHeader>
+            <div className="grid grid-cols-2 gap-4">
+              {/* Placeholder for gallery images */}
+              <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
+                <span className="text-gray-500">Image Preview</span>
+              </div>
+              <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
+                <span className="text-gray-500">Image Preview</span>
+              </div>
+            </div>
+            <div className="flex justify-end space-x-2 mt-4">
+              <Button
+                variant="outline"
+                onClick={() => setSelectedSubmission(null)}
+              >
+                Close
+              </Button>
+              <Button
+                variant="default"
+                className="bg-green-600 hover:bg-green-700"
+                onClick={() => handleImageReview(selectedSubmission.id, 'approve')}
+              >
+                Approve
+              </Button>
+              <Button
+                variant="default"
+                className="bg-red-600 hover:bg-red-700"
+                onClick={() => handleImageReview(selectedSubmission.id, 'reject')}
+              >
+                Reject
+              </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
+      )}
+    </div>
+  );
+
   return (
     <MainLayout>
       <header className="bg-white border-b border-gray-200">
@@ -323,7 +498,7 @@ const Submissions = () => {
                   <SubmissionsTable submissions={filteredSubmissions} />
                 </TabsContent>
                 <TabsContent value="curatorial">
-                  <SubmissionsTable submissions={curatorialSubmissions} />
+                  <CuratorialTable submissions={curatorialSubmissions} />
                 </TabsContent>
                 <TabsContent value="public-user-applications">
                   <div className="p-4 text-center text-gray-500">No public user applications available</div>

@@ -80,21 +80,43 @@ const ApplicationLayout = ({ children, currentStep }: ApplicationLayoutProps) =>
               >
                 <div className={cn(
                   "w-6 h-6 rounded-full flex items-center justify-center mr-2 text-sm transition-colors duration-300",
-                  currentStep === 4 ? "bg-[#1A1F2C] text-white" :
-                  currentStep > 4 ? "bg-[#1A1F2C] text-white" :
+                  currentStep === 5 ? "bg-[#1A1F2C] text-white" :
+                  currentStep > 5 ? "bg-[#1A1F2C] text-white" :
                   "bg-gray-200 text-gray-600"
                 )}>
                   5
                 </div>
                 <span className={cn(
                   "text-sm transition-colors duration-300",
-                  currentStep === 4 ? "font-semibold text-[#1A1F2C]" :
-                  currentStep > 4 ? "font-medium text-[#1A1F2C]" :
+                  currentStep === 5 ? "font-semibold text-[#1A1F2C]" :
+                  currentStep > 5 ? "font-medium text-[#1A1F2C]" :
+                  "text-[#8E9196]"
+                )}>
+                  Curatorial Review
+                </span>
+              </Link>
+              <div className={cn(
+                "ml-3 pl-2 mt-1 mb-1 border-l-2 h-3 transition-colors duration-300",
+                currentStep > 5 ? "border-[#1A1F2C]" : "border-gray-200"
+              )} />
+              <div className="flex items-center">
+                <div className={cn(
+                  "w-6 h-6 rounded-full flex items-center justify-center mr-2 text-sm transition-colors duration-300",
+                  currentStep === 6 ? "bg-[#1A1F2C] text-white" :
+                  currentStep > 6 ? "bg-[#1A1F2C] text-white" :
+                  "bg-gray-200 text-gray-600"
+                )}>
+                  6
+                </div>
+                <span className={cn(
+                  "text-sm transition-colors duration-300",
+                  currentStep === 6 ? "font-semibold text-[#1A1F2C]" :
+                  currentStep > 6 ? "font-medium text-[#1A1F2C]" :
                   "text-[#8E9196]"
                 )}>
                   Gallery Presentation
                 </span>
-              </Link>
+              </div>
             </div>
           </div>
         </div>

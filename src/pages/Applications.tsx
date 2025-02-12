@@ -20,59 +20,37 @@ const Applications = () => {
       </header>
 
       <div className="p-6 max-w-3xl">
-        <h1 className="text-2xl font-bold mb-4 text-[#1A1F2C]">Your Gateway to SCOPE</h1>
+        <h1 className="text-2xl font-bold mb-4 text-[#1A1F2C]">Welcome to SCOPE</h1>
         
         <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 space-y-4">
           <section>
-            <h2 className="text-base font-semibold mb-2 text-[#1A1F2C]">Get Started with Ease</h2>
+            <h2 className="text-base font-semibold mb-2 text-[#1A1F2C]">Join the World's Premier Art Show</h2>
             <p className="text-[#8E9196] text-sm">Welcome to the SCOPE application portal. We're excited to have you here!</p>
           </section>
 
           <section>
-            <h2 className="text-base font-semibold mb-2 text-[#1A1F2C]">Complete Your Application</h2>
-            <p className="text-[#8E9196] text-sm">Submit and track your gallery application with a few simple clicks.</p>
-          </section>
-
-          <section>
-            <h2 className="text-base font-semibold mb-2 text-[#1A1F2C]">Manage Your Exhibit</h2>
-            <p className="text-[#8E9196] text-sm">Access all the tools you need to design, organize, and showcase your exhibit.</p>
-          </section>
-
-          <section>
-            <h2 className="text-base font-semibold mb-2 text-[#1A1F2C]">Stay Updated</h2>
-            <p className="text-[#8E9196] text-sm">Receive real-time updates on deadlines, event logistics, and more to keep you informed and prepared.</p>
-          </section>
-
-          <section>
-            <h2 className="text-base font-semibold mb-2 text-[#1A1F2C]">Explore, Connect, Inspire</h2>
+            <h2 className="text-base font-semibold mb-2 text-[#1A1F2C]">What to Expect</h2>
             <p className="text-[#8E9196] text-sm">
-              At SCOPE, we're here to make your journey as an exhibitor effortless and engaging. 
-              Dive into the portal, connect with our team, and discover how you can make an impact 
-              in one of the world's most dynamic art shows.
+              The application process is simple and straightforward. You'll need to:
             </p>
-          </section>
-
-          <section>
-            <h2 className="text-base font-semibold mb-2 text-[#1A1F2C]">We're Here to Support You</h2>
-            <p className="text-[#8E9196] text-sm">
-              If you have questions or need assistance, reach out to our support team anytime through 
-              the portal. We're excited to see what you bring to SCOPE this year, and we're here to 
-              support you every step of the way.
-            </p>
+            <ul className="mt-2 space-y-2 text-sm text-[#8E9196]">
+              <li className="flex items-center">
+                <span className="w-4 h-4 rounded-full bg-[#1A1F2C] text-white flex items-center justify-center text-xs mr-2">1</span>
+                Provide your gallery details
+              </li>
+              <li className="flex items-center">
+                <span className="w-4 h-4 rounded-full bg-[#1A1F2C] text-white flex items-center justify-center text-xs mr-2">2</span>
+                Select your preferred booth option
+              </li>
+            </ul>
           </section>
 
           <div className="flex space-x-3 pt-4">
             <Button 
               className="bg-[#1A1F2C] hover:bg-[#2A2F3C] text-white"
-              onClick={() => navigate("/gallery-information")}
+              onClick={() => navigate("/gallery-details")}
             >
-              Start Your Application
-            </Button>
-            <Button 
-              variant="outline" 
-              className="border-[#1A1F2C] text-[#1A1F2C] hover:bg-[#1A1F2C] hover:text-white"
-            >
-              Explore Portal Features
+              Start Application
             </Button>
           </div>
         </div>

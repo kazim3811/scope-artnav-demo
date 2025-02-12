@@ -28,6 +28,9 @@ import {
 import MainLayout from "@/components/layouts/MainLayout";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { Badge } from "@/components/ui/badge";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { format } from "date-fns";
 
 const Submissions = () => {
   const { toast } = useToast();
@@ -41,6 +44,7 @@ const Submissions = () => {
   const [editedValues, setEditedValues] = useState<any>(null);
   const [actionMessage, setActionMessage] = useState("");
   const [selectedAction, setSelectedAction] = useState<'approve' | 'reject' | 'more-info' | null>(null);
+  const [selectedNotes, setSelectedNotes] = useState<number | null>(null);
 
   const mockApplicationData = {
     galleryName: "ARTNAV Gallery",
@@ -381,8 +385,23 @@ const Submissions = () => {
             </TableCell>
             <TableCell>
               <div className="flex items-center justify-between">
-                <span className="text-gray-500 italic">Empty</span>
-                <Button variant="ghost" className="h-4 w-4 p-0">⋮</Button>
+                <span className="text-gray-500 italic">
+                  {notes[submission.id]?.length 
+                    ? `${notes[submission.id].length} note${notes[submission.id].length > 1 ? 's' : ''}`
+                    : 'Empty'}
+                </span>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className="h-8 w-8 p-0">
+                      <MoreVertical className="h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-56">
+                    <DropdownMenuItem onSelect={() => setSelectedNotes(submission.id)}>
+                      View Notes
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </div>
             </TableCell>
           </TableRow>
@@ -954,6 +973,41 @@ const Submissions = () => {
     });
   };
 
+  const submissionNotes = {
+    1: [
+      { id: 1, text: "Gallery has requested additional time for booth selection", timestamp: "2024-03-15T10:30:00Z", author: "John Doe" },
+      { id: 2, text: "Follow up scheduled for next week", timestamp: "2024-03-14T15:45:00Z", author: "Jane Smith" }
+    ],
+    2: [
+      { id: 3, text: "Payment pending confirmation", timestamp: "2024-03-13T09:20:00Z", author: "John Doe" }
+    ]
+  };
+
+  const [notes, setNotes] = useState<{[key: number]: Array<{id: number; text: string; timestamp: string; author: string}>}>(submissionNotes);
+  const [newNote, setNewNote] = useState("");
+
+  const addNote = (submissionId: number) => {
+    if (!newNote.trim()) return;
+
+    const newNoteObj = {
+      id: Date.now(),
+      text: newNote,
+      timestamp: new Date().toISOString(),
+      author: "Current User" // In a real app, this would come from auth context
+    };
+
+    setNotes(prev => ({
+      ...prev,
+      [submissionId]: [...(prev[submissionId] || []), newNoteObj]
+    }));
+
+    setNewNote("");
+    toast({
+      title: "Note Added",
+      description: "Your note has been successfully added to this submission.",
+    });
+  };
+
   return (
     <MainLayout>
       <header className="bg-white border-b border-gray-200">
@@ -1137,6 +1191,56 @@ const Submissions = () => {
           </div>
         </div>
       </main>
+
+      {/* Notes Dialog */}
+      <Dialog open={selectedNotes !== null} onOpenChange={() => setSelectedNotes(null)}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle>Submission Notes</DialogTitle>
+            <DialogDescription>
+              View and add notes for this submission
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-4">
+            <ScrollArea className="h-[300px] rounded-md border p-4">
+              <div className="space-y-4">
+                {notes[selectedNotes || 0]?.map((note) => (
+                  <div key={note.id} className="bg-gray-50 p-3 rounded-lg space-y-2">
+                    <div className="flex items-center justify-between">
+                      <Badge variant="secondary" className="text-xs">
+                        {format(new Date(note.timestamp), "MMM d, yyyy 'at' h:mm a")}
+                      </Badge>
+                      <span className="text-sm text-gray-600">{note.author}</span>
+                    </div>
+                    <p className="text-sm text-gray-700">{note.text}</p>
+                  </div>
+                ))}
+                {(!notes[selectedNotes || 0] || notes[selectedNotes || 0].length === 0) && (
+                  <div className="text-center text-gray-500 py-4">
+                    No notes yet
+                  </div>
+                )}
+              </div>
+            </ScrollArea>
+
+            <div className="flex space-x-2">
+              <Input
+                placeholder="Add a new note..."
+                value={newNote}
+                onChange={(e) => setNewNote(e.target.value)}
+                className="flex-1"
+              />
+              <Button 
+                onClick={() => selectedNotes && addNote(selectedNotes)}
+                className="bg-[#1A1F2C] hover:bg-[#2A2F3C] text-white"
+              >
+                Add Note
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </MainLayout>
   );
 };

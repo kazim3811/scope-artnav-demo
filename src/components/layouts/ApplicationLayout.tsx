@@ -22,26 +22,26 @@ const ApplicationLayout = ({ children, currentStep }: ApplicationLayoutProps) =>
       <div className="flex">
         {/* Sidebar */}
         <div className="w-64 min-h-screen bg-white border-r border-gray-200">
-          <div className="p-6 border-b border-gray-200">
-            <h1 className="text-xl font-bold text-[#1A1F2C]">ARTNAV PORTAL</h1>
+          <div className="p-4 border-b border-gray-200">
+            <h1 className="text-lg font-bold text-[#1A1F2C]">ARTNAV PORTAL</h1>
           </div>
           
-          <div className="p-4">
+          <div className="p-3">
             {steps.map((step, index) => (
-              <div key={step} className="mb-4">
+              <div key={step} className="mb-3">
                 <div className="flex items-center">
                   <div className={cn(
-                    "w-8 h-8 rounded-full flex items-center justify-center mr-3",
-                    currentStep > index ? "bg-[#9b87f5] text-white" :
-                    currentStep === index ? "bg-[#9b87f5] text-white" :
+                    "w-6 h-6 rounded-full flex items-center justify-center mr-2 text-sm",
+                    currentStep > index ? "bg-[#1A1F2C] text-white" :
+                    currentStep === index ? "bg-[#1A1F2C] text-white" :
                     "bg-gray-200 text-gray-600"
                   )}>
                     {index + 1}
                   </div>
                   <span className={cn(
                     "text-sm",
-                    currentStep === index ? "font-semibold text-[#9b87f5]" :
-                    currentStep > index ? "font-medium text-[#9b87f5]" :
+                    currentStep === index ? "font-semibold text-[#1A1F2C]" :
+                    currentStep > index ? "font-medium text-[#1A1F2C]" :
                     "text-[#8E9196]"
                   )}>
                     {step}
@@ -49,8 +49,8 @@ const ApplicationLayout = ({ children, currentStep }: ApplicationLayoutProps) =>
                 </div>
                 {index < steps.length - 1 && (
                   <div className={cn(
-                    "ml-4 pl-3 mt-2 mb-2 border-l-2 h-4",
-                    currentStep > index ? "border-[#9b87f5]" : "border-gray-200"
+                    "ml-3 pl-2 mt-1 mb-1 border-l-2 h-3",
+                    currentStep > index ? "border-[#1A1F2C]" : "border-gray-200"
                   )} />
                 )}
               </div>

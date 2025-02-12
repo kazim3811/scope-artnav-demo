@@ -501,11 +501,11 @@ const Submissions = () => {
                           {artwork.artworkName}
                         </h3>
                         <p className="text-base font-medium text-gray-700 mt-1">
-                          by {artwork.artistName}
+                          Artist Name: {artwork.artistName}
                         </p>
                       </div>
 
-                      <div className="grid grid-cols-3 gap-4">
+                      <div className="space-y-2">
                         <div>
                           <h4 className="text-sm font-medium text-gray-900">Medium</h4>
                           <p className="text-sm text-gray-600">{artwork.medium}</p>
@@ -526,7 +526,7 @@ const Submissions = () => {
                       </div>
                     </div>
 
-                    <div className="w-full">
+                    <div className="w-full max-w-2xl mx-auto">
                       <div className="aspect-[4/3] rounded-lg overflow-hidden">
                         <img 
                           src={artwork.url} 

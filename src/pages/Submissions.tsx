@@ -37,6 +37,28 @@ const Submissions = () => {
   const [moreInfoReason, setMoreInfoReason] = useState("");
   const [previewApplication, setPreviewApplication] = useState<number | null>(null);
 
+  const mockApplicationData = {
+    galleryName: "ARTNAV Gallery",
+    website: "www.artnavgallery.com",
+    yearEstablished: "2010",
+    primaryContact: {
+      name: "John Smith",
+      position: "Gallery Director",
+      email: "john@artnavgallery.com",
+      phone: "+1 (555) 123-4567"
+    },
+    exhibitType: "Solo Exhibition",
+    boothPreference: "Standard Booth 20x20",
+    representedArtists: [
+      "Sarah Chen",
+      "Marcus Rivera",
+      "Elena Rodriguez",
+      "David Kim"
+    ],
+    previousFairs: "Art Basel Miami 2023, Frieze London 2023",
+    proposedProgram: "We plan to showcase a curated selection of contemporary works focusing on emerging artists from the Asia-Pacific region. The exhibition will feature multimedia installations and traditional mediums."
+  };
+
   const submissions = [
     { 
       id: 1, 

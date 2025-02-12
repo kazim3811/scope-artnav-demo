@@ -39,6 +39,8 @@ const Submissions = () => {
   const [previewApplication, setPreviewApplication] = useState<number | null>(null);
   const [editingField, setEditingField] = useState<string | null>(null);
   const [editedValues, setEditedValues] = useState<any>(null);
+  const [actionMessage, setActionMessage] = useState("");
+  const [selectedAction, setSelectedAction] = useState<'approve' | 'reject' | 'more-info' | null>(null);
 
   const mockApplicationData = {
     galleryName: "ARTNAV Gallery",
@@ -190,29 +192,30 @@ const Submissions = () => {
     // Here you would typically update the state or make an API call
   };
 
-  const handleImageReview = (submissionId: number, action: 'approve' | 'reject' | 'more-info', reason?: string) => {
+  const handleImageReview = (submissionId: number, action: 'approve' | 'reject' | 'more-info', message?: string) => {
     const submission = submissions.find(s => s.id === submissionId);
-    let message = "";
+    let toastMessage = "";
     
     switch(action) {
       case 'approve':
-        message = `Approved images for ${submission?.name}`;
+        toastMessage = `Approved images for ${submission?.name} - ${message}`;
         break;
       case 'reject':
-        message = `Rejected images for ${submission?.name}`;
+        toastMessage = `Rejected images for ${submission?.name} - ${message}`;
         break;
       case 'more-info':
-        message = `Requested more information for ${submission?.name}`;
+        toastMessage = `Requested more information for ${submission?.name} - ${message}`;
         break;
     }
 
     toast({
       title: "Review Updated",
-      description: message,
+      description: toastMessage,
     });
 
     setSelectedSubmission(null);
-    setMoreInfoReason("");
+    setActionMessage("");
+    setSelectedAction(null);
   };
 
   const mockArtworkDetails = [
@@ -426,28 +429,87 @@ const Submissions = () => {
               </TableCell>
               <TableCell>
                 <div className="flex space-x-2">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="text-green-600 hover:text-green-700"
-                    onClick={() => handleImageReview(submission.id, 'approve')}
-                  >
-                    <CheckCircle2 className="w-4 h-4" />
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="text-red-600 hover:text-red-700"
-                    onClick={() => handleImageReview(submission.id, 'reject')}
-                  >
-                    <XCircle className="w-4 h-4" />
-                  </Button>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="text-green-600 hover:text-green-700"
+                        onClick={() => setSelectedAction('approve')}
+                      >
+                        <CheckCircle2 className="w-4 h-4" />
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                      <DialogHeader>
+                        <DialogTitle>Approve Submission</DialogTitle>
+                        <DialogDescription>
+                          Add any comments or notes about this approval.
+                        </DialogDescription>
+                      </DialogHeader>
+                      <div className="space-y-4 py-4">
+                        <textarea
+                          className="w-full p-2 border rounded-md"
+                          placeholder="Enter approval comments..."
+                          value={selectedAction === 'approve' ? actionMessage : ''}
+                          onChange={(e) => setActionMessage(e.target.value)}
+                          rows={4}
+                        />
+                        <Button 
+                          onClick={() => {
+                            handleImageReview(submission.id, 'approve', actionMessage);
+                          }}
+                        >
+                          Confirm Approval
+                        </Button>
+                      </div>
+                    </DialogContent>
+                  </Dialog>
+
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="text-red-600 hover:text-red-700"
+                        onClick={() => setSelectedAction('reject')}
+                      >
+                        <XCircle className="w-4 h-4" />
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                      <DialogHeader>
+                        <DialogTitle>Reject Submission</DialogTitle>
+                        <DialogDescription>
+                          Specify the reason for rejection.
+                        </DialogDescription>
+                      </DialogHeader>
+                      <div className="space-y-4 py-4">
+                        <textarea
+                          className="w-full p-2 border rounded-md"
+                          placeholder="Enter rejection reason..."
+                          value={selectedAction === 'reject' ? actionMessage : ''}
+                          onChange={(e) => setActionMessage(e.target.value)}
+                          rows={4}
+                        />
+                        <Button 
+                          onClick={() => {
+                            handleImageReview(submission.id, 'reject', actionMessage);
+                          }}
+                        >
+                          Confirm Rejection
+                        </Button>
+                      </div>
+                    </DialogContent>
+                  </Dialog>
+
                   <Dialog>
                     <DialogTrigger asChild>
                       <Button
                         variant="ghost"
                         size="sm"
                         className="text-blue-600 hover:text-blue-700"
+                        onClick={() => setSelectedAction('more-info')}
                       >
                         <HelpCircle className="w-4 h-4" />
                       </Button>
@@ -463,13 +525,13 @@ const Submissions = () => {
                         <textarea
                           className="w-full p-2 border rounded-md"
                           placeholder="Enter your request..."
-                          value={moreInfoReason}
-                          onChange={(e) => setMoreInfoReason(e.target.value)}
+                          value={selectedAction === 'more-info' ? actionMessage : ''}
+                          onChange={(e) => setActionMessage(e.target.value)}
                           rows={4}
                         />
                         <Button 
                           onClick={() => {
-                            handleImageReview(submission.id, 'more-info', moreInfoReason);
+                            handleImageReview(submission.id, 'more-info', actionMessage);
                           }}
                         >
                           Send Request

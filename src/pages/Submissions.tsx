@@ -1,4 +1,3 @@
-
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -995,30 +994,24 @@ const Submissions = () => {
                             </span>
                           </TableCell>
                           <TableCell>
-                            <div className="flex space-x-2">
-                              <Eye 
-                                className="w-4 h-4 cursor-pointer hover:text-blue-600" 
-                                onClick={() => setPreviewApplication(submission.id)}
-                              />
-                              <DropdownMenu>
-                                <DropdownMenuTrigger asChild>
-                                  <Button variant="ghost" size="icon" className="h-8 w-8 p-0">
-                                    <Settings className="h-4 w-4" />
-                                  </Button>
-                                </DropdownMenuTrigger>
-                                <DropdownMenuContent align="end">
-                                  <DropdownMenuItem onClick={() => handleReminder(submission.id)}>
-                                    Send Payment Reminder
-                                  </DropdownMenuItem>
-                                  <DropdownMenuItem onClick={() => handleAutomatedReminders(submission.id)}>
-                                    Configure Automated Reminders
-                                  </DropdownMenuItem>
-                                  <DropdownMenuItem onClick={() => handleMarkAsPaid(submission.id)}>
-                                    Mark as Paid
-                                  </DropdownMenuItem>
-                                </DropdownMenuContent>
-                              </DropdownMenu>
-                            </div>
+                            <DropdownMenu>
+                              <DropdownMenuTrigger asChild>
+                                <Button variant="ghost" size="icon" className="h-8 w-8 p-0">
+                                  <Settings className="h-4 w-4" />
+                                </Button>
+                              </DropdownMenuTrigger>
+                              <DropdownMenuContent align="end">
+                                <DropdownMenuItem onClick={() => handleReminder(submission.id)}>
+                                  Send Payment Reminder
+                                </DropdownMenuItem>
+                                <DropdownMenuItem onClick={() => handleAutomatedReminders(submission.id)}>
+                                  Configure Automated Reminders
+                                </DropdownMenuItem>
+                                <DropdownMenuItem onClick={() => handleMarkAsPaid(submission.id)}>
+                                  Mark as Paid
+                                </DropdownMenuItem>
+                              </DropdownMenuContent>
+                            </DropdownMenu>
                           </TableCell>
                         </TableRow>
                       ))}

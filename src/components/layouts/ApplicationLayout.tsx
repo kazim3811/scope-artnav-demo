@@ -1,6 +1,7 @@
 
 import { cn } from "@/lib/utils";
 import { Link, useNavigate } from "react-router-dom";
+import { Lock } from "lucide-react";
 
 interface ApplicationLayoutProps {
   children: React.ReactNode;
@@ -87,13 +88,16 @@ const ApplicationLayout = ({ children, currentStep }: ApplicationLayoutProps) =>
                   5
                 </div>
                 <span className={cn(
-                  "text-sm transition-colors duration-300",
+                  "text-sm flex-1 transition-colors duration-300",
                   currentStep === 5 ? "font-semibold text-[#1A1F2C]" :
                   currentStep > 5 ? "font-medium text-[#1A1F2C]" :
                   "text-[#8E9196]"
                 )}>
                   Curatorial Review
                 </span>
+                {currentStep < 5 && (
+                  <Lock className="h-3.5 w-3.5 ml-2 text-[#8E9196]" />
+                )}
               </Link>
               <div className={cn(
                 "ml-3 pl-2 mt-1 mb-1 border-l-2 h-3 transition-colors duration-300",
@@ -109,13 +113,16 @@ const ApplicationLayout = ({ children, currentStep }: ApplicationLayoutProps) =>
                   6
                 </div>
                 <span className={cn(
-                  "text-sm transition-colors duration-300",
+                  "text-sm flex-1 transition-colors duration-300",
                   currentStep === 6 ? "font-semibold text-[#1A1F2C]" :
                   currentStep > 6 ? "font-medium text-[#1A1F2C]" :
                   "text-[#8E9196]"
                 )}>
                   Gallery Presentation
                 </span>
+                {currentStep < 6 && (
+                  <Lock className="h-3.5 w-3.5 ml-2 text-[#8E9196]" />
+                )}
               </div>
               <div className={cn(
                 "ml-3 pl-2 mt-1 mb-1 border-l-2 h-3 transition-colors duration-300",
@@ -131,13 +138,16 @@ const ApplicationLayout = ({ children, currentStep }: ApplicationLayoutProps) =>
                   7
                 </div>
                 <span className={cn(
-                  "text-sm transition-colors duration-300",
+                  "text-sm flex-1 transition-colors duration-300",
                   currentStep === 7 ? "font-semibold text-[#1A1F2C]" :
                   currentStep > 7 ? "font-medium text-[#1A1F2C]" :
                   "text-[#8E9196]"
                 )}>
                   Next Steps
                 </span>
+                {currentStep < 7 && (
+                  <Lock className="h-3.5 w-3.5 ml-2 text-[#8E9196]" />
+                )}
               </div>
             </div>
           </div>

@@ -1,3 +1,4 @@
+
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
@@ -88,7 +89,7 @@ const ChooseBooth = () => {
                 className="bg-[#1A1F2C] hover:bg-[#2A2F3C] text-white"
                 disabled={!selectedBooth}
               >
-                Submit Application
+                Proceed to Deposit
               </Button>
             </div>
           </div>

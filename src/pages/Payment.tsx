@@ -2,9 +2,23 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import ApplicationLayout from "@/components/layouts/ApplicationLayout";
+import { useToast } from "@/components/ui/use-toast";
+import { useState } from "react";
+import { Input } from "@/components/ui/input";
 
 const Payment = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handlePayment = (e: React.FormEvent) => {
+    e.preventDefault();
+    toast({
+      title: "Payment Successful",
+      description: "Thank you for your deposit payment.",
+    });
+    setIsSubmitted(true);
+  };
 
   return (
     <ApplicationLayout currentStep={3}>
@@ -29,33 +43,100 @@ const Payment = () => {
               <p className="text-lg font-medium text-[#1A1F2C] mt-2">$10,000.00</p>
             </div>
 
-            {/* Stripe payment form would go here */}
-            <div className="p-4 border border-gray-200 rounded-lg">
-              <p className="text-sm text-[#8E9196] mb-4">
-                Secure payment processing powered by Stripe
-              </p>
-              {/* Placeholder for Stripe Elements */}
-              <div className="h-40 flex items-center justify-center border border-dashed border-gray-300 rounded-lg">
-                <p className="text-[#8E9196]">Stripe payment form will be integrated here</p>
-              </div>
-            </div>
+            {!isSubmitted ? (
+              <form onSubmit={handlePayment} className="space-y-4">
+                <div className="space-y-4">
+                  <div>
+                    <label className="text-sm font-medium text-[#1A1F2C] block mb-2">
+                      Card Information
+                    </label>
+                    <Input 
+                      type="text"
+                      placeholder="1234 1234 1234 1234"
+                      className="mb-2"
+                    />
+                    <div className="grid grid-cols-2 gap-2">
+                      <Input 
+                        type="text"
+                        placeholder="MM / YY"
+                      />
+                      <Input 
+                        type="text"
+                        placeholder="CVC"
+                      />
+                    </div>
+                  </div>
 
-            <div className="flex justify-between pt-4">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => navigate("/choose-booth")}
-                className="border-[#1A1F2C] text-[#1A1F2C] hover:bg-[#1A1F2C] hover:text-white"
-              >
-                Back
-              </Button>
-              <Button 
-                type="submit"
-                className="bg-[#1A1F2C] hover:bg-[#2A2F3C] text-white"
-              >
-                Complete Payment
-              </Button>
-            </div>
+                  <div>
+                    <label className="text-sm font-medium text-[#1A1F2C] block mb-2">
+                      Name on Card
+                    </label>
+                    <Input 
+                      type="text"
+                      placeholder="Full name"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-sm font-medium text-[#1A1F2C] block mb-2">
+                      Billing Address
+                    </label>
+                    <Input 
+                      type="text"
+                      placeholder="Address"
+                      className="mb-2"
+                    />
+                    <div className="grid grid-cols-2 gap-2">
+                      <Input 
+                        type="text"
+                        placeholder="City"
+                      />
+                      <Input 
+                        type="text"
+                        placeholder="ZIP Code"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex justify-between pt-4">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => navigate("/choose-booth")}
+                    className="border-[#1A1F2C] text-[#1A1F2C] hover:bg-[#1A1F2C] hover:text-white"
+                  >
+                    Back
+                  </Button>
+                  <Button 
+                    type="submit"
+                    className="bg-[#1A1F2C] hover:bg-[#2A2F3C] text-white"
+                  >
+                    Submit Payment
+                  </Button>
+                </div>
+              </form>
+            ) : (
+              <div className="space-y-6">
+                <div className="text-center p-6 bg-green-50 rounded-lg">
+                  <h3 className="text-lg font-medium text-green-800 mb-2">
+                    Thank you for your deposit payment!
+                  </h3>
+                  <p className="text-sm text-green-600">
+                    Your payment has been processed successfully.
+                  </p>
+                </div>
+                
+                <div className="flex justify-center">
+                  <Button 
+                    onClick={() => navigate("/curatorial")}
+                    className="bg-[#1A1F2C] hover:bg-[#2A2F3C] text-white"
+                  >
+                    Proceed to Curatorial
+                  </Button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

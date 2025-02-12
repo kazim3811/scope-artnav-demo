@@ -1,7 +1,7 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { ArrowLeftToLine, Eye, CheckCircle2, XCircle, HelpCircle } from "lucide-react";
+import { ArrowLeftToLine, Eye, CheckCircle2, XCircle, HelpCircle, MoreVertical } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import {
   Dialog,
@@ -37,92 +37,70 @@ const Submissions = () => {
   const [moreInfoReason, setMoreInfoReason] = useState("");
   const [previewApplication, setPreviewApplication] = useState<number | null>(null);
 
-  const mockApplicationData = {
-    galleryName: "ARTNAV Gallery",
-    primaryContact: {
-      name: "Sarah Johnson",
-      email: "sarah@artnavgallery.com",
-      phone: "+1 (555) 123-4567",
-      position: "Gallery Director"
-    },
-    website: "www.artnavgallery.com",
-    exhibitType: "Contemporary",
-    boothPreference: "100sqm corner $15000",
-    representedArtists: [
-      "Emma Chen - Mixed Media",
-      "Marcus Rivera - Digital Art",
-      "Sophie Lee - Contemporary Sculpture",
-      "David Patel - Abstract Painting"
-    ],
-    yearEstablished: "2015",
-    previousFairs: "Art Basel Miami 2023, Frieze London 2023",
-    proposedProgram: "Our booth will showcase emerging contemporary artists working across various mediums, highlighting innovative approaches to traditional techniques and materials. The presentation will focus on the intersection of digital and traditional art practices."
-  };
-
   const submissions = [
     { 
       id: 1, 
       name: "ARTNAV gallery 1 2025", 
-      status: "Not Submitted",
-      paymentStatus: "Ready to Invoice",
-      curatorial: "Under Review",
+      status: "Not Started",
+      paymentStatus: "Incomplete",
+      curatorial: "Not Started",
       invoicingStatus: "Not Started"
     },
     { 
       id: 2, 
       name: "ARTNAV gallery 2 2025", 
-      status: "Not Submitted",
-      paymentStatus: "Ready to Invoice",
-      curatorial: "Approved",
+      status: "In Progress",
+      paymentStatus: "Incomplete",
+      curatorial: "In Progress",
       invoicingStatus: "Invoice Sent"
     },
     { 
       id: 3, 
       name: "ARTNAV gallery 3 2025", 
-      status: "Not Submitted",
-      paymentStatus: "Ready to Invoice",
-      curatorial: "Under Review",
+      status: "Completed",
+      paymentStatus: "Paid",
+      curatorial: "In Progress",
       invoicingStatus: "Not Started"
     },
     { 
       id: 4, 
       name: "ARTNAV gallery 4 2025", 
-      status: "Not Submitted",
-      paymentStatus: "Ready to Invoice",
-      curatorial: "Rejected",
+      status: "Not Started",
+      paymentStatus: "Incomplete",
+      curatorial: "Not Started",
       invoicingStatus: "Not Started"
     },
     { 
       id: 5, 
       name: "ARTNAV gallery 5 2025", 
-      status: "Not Submitted",
-      paymentStatus: "Ready to Invoice",
-      curatorial: "Under Review",
+      status: "Not Started",
+      paymentStatus: "Incomplete",
+      curatorial: "Not Started",
       invoicingStatus: "Not Started"
     },
     { 
       id: 6, 
       name: "ARTNAV gallery 6 2025", 
       status: "Completed",
-      paymentStatus: "Ready to Invoice",
+      paymentStatus: "Paid",
       curatorial: "Approved",
       invoicingStatus: "Paid"
     },
     { 
       id: 7, 
       name: "ARTNAV gallery 7 2025", 
-      status: "Not Submitted",
-      paymentStatus: "Ready to Invoice",
-      curatorial: "Under Review",
+      status: "Not Started",
+      paymentStatus: "Incomplete",
+      curatorial: "Not Started",
       invoicingStatus: "Not Started"
     },
     { 
       id: 8, 
       name: "ARTNAV gallery 8 2025", 
-      status: "Not Submitted",
-      paymentStatus: "Ready to Invoice",
-      curatorial: "Approved",
-      invoicingStatus: "Invoice Sent"
+      status: "Not Started",
+      paymentStatus: "Incomplete",
+      curatorial: "Not Started",
+      invoicingStatus: "Not Started"
     },
   ];
 
@@ -135,7 +113,7 @@ const Submissions = () => {
   });
 
   const curatorialSubmissions = submissions.filter(submission => 
-    submission.curatorial === "Under Review"
+    submission.curatorial === "Not Started"
   );
 
   const approvedSubmissions = submissions.filter(submission => 
@@ -144,21 +122,16 @@ const Submissions = () => {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "Ready to Invoice":
-      case "Payment Due":
-        return "bg-yellow-100 text-yellow-800";
-      case "Paid":
-        return "bg-green-100 text-green-800";
-      case "Under Review":
-        return "bg-blue-100 text-blue-800";
-      case "Approved":
-        return "bg-green-100 text-green-800";
-      case "Rejected":
-        return "bg-red-100 text-red-800";
       case "Completed":
         return "bg-green-100 text-green-800";
-      case "Not Submitted":
+      case "Paid":
+        return "bg-green-100 text-green-800";
+      case "In Progress":
+        return "bg-blue-100 text-blue-800";
+      case "Not Started":
         return "bg-red-100 text-red-800";
+      case "Incomplete":
+        return "bg-yellow-100 text-yellow-800";
       default:
         return "bg-gray-100 text-gray-800";
     }
@@ -239,7 +212,8 @@ const Submissions = () => {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All Status</SelectItem>
-                  <SelectItem value="Not Submitted">Not Submitted</SelectItem>
+                  <SelectItem value="Not Started">Not Started</SelectItem>
+                  <SelectItem value="In Progress">In Progress</SelectItem>
                   <SelectItem value="Completed">Completed</SelectItem>
                 </SelectContent>
               </Select>
@@ -254,8 +228,7 @@ const Submissions = () => {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All Payments</SelectItem>
-                  <SelectItem value="Ready to Invoice">Ready to Invoice</SelectItem>
-                  <SelectItem value="Payment Due">Payment Due</SelectItem>
+                  <SelectItem value="Incomplete">Incomplete</SelectItem>
                   <SelectItem value="Paid">Paid</SelectItem>
                 </SelectContent>
               </Select>
@@ -266,13 +239,12 @@ const Submissions = () => {
               <span>Curatorial</span>
               <Select value={curatorialFilter} onValueChange={setCuratorialFilter}>
                 <SelectTrigger className="h-8">
-                  <SelectValue placeholder="All Results" />
+                  <SelectValue placeholder="All Status" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">All Results</SelectItem>
-                  <SelectItem value="Under Review">Under Review</SelectItem>
-                  <SelectItem value="Approved">Approved</SelectItem>
-                  <SelectItem value="Rejected">Rejected</SelectItem>
+                  <SelectItem value="all">All Status</SelectItem>
+                  <SelectItem value="Not Started">Not Started</SelectItem>
+                  <SelectItem value="In Progress">In Progress</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -306,8 +278,11 @@ const Submissions = () => {
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  <DropdownMenuItem onSelect={() => handleStatusUpdate(submission.id, 'application', 'Not Submitted')}>
-                    Not Submitted
+                  <DropdownMenuItem onSelect={() => handleStatusUpdate(submission.id, 'application', 'Not Started')}>
+                    Not Started
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onSelect={() => handleStatusUpdate(submission.id, 'application', 'In Progress')}>
+                    In Progress
                   </DropdownMenuItem>
                   <DropdownMenuItem onSelect={() => handleStatusUpdate(submission.id, 'application', 'Completed')}>
                     Completed
@@ -325,11 +300,8 @@ const Submissions = () => {
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  <DropdownMenuItem onSelect={() => handleStatusUpdate(submission.id, 'payment', 'Ready to Invoice')}>
-                    Ready to Invoice
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onSelect={() => handleStatusUpdate(submission.id, 'payment', 'Payment Due')}>
-                    Payment Due
+                  <DropdownMenuItem onSelect={() => handleStatusUpdate(submission.id, 'payment', 'Incomplete')}>
+                    Incomplete
                   </DropdownMenuItem>
                   <DropdownMenuItem onSelect={() => handleStatusUpdate(submission.id, 'payment', 'Paid')}>
                     Paid
@@ -347,14 +319,11 @@ const Submissions = () => {
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  <DropdownMenuItem onSelect={() => handleStatusUpdate(submission.id, 'curatorial', 'Under Review')}>
-                    Under Review
+                  <DropdownMenuItem onSelect={() => handleStatusUpdate(submission.id, 'curatorial', 'Not Started')}>
+                    Not Started
                   </DropdownMenuItem>
-                  <DropdownMenuItem onSelect={() => handleStatusUpdate(submission.id, 'curatorial', 'Approved')}>
-                    Approved
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onSelect={() => handleStatusUpdate(submission.id, 'curatorial', 'Rejected')}>
-                    Rejected
+                  <DropdownMenuItem onSelect={() => handleStatusUpdate(submission.id, 'curatorial', 'In Progress')}>
+                    In Progress
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>

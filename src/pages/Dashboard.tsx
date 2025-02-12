@@ -30,20 +30,41 @@ const Dashboard = () => {
           This is a demonstration account set up to enabling Portal configuration to SCOPE needs
         </p>
 
-        <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
-          <div className="flex items-start justify-between">
-            <div>
-              <h3 className="text-lg font-semibold text-[#1A1F2C]">Application</h3>
-              <p className="text-[#8E9196] mt-1">default description.</p>
-            </div>
-            <div className="space-y-4">
-              <div className="flex items-center justify-end space-x-3">
-                <span className="text-sm text-[#8E9196]">Enabled</span>
-                <Switch className="data-[state=checked]:bg-[#1A1F2C]" />
+        <div className="space-y-6">
+          <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+            <div className="flex items-start justify-between">
+              <div>
+                <h3 className="text-lg font-semibold text-[#1A1F2C]">Application</h3>
+                <p className="text-[#8E9196] mt-1">default description.</p>
               </div>
-              <div className="flex items-center justify-end space-x-3">
-                <span className="text-sm text-[#8E9196]">Opened</span>
-                <Switch className="data-[state=checked]:bg-[#1A1F2C]" />
+              <div className="space-y-4">
+                <div className="flex items-center justify-end space-x-3">
+                  <span className="text-sm text-[#8E9196]">Enabled</span>
+                  <Switch className="data-[state=checked]:bg-[#1A1F2C]" />
+                </div>
+                <div className="flex items-center justify-end space-x-3">
+                  <span className="text-sm text-[#8E9196]">Opened</span>
+                  <Switch className="data-[state=checked]:bg-[#1A1F2C]" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+            <div className="flex items-start justify-between">
+              <div>
+                <h3 className="text-lg font-semibold text-[#1A1F2C]">Gallery Forms</h3>
+                <p className="text-[#8E9196] mt-1">Complete your gallery information.</p>
+              </div>
+              <div className="space-y-4">
+                <div className="flex items-center justify-end space-x-3">
+                  <span className="text-sm text-[#8E9196]">Enabled</span>
+                  <Switch className="data-[state=checked]:bg-[#1A1F2C]" />
+                </div>
+                <div className="flex items-center justify-end space-x-3">
+                  <span className="text-sm text-[#8E9196]">Opened</span>
+                  <Switch className="data-[state=checked]:bg-[#1A1F2C]" />
+                </div>
               </div>
             </div>
           </div>

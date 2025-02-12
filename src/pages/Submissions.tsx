@@ -531,52 +531,82 @@ const Submissions = () => {
             Application details submitted by the gallery
           </DialogDescription>
         </DialogHeader>
-        <div className="space-y-6 py-4">
-          <div className="grid grid-cols-2 gap-6">
-            <div className="space-y-2">
-              <h4 className="font-medium text-gray-900">Gallery Information</h4>
-              <div className="space-y-1">
-                <p className="text-sm"><span className="font-medium">Gallery Name:</span> {mockApplicationData.galleryName}</p>
-                <p className="text-sm"><span className="font-medium">Website:</span> {mockApplicationData.website}</p>
-                <p className="text-sm"><span className="font-medium">Year Established:</span> {mockApplicationData.yearEstablished}</p>
+        <div className="space-y-8 py-4">
+          <div className="grid grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="font-semibold text-lg">Gallery Information</h3>
+              <div className="space-y-3">
+                <div>
+                  <div className="font-medium">Gallery Name:</div>
+                  <div>{mockApplicationData.galleryName}</div>
+                </div>
+                <div>
+                  <div className="font-medium">Website:</div>
+                  <div>{mockApplicationData.website}</div>
+                </div>
+                <div>
+                  <div className="font-medium">Year Established:</div>
+                  <div>{mockApplicationData.yearEstablished}</div>
+                </div>
               </div>
             </div>
 
-            <div className="space-y-2">
-              <h4 className="font-medium text-gray-900">Primary Contact</h4>
-              <div className="space-y-1">
-                <p className="text-sm"><span className="font-medium">Name:</span> {mockApplicationData.primaryContact.name}</p>
-                <p className="text-sm"><span className="font-medium">Position:</span> {mockApplicationData.primaryContact.position}</p>
-                <p className="text-sm"><span className="font-medium">Email:</span> {mockApplicationData.primaryContact.email}</p>
-                <p className="text-sm"><span className="font-medium">Phone:</span> {mockApplicationData.primaryContact.phone}</p>
+            <div className="space-y-4">
+              <h3 className="font-semibold text-lg">Primary Contact</h3>
+              <div className="space-y-3">
+                <div>
+                  <div className="font-medium">Name:</div>
+                  <div>{mockApplicationData.primaryContact.name}</div>
+                </div>
+                <div>
+                  <div className="font-medium">Position:</div>
+                  <div>{mockApplicationData.primaryContact.position}</div>
+                </div>
+                <div>
+                  <div className="font-medium">Email:</div>
+                  <div>{mockApplicationData.primaryContact.email}</div>
+                </div>
+                <div>
+                  <div className="font-medium">Phone:</div>
+                  <div>{mockApplicationData.primaryContact.phone}</div>
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="space-y-2">
-            <h4 className="font-medium text-gray-900">Exhibition Details</h4>
-            <div className="space-y-1">
-              <p className="text-sm"><span className="font-medium">Primary Exhibition Type:</span> {mockApplicationData.exhibitType}</p>
-              <p className="text-sm"><span className="font-medium">Booth Preference:</span> {mockApplicationData.boothPreference}</p>
+          <div className="space-y-4">
+            <h3 className="font-semibold text-lg">Exhibition Details</h3>
+            <div className="space-y-3">
+              <div>
+                <div className="font-medium">Primary Exhibition Type:</div>
+                <div>{mockApplicationData.exhibitType}</div>
+              </div>
+              <div>
+                <div className="font-medium">Booth Preference:</div>
+                <div>{mockApplicationData.boothPreference}</div>
+              </div>
             </div>
           </div>
 
-          <div className="space-y-2">
-            <h4 className="font-medium text-gray-900">Represented Artists</h4>
-            <div className="grid grid-cols-2 gap-2">
+          <div className="space-y-4">
+            <h3 className="font-semibold text-lg">Represented Artists</h3>
+            <div className="grid grid-cols-2">
               {mockApplicationData.representedArtists.map((artist, index) => (
-                <p key={index} className="text-sm">{artist}</p>
+                <div key={index} className="py-1">{artist}</div>
               ))}
             </div>
           </div>
 
-          <div className="space-y-2">
-            <h4 className="font-medium text-gray-900">Experience & Program</h4>
-            <div className="space-y-1">
-              <p className="text-sm"><span className="font-medium">Previous Fairs:</span> {mockApplicationData.previousFairs}</p>
+          <div className="space-y-4">
+            <h3 className="font-semibold text-lg">Experience & Program</h3>
+            <div className="space-y-3">
               <div>
-                <p className="text-sm font-medium mb-1">Proposed Program:</p>
-                <p className="text-sm text-gray-600">{mockApplicationData.proposedProgram}</p>
+                <div className="font-medium">Previous Fairs:</div>
+                <div>{mockApplicationData.previousFairs}</div>
+              </div>
+              <div>
+                <div className="font-medium">Proposed Program:</div>
+                <div className="text-sm text-gray-600">{mockApplicationData.proposedProgram}</div>
               </div>
             </div>
           </div>

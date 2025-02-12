@@ -1,8 +1,9 @@
+
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
-import { ArrowLeftToLine, Eye, CheckCircle2, XCircle, HelpCircle, MoreVertical, Pencil } from "lucide-react";
+import { ArrowLeftToLine, Eye, CheckCircle2, XCircle, HelpCircle, MoreVertical, Pencil, Settings } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import {
   Dialog,

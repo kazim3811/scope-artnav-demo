@@ -1,5 +1,6 @@
 
 import { cn } from "@/lib/utils";
+import { Link, useNavigate } from "react-router-dom";
 
 interface ApplicationLayoutProps {
   children: React.ReactNode;
@@ -7,13 +8,15 @@ interface ApplicationLayoutProps {
 }
 
 const applicationSteps = [
-  "Welcome",
-  "Your Details",
-  "Choose Booth",
-  "Payment"
+  { name: "Welcome", path: "/" },
+  { name: "Your Details", path: "/gallery-details" },
+  { name: "Choose Booth", path: "/choose-booth" },
+  { name: "Payment", path: "/payment" }
 ];
 
 const ApplicationLayout = ({ children, currentStep }: ApplicationLayoutProps) => {
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen bg-[#f3f3f3]">
       <div className="flex">
@@ -29,8 +32,14 @@ const ApplicationLayout = ({ children, currentStep }: ApplicationLayoutProps) =>
               Application
             </h2>
             {applicationSteps.map((step, index) => (
-              <div key={step} className="mb-3">
-                <div className="flex items-center">
+              <div key={step.name} className="mb-3">
+                <Link 
+                  to={step.path}
+                  className={cn(
+                    "flex items-center group",
+                    currentStep < index && "pointer-events-none opacity-50"
+                  )}
+                >
                   <div className={cn(
                     "w-6 h-6 rounded-full flex items-center justify-center mr-2 text-sm transition-colors duration-300",
                     currentStep > index ? "bg-[#1A1F2C] text-white" :
@@ -45,9 +54,9 @@ const ApplicationLayout = ({ children, currentStep }: ApplicationLayoutProps) =>
                     currentStep > index ? "font-medium text-[#1A1F2C]" :
                     "text-[#8E9196]"
                   )}>
-                    {step}
+                    {step.name}
                   </span>
-                </div>
+                </Link>
                 {index < applicationSteps.length - 1 && (
                   <div className={cn(
                     "ml-3 pl-2 mt-1 mb-1 border-l-2 h-3 transition-colors duration-300",
@@ -62,14 +71,30 @@ const ApplicationLayout = ({ children, currentStep }: ApplicationLayoutProps) =>
               Curatorial
             </h2>
             <div className="mb-3">
-              <div className="flex items-center">
-                <div className="w-6 h-6 rounded-full flex items-center justify-center mr-2 text-sm bg-gray-200 text-gray-600">
+              <Link 
+                to="/curatorial"
+                className={cn(
+                  "flex items-center",
+                  currentStep < 4 && "pointer-events-none opacity-50"
+                )}
+              >
+                <div className={cn(
+                  "w-6 h-6 rounded-full flex items-center justify-center mr-2 text-sm transition-colors duration-300",
+                  currentStep === 4 ? "bg-[#1A1F2C] text-white" :
+                  currentStep > 4 ? "bg-[#1A1F2C] text-white" :
+                  "bg-gray-200 text-gray-600"
+                )}>
                   5
                 </div>
-                <span className="text-sm text-[#8E9196]">
+                <span className={cn(
+                  "text-sm transition-colors duration-300",
+                  currentStep === 4 ? "font-semibold text-[#1A1F2C]" :
+                  currentStep > 4 ? "font-medium text-[#1A1F2C]" :
+                  "text-[#8E9196]"
+                )}>
                   Gallery Presentation
                 </span>
-              </div>
+              </Link>
             </div>
           </div>
         </div>

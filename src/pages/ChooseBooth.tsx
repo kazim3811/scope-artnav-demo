@@ -12,11 +12,11 @@ import ApplicationLayout from "@/components/layouts/ApplicationLayout";
 import { useState } from "react";
 
 const boothOptions = [
-  { id: 1, name: "Standard Booth", price: 10000 },
-  { id: 2, name: "Premium Booth", price: 20000 },
-  { id: 3, name: "Corner Booth", price: 30000 },
-  { id: 4, name: "Premium Corner Booth", price: 40000 },
-  { id: 5, name: "Flagship Booth", price: 50000 },
+  { id: 1, name: "Booth A 30sq m", price: 10000 },
+  { id: 2, name: "Booth A 45sq m", price: 20000 },
+  { id: 3, name: "Booth A 60sq m", price: 30000 },
+  { id: 4, name: "Booth A 80sq m", price: 40000 },
+  { id: 5, name: "Booth A 100sq m", price: 50000 },
 ];
 
 const ChooseBooth = () => {

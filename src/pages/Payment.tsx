@@ -39,8 +39,11 @@ const Payment = () => {
           <div className="space-y-4">
             <div className="p-4 bg-gray-50 rounded-lg mb-6">
               <h3 className="text-sm font-medium text-[#1A1F2C] mb-2">Payment Summary</h3>
-              <p className="text-sm text-[#8E9196]">Booth Application Fee</p>
-              <p className="text-lg font-medium text-[#1A1F2C] mt-2">$10,000.00</p>
+              <p className="text-sm text-[#8E9196]">Booth Deposit</p>
+              <p className="text-lg font-medium text-[#1A1F2C] mt-2">$3,000.00</p>
+              <p className="text-sm text-[#8E9196] mt-3 italic">
+                This deposit is non-refundable and will be applied towards the final cost of your selected booth.
+              </p>
             </div>
 
             {!isSubmitted ? (

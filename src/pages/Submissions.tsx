@@ -494,48 +494,45 @@ const Submissions = () => {
             <div className="space-y-8 max-h-[80vh] overflow-y-auto py-4">
               {mockArtworkDetails[0].images.map((artwork, index) => (
                 <div key={index} className="border rounded-lg p-6 bg-gray-50">
-                  <div className="grid grid-cols-2 gap-8">
-                    {/* Image Column */}
-                    <div className="space-y-4">
-                      <div className="aspect-[4/3] rounded-lg overflow-hidden">
-                        <img 
-                          src={artwork.url} 
-                          alt={artwork.artworkName}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                    </div>
-                    {/* Details Column */}
+                  <div className="space-y-6">
                     <div className="space-y-4">
                       <div>
                         <h3 className="text-xl font-semibold text-gray-900">
                           {artwork.artworkName}
                         </h3>
                         <p className="text-base font-medium text-gray-700 mt-1">
-                          <span className="text-gray-900">Artist Name:</span> {artwork.artistName}
+                          by {artwork.artistName}
                         </p>
                       </div>
-                      
-                      <div className="space-y-3">
+
+                      <div className="grid grid-cols-3 gap-4">
                         <div>
-                          <h4 className="text-sm font-medium text-gray-900">About the Work</h4>
-                          <p className="text-sm text-gray-600 mt-1">{artwork.aboutWork}</p>
+                          <h4 className="text-sm font-medium text-gray-900">Medium</h4>
+                          <p className="text-sm text-gray-600">{artwork.medium}</p>
                         </div>
-                        
-                        <div className="grid grid-cols-2 gap-4">
-                          <div>
-                            <h4 className="text-sm font-medium text-gray-900">Medium</h4>
-                            <p className="text-sm text-gray-600">{artwork.medium}</p>
-                          </div>
-                          <div>
-                            <h4 className="text-sm font-medium text-gray-900">Dimensions</h4>
-                            <p className="text-sm text-gray-600">{artwork.dimensions}</p>
-                          </div>
-                          <div>
-                            <h4 className="text-sm font-medium text-gray-900">Year</h4>
-                            <p className="text-sm text-gray-600">{artwork.year}</p>
-                          </div>
+                        <div>
+                          <h4 className="text-sm font-medium text-gray-900">Dimensions</h4>
+                          <p className="text-sm text-gray-600">{artwork.dimensions}</p>
                         </div>
+                        <div>
+                          <h4 className="text-sm font-medium text-gray-900">Year</h4>
+                          <p className="text-sm text-gray-600">{artwork.year}</p>
+                        </div>
+                      </div>
+
+                      <div>
+                        <h4 className="text-sm font-medium text-gray-900">About the Work</h4>
+                        <p className="text-sm text-gray-600 mt-1">{artwork.aboutWork}</p>
+                      </div>
+                    </div>
+
+                    <div className="w-full">
+                      <div className="aspect-[4/3] rounded-lg overflow-hidden">
+                        <img 
+                          src={artwork.url} 
+                          alt={artwork.artworkName}
+                          className="w-full h-full object-cover"
+                        />
                       </div>
                     </div>
                   </div>

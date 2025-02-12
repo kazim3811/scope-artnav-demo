@@ -28,7 +28,7 @@ const ApplicationLayout = ({ children, currentStep }: ApplicationLayoutProps) =>
               <div key={step} className="mb-3">
                 <div className="flex items-center">
                   <div className={cn(
-                    "w-6 h-6 rounded-full flex items-center justify-center mr-2 text-sm",
+                    "w-6 h-6 rounded-full flex items-center justify-center mr-2 text-sm transition-colors duration-300",
                     currentStep > index ? "bg-[#1A1F2C] text-white" :
                     currentStep === index ? "bg-[#1A1F2C] text-white" :
                     "bg-gray-200 text-gray-600"
@@ -36,7 +36,7 @@ const ApplicationLayout = ({ children, currentStep }: ApplicationLayoutProps) =>
                     {index + 1}
                   </div>
                   <span className={cn(
-                    "text-sm",
+                    "text-sm transition-colors duration-300",
                     currentStep === index ? "font-semibold text-[#1A1F2C]" :
                     currentStep > index ? "font-medium text-[#1A1F2C]" :
                     "text-[#8E9196]"
@@ -46,7 +46,7 @@ const ApplicationLayout = ({ children, currentStep }: ApplicationLayoutProps) =>
                 </div>
                 {index < steps.length - 1 && (
                   <div className={cn(
-                    "ml-3 pl-2 mt-1 mb-1 border-l-2 h-3",
+                    "ml-3 pl-2 mt-1 mb-1 border-l-2 h-3 transition-colors duration-300",
                     currentStep > index ? "border-[#1A1F2C]" : "border-gray-200"
                   )} />
                 )}
@@ -57,7 +57,9 @@ const ApplicationLayout = ({ children, currentStep }: ApplicationLayoutProps) =>
 
         {/* Main Content */}
         <div className="flex-1">
-          {children}
+          <div className="animate-fade-in">
+            {children}
+          </div>
         </div>
       </div>
     </div>

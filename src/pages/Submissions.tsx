@@ -853,24 +853,24 @@ const Submissions = () => {
       name: "ARTNAV gallery 9 2025", 
       status: "Waitlisted",
       submissionDate: "2024-03-15",
-      paymentStatus: "Not Required",
-      priority: "High"
+      paymentStatus: "N/A",
+      priority: "N/A"
     },
     { 
       id: 10, 
       name: "ARTNAV gallery 10 2025", 
       status: "Waitlisted",
       submissionDate: "2024-03-14",
-      paymentStatus: "Not Required",
-      priority: "Medium"
+      paymentStatus: "N/A",
+      priority: "N/A"
     },
     { 
       id: 11, 
       name: "ARTNAV gallery 11 2025", 
       status: "Waitlisted",
       submissionDate: "2024-03-13",
-      paymentStatus: "Not Required",
-      priority: "Low"
+      paymentStatus: "N/A",
+      priority: "N/A"
     },
   ];
 

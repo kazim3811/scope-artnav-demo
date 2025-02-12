@@ -146,7 +146,7 @@ const Submissions = () => {
       id: 6, 
       name: "ARTNAV gallery 6 2025", 
       status: "Completed",
-      paymentStatus: "Deposit",
+      paymentStatus: "Paid",
       curatorial: "Approved",
       invoicingStatus: "Paid"
     },
@@ -154,7 +154,7 @@ const Submissions = () => {
       id: 12, 
       name: "ARTNAV gallery 12 2025", 
       status: "Completed",
-      paymentStatus: "Deposit",
+      paymentStatus: "Paid",
       curatorial: "Approved",
       invoicingStatus: "Part Paid"
     },
@@ -162,7 +162,7 @@ const Submissions = () => {
       id: 13, 
       name: "ARTNAV gallery 13 2025", 
       status: "Completed",
-      paymentStatus: "Deposit",
+      paymentStatus: "Paid",
       curatorial: "Approved",
       invoicingStatus: "Unpaid"
     }
@@ -960,7 +960,7 @@ const Submissions = () => {
                         </TableHead>
                         <TableHead>Gallery Name</TableHead>
                         <TableHead>Status</TableHead>
-                        <TableHead>Payment Status</TableHead>
+                        <TableHead>Deposit</TableHead>
                         <TableHead>Curatorial Status</TableHead>
                         <TableHead>Invoicing Status</TableHead>
                         <TableHead>Actions</TableHead>

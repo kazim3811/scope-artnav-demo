@@ -54,6 +54,37 @@ This document outlines the key features and functionality of the Gallery Submiss
 - Receipt generation
 - "Proceed to Curatorial" CTA
 
+## Curatorial Review Process
+
+### Image Review Actions
+Each submission can be reviewed with three possible actions:
+1. Approve
+   - Allows adding approval comments
+   - Confirmation dialog with message input
+   - Success notification upon completion
+
+2. Reject
+   - Requires rejection reason
+   - Confirmation dialog with message input
+   - Notification sent upon rejection
+
+3. Request More Information
+   - Dialog to specify additional information needed
+   - Custom message input field
+   - Notification sent to gallery
+
+### Artwork Preview
+- Modal display for submitted artworks
+- Single column layout for clear information hierarchy
+- Information displayed in following order:
+  1. Artwork Name
+  2. Artist Name
+  3. Medium (separate row)
+  4. Dimensions (separate row)
+  5. Year (separate row)
+  6. About the Work
+  7. Artwork Image (centered, optimized size)
+
 ## Submissions Management
 
 ### Status Tracking

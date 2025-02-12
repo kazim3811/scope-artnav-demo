@@ -824,6 +824,33 @@ const Submissions = () => {
     });
   };
 
+  const waitlistedGalleries = [
+    { 
+      id: 9, 
+      name: "ARTNAV gallery 9 2025", 
+      status: "Waitlisted",
+      submissionDate: "2024-03-15",
+      paymentStatus: "Not Required",
+      priority: "High"
+    },
+    { 
+      id: 10, 
+      name: "ARTNAV gallery 10 2025", 
+      status: "Waitlisted",
+      submissionDate: "2024-03-14",
+      paymentStatus: "Not Required",
+      priority: "Medium"
+    },
+    { 
+      id: 11, 
+      name: "ARTNAV gallery 11 2025", 
+      status: "Waitlisted",
+      submissionDate: "2024-03-13",
+      paymentStatus: "Not Required",
+      priority: "Low"
+    },
+  ];
+
   return (
     <MainLayout>
       <header className="bg-white border-b border-gray-200">
@@ -866,10 +893,10 @@ const Submissions = () => {
                   Curatorial Approved
                 </TabsTrigger>
                 <TabsTrigger 
-                  value="committee-sheets" 
+                  value="waitlist" 
                   className="px-4 py-2 border-b-2 border-transparent data-[state=active]:border-black rounded-none bg-transparent"
                 >
-                  Committee Sheets
+                  Waitlist
                 </TabsTrigger>
               </TabsList>
               <div className="mt-4">
@@ -935,8 +962,60 @@ const Submissions = () => {
                     </TableBody>
                   </Table>
                 </TabsContent>
-                <TabsContent value="committee-sheets">
-                  <div className="p-4 text-center text-gray-500">No committee sheets available</div>
+                <TabsContent value="waitlist">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="w-12">
+                          <Checkbox />
+                        </TableHead>
+                        <TableHead>Gallery Name</TableHead>
+                        <TableHead>Submission Date</TableHead>
+                        <TableHead>Status</TableHead>
+                        <TableHead>Priority</TableHead>
+                        <TableHead>Payment Status</TableHead>
+                        <TableHead>Actions</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {waitlistedGalleries.map((gallery) => (
+                        <TableRow key={gallery.id}>
+                          <TableCell>
+                            <Checkbox />
+                          </TableCell>
+                          <TableCell>{gallery.name}</TableCell>
+                          <TableCell>{gallery.submissionDate}</TableCell>
+                          <TableCell>
+                            <span className={`px-2 py-1 rounded text-sm ${getStatusColor(gallery.status)}`}>
+                              {gallery.status}
+                            </span>
+                          </TableCell>
+                          <TableCell>
+                            <span className={`px-2 py-1 rounded text-sm ${
+                              gallery.priority === 'High' ? 'bg-red-100 text-red-800' :
+                              gallery.priority === 'Medium' ? 'bg-yellow-100 text-yellow-800' :
+                              'bg-blue-100 text-blue-800'
+                            }`}>
+                              {gallery.priority}
+                            </span>
+                          </TableCell>
+                          <TableCell>
+                            <span className={`px-2 py-1 rounded text-sm ${getStatusColor(gallery.paymentStatus)}`}>
+                              {gallery.paymentStatus}
+                            </span>
+                          </TableCell>
+                          <TableCell>
+                            <div className="flex space-x-2">
+                              <Eye 
+                                className="w-4 h-4 cursor-pointer hover:text-blue-600" 
+                                onClick={() => setPreviewApplication(gallery.id)}
+                              />
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
                 </TabsContent>
               </div>
             </Tabs>

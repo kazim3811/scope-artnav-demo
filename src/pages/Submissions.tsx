@@ -524,14 +524,14 @@ const Submissions = () => {
 
   const ApplicationPreviewDialog = () => (
     <Dialog open={previewApplication !== null} onOpenChange={() => setPreviewApplication(null)}>
-      <DialogContent className="max-w-4xl">
+      <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden flex flex-col">
         <DialogHeader>
           <DialogTitle>Gallery Application Preview</DialogTitle>
           <DialogDescription>
             Application details submitted by the gallery
           </DialogDescription>
         </DialogHeader>
-        <div className="space-y-6 py-4">
+        <div className="space-y-6 py-4 overflow-y-auto pr-6">
           {/* Gallery Information Section */}
           <div>
             <div className="bg-gray-100 px-4 py-2 font-medium text-gray-700 mb-4">

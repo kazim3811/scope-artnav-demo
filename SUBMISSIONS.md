@@ -3,87 +3,115 @@
 
 This document outlines the key features and functionality of the Gallery Submissions system.
 
+## Navigation & Layout
+
+### Main Navigation
+- Located at route: `/submissions`
+- Top header with breadcrumb navigation showing: Fair Submissions > SCOPE DEMO > application
+- Left sidebar navigation with progress tracking
+
+### Tab Navigation
+1. Gallery Applications
+   - Main application management interface
+   - Status tracking
+   - Notes and comments functionality
+2. Rejected
+   - View rejected applications
+3. Waitlist
+   - Manage waitlisted applications
+4. Accepted
+   - View and manage accepted applications
+5. Placed
+   - Track placed applications and booth assignments
+
 ## Application Process
 
 ### Step 1: Welcome
 - Initial welcome screen
 - Introduction to the application process
+- Overview of requirements
 
 ### Step 2: Gallery Details
 - Gallery information collection
-- Contact details
-- Gallery history and background
+  - Gallery name
+  - Contact details
+  - Gallery history
+  - Background information
+  - Website details
+  - Year established
 
 ### Step 3: Choose Booth
-- Interactive booth selection
+- Interactive booth selection interface
 - Visual booth layout
+- Booth pricing information
 - "Proceed to Deposit" CTA button
 
 ### Step 4: Payment
-- Secure payment processing interface
-- Stripe payment form integration
-- Deposit payment confirmation
+- Secure payment processing
+- Stripe payment integration
+- Deposit collection
+- Payment confirmation
+- Receipt generation
 - "Proceed to Curatorial" CTA
-- Payment status tracking
 
-## Features
+## Submissions Management
 
-### Navigation
-- Located at the route: `/submissions`
-- Breadcrumb navigation showing: Fair Submissions > SCOPE DEMO > application
-- Step-by-step progress indicator
+### Status Tracking
+#### Application Form Status
+- Not Started
+- In Progress
+- Submitted
 
-### Tab Navigation
-- Gallery Applications
-- Gallery Submissions
-- Represented Artists
-- Results Manager
-- Public User Applications
-- Committee Sheets
+#### Payment Status
+- Not Completed
+- Paid
 
-### Search and Filtering
-- Gallery Name search functionality
-- Application Form dropdown filter with options:
-  - Any
-  - SCOPE
-  - VOLTA
-  - FOCUS
+#### Curatorial Status
+- Not Started
+- In Progress
 
-### Action Buttons
-- All Result
-- All Status
-- All Terms & Conditions
+### Features
+- Gallery name search functionality
+- Application form filtering
+- Bulk action capabilities
+- Note-taking system with timestamp tracking
+- Historical notes viewing in CRM style
+- Status updates and tracking
+- Manual update options
 
-### Submissions Table
-#### Columns:
+### Table Columns
 1. Selection checkbox
 2. Actions (View/Return)
 3. Gallery Name
-4. Application Form
+4. Application Form Status
 5. Payment Status
-6. Curatorial
+6. Curatorial Status
 7. Notes
+   - Add notes via three-dots menu
+   - View historical notes with timestamps
+   - Empty state indication
 
-### Status Indicators
-- Not Submitted (red)
-- Completed (green)
-- Payment Due (yellow)
-- Paid (green)
-- Under Review (blue)
-- Approved (green)
-- Rejected (red)
+### Filters & Actions
+- Status filters for each column
+- Bulk selection capabilities
+- Manual update button
+- View/Return actions per submission
+- Notes management system
 
-## Layout
-The application uses a main layout component that includes:
-- Left sidebar navigation with progress tracking
-- Top header with breadcrumb navigation
-- Main content area for each step
-- Responsive design for various screen sizes
+## Responsive Design
+- Adaptive layout for various screen sizes
+- Mobile-friendly interface
+- Responsive tables and forms
 
-## Payment Processing
-- Secure payment integration
-- Deposit collection
-- Payment confirmation system
-- Transaction tracking
-- Receipt generation
+## Security & Permissions
+- Secure payment processing
+- User role-based access
+- Data protection measures
 
+## Data Management
+- Real-time status updates
+- Historical data tracking
+- Notes and comments system
+- Timestamp tracking for all changes
+
+This documentation will be updated as new features are added or existing ones are modified.

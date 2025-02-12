@@ -12,6 +12,7 @@ import Applications from "./pages/Applications";
 import GalleryForms from "./pages/GalleryForms";
 import GalleryDetails from "./pages/GalleryDetails";
 import ChooseBooth from "./pages/ChooseBooth";
+import Payment from "./pages/Payment";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/gallery-forms" element={<GalleryForms />} />
           <Route path="/gallery-details" element={<GalleryDetails />} />
           <Route path="/choose-booth" element={<ChooseBooth />} />
+          <Route path="/payment" element={<Payment />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

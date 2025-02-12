@@ -9,7 +9,8 @@ interface ApplicationLayoutProps {
 const steps = [
   "Welcome",
   "Your Details",
-  "Choose Booth"
+  "Choose Booth",
+  "Payment"
 ];
 
 const ApplicationLayout = ({ children, currentStep }: ApplicationLayoutProps) => {

@@ -1,4 +1,3 @@
-
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
@@ -25,8 +24,7 @@ const ChooseBooth = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle final submission
-    console.log("Selected booth:", selectedBooth);
+    navigate("/payment");
   };
 
   return (

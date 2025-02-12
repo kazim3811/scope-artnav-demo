@@ -537,14 +537,22 @@ const Submissions = () => {
         <div className="space-y-6 py-4 overflow-y-auto pr-6">
           {/* Gallery Information Section */}
           <div>
-            <div className="bg-gray-100 px-4 py-2 font-medium text-gray-700 mb-4">
-              Gallery Details
+            <div className="bg-gray-100 px-4 py-2 font-medium text-gray-700 mb-4 flex justify-between items-center">
+              <span>Gallery Details</span>
+              {editingField === 'galleryDetails' ? (
+                <Button size="sm" onClick={() => handleSave('galleryDetails')}>Save</Button>
+              ) : (
+                <Pencil 
+                  className="h-4 w-4 cursor-pointer text-gray-400 hover:text-gray-600" 
+                  onClick={() => handleEdit('galleryDetails')}
+                />
+              )}
             </div>
             <div className="grid grid-cols-1 gap-4">
               <div className="grid grid-cols-4 gap-4 items-center px-4">
                 <div className="text-sm text-gray-600">Gallery Name</div>
-                <div className="col-span-2 flex items-center gap-2">
-                  {editingField === 'galleryName' ? (
+                <div className="col-span-3">
+                  {editingField === 'galleryDetails' ? (
                     <Input 
                       value={editedValues?.galleryName || mockApplicationData.galleryName}
                       onChange={(e) => setEditedValues({ ...editedValues, galleryName: e.target.value })}
@@ -554,21 +562,11 @@ const Submissions = () => {
                     mockApplicationData.galleryName
                   )}
                 </div>
-                <div className="flex justify-end">
-                  {editingField === 'galleryName' ? (
-                    <Button size="sm" onClick={() => handleSave('galleryName')}>Save</Button>
-                  ) : (
-                    <Pencil 
-                      className="h-4 w-4 cursor-pointer text-gray-400 hover:text-gray-600" 
-                      onClick={() => handleEdit('galleryName', mockApplicationData.galleryName)}
-                    />
-                  )}
-                </div>
               </div>
               <div className="grid grid-cols-4 gap-4 items-center px-4">
                 <div className="text-sm text-gray-600">Website</div>
-                <div className="col-span-2 flex items-center gap-2">
-                  {editingField === 'website' ? (
+                <div className="col-span-3">
+                  {editingField === 'galleryDetails' ? (
                     <Input 
                       value={editedValues?.website || mockApplicationData.website}
                       onChange={(e) => setEditedValues({ ...editedValues, website: e.target.value })}
@@ -578,21 +576,11 @@ const Submissions = () => {
                     mockApplicationData.website
                   )}
                 </div>
-                <div className="flex justify-end">
-                  {editingField === 'website' ? (
-                    <Button size="sm" onClick={() => handleSave('website')}>Save</Button>
-                  ) : (
-                    <Pencil 
-                      className="h-4 w-4 cursor-pointer text-gray-400 hover:text-gray-600" 
-                      onClick={() => handleEdit('website', mockApplicationData.website)}
-                    />
-                  )}
-                </div>
               </div>
               <div className="grid grid-cols-4 gap-4 items-center px-4">
                 <div className="text-sm text-gray-600">Year Established</div>
-                <div className="col-span-2 flex items-center gap-2">
-                  {editingField === 'yearEstablished' ? (
+                <div className="col-span-3">
+                  {editingField === 'galleryDetails' ? (
                     <Input 
                       value={editedValues?.yearEstablished || mockApplicationData.yearEstablished}
                       onChange={(e) => setEditedValues({ ...editedValues, yearEstablished: e.target.value })}
@@ -602,30 +590,28 @@ const Submissions = () => {
                     mockApplicationData.yearEstablished
                   )}
                 </div>
-                <div className="flex justify-end">
-                  {editingField === 'yearEstablished' ? (
-                    <Button size="sm" onClick={() => handleSave('yearEstablished')}>Save</Button>
-                  ) : (
-                    <Pencil 
-                      className="h-4 w-4 cursor-pointer text-gray-400 hover:text-gray-600" 
-                      onClick={() => handleEdit('yearEstablished', mockApplicationData.yearEstablished)}
-                    />
-                  )}
-                </div>
               </div>
             </div>
           </div>
 
           {/* Primary Contact Section */}
           <div>
-            <div className="bg-gray-100 px-4 py-2 font-medium text-gray-700 mb-4">
-              Primary Contact Information
+            <div className="bg-gray-100 px-4 py-2 font-medium text-gray-700 mb-4 flex justify-between items-center">
+              <span>Primary Contact Information</span>
+              {editingField === 'contactInfo' ? (
+                <Button size="sm" onClick={() => handleSave('contactInfo')}>Save</Button>
+              ) : (
+                <Pencil 
+                  className="h-4 w-4 cursor-pointer text-gray-400 hover:text-gray-600" 
+                  onClick={() => handleEdit('contactInfo')}
+                />
+              )}
             </div>
             <div className="grid grid-cols-1 gap-4">
               <div className="grid grid-cols-4 gap-4 items-center px-4">
                 <div className="text-sm text-gray-600">Name</div>
-                <div className="col-span-2 flex items-center gap-2">
-                  {editingField === 'contactName' ? (
+                <div className="col-span-3">
+                  {editingField === 'contactInfo' ? (
                     <Input 
                       value={editedValues?.primaryContact?.name || mockApplicationData.primaryContact.name}
                       onChange={(e) => setEditedValues({
@@ -638,22 +624,11 @@ const Submissions = () => {
                     mockApplicationData.primaryContact.name
                   )}
                 </div>
-                <div className="flex justify-end">
-                  {editingField === 'contactName' ? (
-                    <Button size="sm" onClick={() => handleSave('contactName')}>Save</Button>
-                  ) : (
-                    <Pencil 
-                      className="h-4 w-4 cursor-pointer text-gray-400 hover:text-gray-600" 
-                      onClick={() => handleEdit('contactName', mockApplicationData.primaryContact.name)}
-                    />
-                  )}
-                </div>
               </div>
-              
               <div className="grid grid-cols-4 gap-4 items-center px-4">
                 <div className="text-sm text-gray-600">Position</div>
-                <div className="col-span-2 flex items-center gap-2">
-                  {editingField === 'contactPosition' ? (
+                <div className="col-span-3">
+                  {editingField === 'contactInfo' ? (
                     <Input 
                       value={editedValues?.primaryContact?.position || mockApplicationData.primaryContact.position}
                       onChange={(e) => setEditedValues({
@@ -666,14 +641,38 @@ const Submissions = () => {
                     mockApplicationData.primaryContact.position
                   )}
                 </div>
-                <div className="flex justify-end">
-                  {editingField === 'contactPosition' ? (
-                    <Button size="sm" onClick={() => handleSave('contactPosition')}>Save</Button>
-                  ) : (
-                    <Pencil 
-                      className="h-4 w-4 cursor-pointer text-gray-400 hover:text-gray-600" 
-                      onClick={() => handleEdit('contactPosition', mockApplicationData.primaryContact.position)}
+              </div>
+              <div className="grid grid-cols-4 gap-4 items-center px-4">
+                <div className="text-sm text-gray-600">Email</div>
+                <div className="col-span-3">
+                  {editingField === 'contactInfo' ? (
+                    <Input 
+                      value={editedValues?.primaryContact?.email || mockApplicationData.primaryContact.email}
+                      onChange={(e) => setEditedValues({
+                        ...editedValues,
+                        primaryContact: { ...editedValues?.primaryContact, email: e.target.value }
+                      })}
+                      className="flex-1"
                     />
+                  ) : (
+                    mockApplicationData.primaryContact.email
+                  )}
+                </div>
+              </div>
+              <div className="grid grid-cols-4 gap-4 items-center px-4">
+                <div className="text-sm text-gray-600">Phone</div>
+                <div className="col-span-3">
+                  {editingField === 'contactInfo' ? (
+                    <Input 
+                      value={editedValues?.primaryContact?.phone || mockApplicationData.primaryContact.phone}
+                      onChange={(e) => setEditedValues({
+                        ...editedValues,
+                        primaryContact: { ...editedValues?.primaryContact, phone: e.target.value }
+                      })}
+                      className="flex-1"
+                    />
+                  ) : (
+                    mockApplicationData.primaryContact.phone
                   )}
                 </div>
               </div>
@@ -682,14 +681,22 @@ const Submissions = () => {
 
           {/* Exhibition Details Section */}
           <div>
-            <div className="bg-gray-100 px-4 py-2 font-medium text-gray-700 mb-4">
-              Exhibition Details
+            <div className="bg-gray-100 px-4 py-2 font-medium text-gray-700 mb-4 flex justify-between items-center">
+              <span>Exhibition Details</span>
+              {editingField === 'exhibitionDetails' ? (
+                <Button size="sm" onClick={() => handleSave('exhibitionDetails')}>Save</Button>
+              ) : (
+                <Pencil 
+                  className="h-4 w-4 cursor-pointer text-gray-400 hover:text-gray-600" 
+                  onClick={() => handleEdit('exhibitionDetails')}
+                />
+              )}
             </div>
             <div className="grid grid-cols-1 gap-4">
               <div className="grid grid-cols-4 gap-4 items-center px-4">
                 <div className="text-sm text-gray-600">Exhibition Type</div>
-                <div className="col-span-2 flex items-center gap-2">
-                  {editingField === 'exhibitType' ? (
+                <div className="col-span-3">
+                  {editingField === 'exhibitionDetails' ? (
                     <Input 
                       value={editedValues?.exhibitType || mockApplicationData.exhibitType}
                       onChange={(e) => setEditedValues({ ...editedValues, exhibitType: e.target.value })}
@@ -699,21 +706,11 @@ const Submissions = () => {
                     mockApplicationData.exhibitType
                   )}
                 </div>
-                <div className="flex justify-end">
-                  {editingField === 'exhibitType' ? (
-                    <Button size="sm" onClick={() => handleSave('exhibitType')}>Save</Button>
-                  ) : (
-                    <Pencil 
-                      className="h-4 w-4 cursor-pointer text-gray-400 hover:text-gray-600" 
-                      onClick={() => handleEdit('exhibitType', mockApplicationData.exhibitType)}
-                    />
-                  )}
-                </div>
               </div>
               <div className="grid grid-cols-4 gap-4 items-center px-4">
                 <div className="text-sm text-gray-600">Booth Preference</div>
-                <div className="col-span-2 flex items-center gap-2">
-                  {editingField === 'boothPreference' ? (
+                <div className="col-span-3">
+                  {editingField === 'exhibitionDetails' ? (
                     <Input 
                       value={editedValues?.boothPreference || mockApplicationData.boothPreference}
                       onChange={(e) => setEditedValues({ ...editedValues, boothPreference: e.target.value })}
@@ -723,29 +720,41 @@ const Submissions = () => {
                     mockApplicationData.boothPreference
                   )}
                 </div>
-                <div className="flex justify-end">
-                  {editingField === 'boothPreference' ? (
-                    <Button size="sm" onClick={() => handleSave('boothPreference')}>Save</Button>
-                  ) : (
-                    <Pencil 
-                      className="h-4 w-4 cursor-pointer text-gray-400 hover:text-gray-600" 
-                      onClick={() => handleEdit('boothPreference', mockApplicationData.boothPreference)}
-                    />
-                  )}
-                </div>
               </div>
             </div>
           </div>
 
           {/* Represented Artists Section */}
           <div>
-            <div className="bg-gray-100 px-4 py-2 font-medium text-gray-700 mb-4">
-              Represented Artists
+            <div className="bg-gray-100 px-4 py-2 font-medium text-gray-700 mb-4 flex justify-between items-center">
+              <span>Represented Artists</span>
+              {editingField === 'artists' ? (
+                <Button size="sm" onClick={() => handleSave('artists')}>Save</Button>
+              ) : (
+                <Pencil 
+                  className="h-4 w-4 cursor-pointer text-gray-400 hover:text-gray-600" 
+                  onClick={() => handleEdit('artists')}
+                />
+              )}
             </div>
             <div className="px-4">
               <div className="space-y-2">
                 {mockApplicationData.representedArtists.map((artist, index) => (
-                  <div key={index}>{artist}</div>
+                  <div key={index}>
+                    {editingField === 'artists' ? (
+                      <Input 
+                        value={editedValues?.representedArtists?.[index] || artist}
+                        onChange={(e) => {
+                          const newArtists = [...(editedValues?.representedArtists || mockApplicationData.representedArtists)];
+                          newArtists[index] = e.target.value;
+                          setEditedValues({ ...editedValues, representedArtists: newArtists });
+                        }}
+                        className="mb-2"
+                      />
+                    ) : (
+                      artist
+                    )}
+                  </div>
                 ))}
               </div>
             </div>
@@ -753,14 +762,22 @@ const Submissions = () => {
 
           {/* Experience & Program Section */}
           <div>
-            <div className="bg-gray-100 px-4 py-2 font-medium text-gray-700 mb-4">
-              Experience & Program
+            <div className="bg-gray-100 px-4 py-2 font-medium text-gray-700 mb-4 flex justify-between items-center">
+              <span>Experience & Program</span>
+              {editingField === 'experience' ? (
+                <Button size="sm" onClick={() => handleSave('experience')}>Save</Button>
+              ) : (
+                <Pencil 
+                  className="h-4 w-4 cursor-pointer text-gray-400 hover:text-gray-600" 
+                  onClick={() => handleEdit('experience')}
+                />
+              )}
             </div>
             <div className="grid grid-cols-1 gap-4">
               <div className="grid grid-cols-4 gap-4 items-start px-4">
                 <div className="text-sm text-gray-600">Previous Fairs</div>
-                <div className="col-span-2 flex items-center gap-2">
-                  {editingField === 'previousFairs' ? (
+                <div className="col-span-3">
+                  {editingField === 'experience' ? (
                     <Input 
                       value={editedValues?.previousFairs || mockApplicationData.previousFairs}
                       onChange={(e) => setEditedValues({ ...editedValues, previousFairs: e.target.value })}
@@ -770,21 +787,11 @@ const Submissions = () => {
                     mockApplicationData.previousFairs
                   )}
                 </div>
-                <div className="flex justify-end">
-                  {editingField === 'previousFairs' ? (
-                    <Button size="sm" onClick={() => handleSave('previousFairs')}>Save</Button>
-                  ) : (
-                    <Pencil 
-                      className="h-4 w-4 cursor-pointer text-gray-400 hover:text-gray-600" 
-                      onClick={() => handleEdit('previousFairs', mockApplicationData.previousFairs)}
-                    />
-                  )}
-                </div>
               </div>
               <div className="grid grid-cols-4 gap-4 items-start px-4">
                 <div className="text-sm text-gray-600">Proposed Program</div>
-                <div className="col-span-2 flex items-center gap-2">
-                  {editingField === 'proposedProgram' ? (
+                <div className="col-span-3">
+                  {editingField === 'experience' ? (
                     <Input 
                       value={editedValues?.proposedProgram || mockApplicationData.proposedProgram}
                       onChange={(e) => setEditedValues({ ...editedValues, proposedProgram: e.target.value })}
@@ -794,16 +801,6 @@ const Submissions = () => {
                     mockApplicationData.proposedProgram
                   )}
                 </div>
-                <div className="flex justify-end">
-                  {editingField === 'proposedProgram' ? (
-                    <Button size="sm" onClick={() => handleSave('proposedProgram')}>Save</Button>
-                  ) : (
-                    <Pencil 
-                      className="h-4 w-4 cursor-pointer text-gray-400 hover:text-gray-600" 
-                      onClick={() => handleEdit('proposedProgram', mockApplicationData.proposedProgram)}
-                    />
-                  )}
-                </div>
               </div>
             </div>
           </div>
@@ -811,6 +808,21 @@ const Submissions = () => {
       </DialogContent>
     </Dialog>
   );
+
+  const handleEdit = (section: string) => {
+    setEditingField(section);
+    if (!editedValues) {
+      setEditedValues({ ...mockApplicationData });
+    }
+  };
+
+  const handleSave = (section: string) => {
+    setEditingField(null);
+    toast({
+      title: "Changes saved",
+      description: `Updated ${section} successfully`,
+    });
+  };
 
   return (
     <MainLayout>

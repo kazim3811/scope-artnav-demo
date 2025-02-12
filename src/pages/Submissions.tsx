@@ -74,7 +74,7 @@ const Submissions = () => {
       name: "ARTNAV gallery 1 2025", 
       status: "Not Started",
       paymentStatus: "Incomplete",
-      curatorial: "Not Started",
+      curatorial: "In Progress",
       invoicingStatus: "Not Started"
     },
     { 
@@ -98,7 +98,7 @@ const Submissions = () => {
       name: "ARTNAV gallery 4 2025", 
       status: "Not Started",
       paymentStatus: "Incomplete",
-      curatorial: "Not Started",
+      curatorial: "In Progress",
       invoicingStatus: "Not Started"
     },
     { 
@@ -106,7 +106,7 @@ const Submissions = () => {
       name: "ARTNAV gallery 5 2025", 
       status: "Not Started",
       paymentStatus: "Incomplete",
-      curatorial: "Not Started",
+      curatorial: "In Progress",
       invoicingStatus: "Not Started"
     },
     { 
@@ -114,7 +114,7 @@ const Submissions = () => {
       name: "ARTNAV gallery 6 2025", 
       status: "Completed",
       paymentStatus: "Paid",
-      curatorial: "Approved",
+      curatorial: "In Progress",
       invoicingStatus: "Paid"
     },
     { 
@@ -122,7 +122,7 @@ const Submissions = () => {
       name: "ARTNAV gallery 7 2025", 
       status: "Not Started",
       paymentStatus: "Incomplete",
-      curatorial: "Not Started",
+      curatorial: "In Progress",
       invoicingStatus: "Not Started"
     },
     { 
@@ -130,7 +130,7 @@ const Submissions = () => {
       name: "ARTNAV gallery 8 2025", 
       status: "Not Started",
       paymentStatus: "Incomplete",
-      curatorial: "Not Started",
+      curatorial: "In Progress",
       invoicingStatus: "Not Started"
     },
   ];
@@ -144,7 +144,7 @@ const Submissions = () => {
   });
 
   const curatorialSubmissions = submissions.filter(submission => 
-    submission.curatorial === "Not Started"
+    submission.curatorial === "In Progress"
   );
 
   const approvedSubmissions = [

@@ -6,7 +6,7 @@ interface ApplicationLayoutProps {
   currentStep: number;
 }
 
-const steps = [
+const applicationSteps = [
   "Welcome",
   "Your Details",
   "Choose Booth",
@@ -24,7 +24,11 @@ const ApplicationLayout = ({ children, currentStep }: ApplicationLayoutProps) =>
           </div>
           
           <div className="p-3">
-            {steps.map((step, index) => (
+            {/* Application Section */}
+            <h2 className="text-xs font-semibold text-[#8E9196] uppercase tracking-wider mb-3 mt-2 px-2">
+              Application
+            </h2>
+            {applicationSteps.map((step, index) => (
               <div key={step} className="mb-3">
                 <div className="flex items-center">
                   <div className={cn(
@@ -44,7 +48,7 @@ const ApplicationLayout = ({ children, currentStep }: ApplicationLayoutProps) =>
                     {step}
                   </span>
                 </div>
-                {index < steps.length - 1 && (
+                {index < applicationSteps.length - 1 && (
                   <div className={cn(
                     "ml-3 pl-2 mt-1 mb-1 border-l-2 h-3 transition-colors duration-300",
                     currentStep > index ? "border-[#1A1F2C]" : "border-gray-200"
@@ -52,6 +56,21 @@ const ApplicationLayout = ({ children, currentStep }: ApplicationLayoutProps) =>
                 )}
               </div>
             ))}
+
+            {/* Curatorial Section */}
+            <h2 className="text-xs font-semibold text-[#8E9196] uppercase tracking-wider mb-3 mt-6 px-2">
+              Curatorial
+            </h2>
+            <div className="mb-3">
+              <div className="flex items-center">
+                <div className="w-6 h-6 rounded-full flex items-center justify-center mr-2 text-sm bg-gray-200 text-gray-600">
+                  5
+                </div>
+                <span className="text-sm text-[#8E9196]">
+                  Gallery Presentation
+                </span>
+              </div>
+            </div>
           </div>
         </div>
 

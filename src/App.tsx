@@ -13,6 +13,7 @@ import GalleryForms from "./pages/GalleryForms";
 import GalleryDetails from "./pages/GalleryDetails";
 import ChooseBooth from "./pages/ChooseBooth";
 import Payment from "./pages/Payment";
+import Curatorial from "./pages/Curatorial";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,7 @@ const App = () => (
           <Route path="/gallery-details" element={<GalleryDetails />} />
           <Route path="/choose-booth" element={<ChooseBooth />} />
           <Route path="/payment" element={<Payment />} />
+          <Route path="/curatorial" element={<Curatorial />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

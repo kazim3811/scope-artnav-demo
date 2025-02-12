@@ -1,3 +1,4 @@
+
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -177,137 +178,173 @@ const Submissions = () => {
 
       <main className="p-8">
         <div className="mb-8">
-          <div className="flex justify-end gap-4 mb-6">
-            <Button variant="outline">Manual Update</Button>
-          </div>
+          <Tabs defaultValue="gallery-applications" className="space-y-4">
+            <TabsList>
+              <TabsTrigger value="gallery-applications">Gallery Applications</TabsTrigger>
+              <TabsTrigger value="rejected">Rejected</TabsTrigger>
+              <TabsTrigger value="waitlist">Waitlist</TabsTrigger>
+              <TabsTrigger value="accepted">Accepted</TabsTrigger>
+              <TabsTrigger value="placed">Placed</TabsTrigger>
+            </TabsList>
 
-          <div className="bg-white rounded-lg shadow-sm">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="w-12">
-                    <Checkbox />
-                  </TableHead>
-                  <TableHead className="w-24"></TableHead>
-                  <TableHead>Gallery Name</TableHead>
-                  <TableHead>
-                    <div className="flex flex-col gap-2">
-                      <span>Application Form</span>
-                      <Select value={statusFilter} onValueChange={setStatusFilter}>
-                        <SelectTrigger className="h-8">
-                          <SelectValue placeholder="All Status" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="all">All Status</SelectItem>
-                          <SelectItem value="Not Started">Not Started</SelectItem>
-                          <SelectItem value="In Progress">In Progress</SelectItem>
-                          <SelectItem value="Submitted">Submitted</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </TableHead>
-                  <TableHead>
-                    <div className="flex flex-col gap-2">
-                      <span>Payment Status</span>
-                      <Select value={paymentStatusFilter} onValueChange={setPaymentStatusFilter}>
-                        <SelectTrigger className="h-8">
-                          <SelectValue placeholder="All Payments" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="all">All Payments</SelectItem>
-                          <SelectItem value="Not Completed">Not Completed</SelectItem>
-                          <SelectItem value="Paid">Paid</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </TableHead>
-                  <TableHead>
-                    <div className="flex flex-col gap-2">
-                      <span>Curatorial</span>
-                      <Select value={curatorialFilter} onValueChange={setCuratorialFilter}>
-                        <SelectTrigger className="h-8">
-                          <SelectValue placeholder="All Status" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="all">All Status</SelectItem>
-                          <SelectItem value="Not Started">Not Started</SelectItem>
-                          <SelectItem value="In Progress">In Progress</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </TableHead>
-                  <TableHead>Notes</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {submissions.map((submission) => (
-                  <TableRow key={submission.id}>
-                    <TableCell>
-                      <Checkbox />
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex space-x-2">
-                        <ArrowLeftToLine className="w-4 h-4" />
-                        <Eye className="w-4 h-4" />
-                      </div>
-                    </TableCell>
-                    <TableCell>{submission.name}</TableCell>
-                    <TableCell>
-                      <span className={`px-2 py-1 rounded text-sm ${getStatusColor(submission.status)}`}>
-                        {submission.status}
-                      </span>
-                    </TableCell>
-                    <TableCell>
-                      <span className={`px-2 py-1 rounded text-sm ${getStatusColor(submission.paymentStatus)}`}>
-                        {submission.paymentStatus}
-                      </span>
-                    </TableCell>
-                    <TableCell>
-                      <span className={`px-2 py-1 rounded text-sm ${getStatusColor(submission.curatorial)}`}>
-                        {submission.curatorial}
-                      </span>
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex items-center justify-between">
-                        {submission.notes.length > 0 ? (
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            className="text-blue-600 hover:text-blue-700"
-                            onClick={() => {
-                              setSelectedSubmission(submission);
-                              setViewingNotes(true);
-                            }}
-                          >
-                            View
-                          </Button>
-                        ) : (
-                          <span className="text-gray-500 italic">Empty</span>
-                        )}
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button variant="ghost" size="sm">
-                              <MoreVertical className="h-4 w-4" />
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent>
-                            <DropdownMenuItem
-                              onClick={() => {
-                                setSelectedSubmission(submission);
-                                setIsAddingNote(true);
-                              }}
-                            >
-                              Add Note
-                            </DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
+            <TabsContent value="gallery-applications" className="space-y-4">
+              <div className="flex justify-end gap-4 mb-6">
+                <Button variant="outline">Manual Update</Button>
+              </div>
+
+              <div className="bg-white rounded-lg shadow-sm">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="w-12">
+                        <Checkbox />
+                      </TableHead>
+                      <TableHead className="w-24"></TableHead>
+                      <TableHead>Gallery Name</TableHead>
+                      <TableHead>
+                        <div className="flex flex-col gap-2">
+                          <span>Application Form</span>
+                          <Select value={statusFilter} onValueChange={setStatusFilter}>
+                            <SelectTrigger className="h-8">
+                              <SelectValue placeholder="All Status" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="all">All Status</SelectItem>
+                              <SelectItem value="Not Started">Not Started</SelectItem>
+                              <SelectItem value="In Progress">In Progress</SelectItem>
+                              <SelectItem value="Submitted">Submitted</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      </TableHead>
+                      <TableHead>
+                        <div className="flex flex-col gap-2">
+                          <span>Payment Status</span>
+                          <Select value={paymentStatusFilter} onValueChange={setPaymentStatusFilter}>
+                            <SelectTrigger className="h-8">
+                              <SelectValue placeholder="All Payments" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="all">All Payments</SelectItem>
+                              <SelectItem value="Not Completed">Not Completed</SelectItem>
+                              <SelectItem value="Paid">Paid</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      </TableHead>
+                      <TableHead>
+                        <div className="flex flex-col gap-2">
+                          <span>Curatorial</span>
+                          <Select value={curatorialFilter} onValueChange={setCuratorialFilter}>
+                            <SelectTrigger className="h-8">
+                              <SelectValue placeholder="All Status" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="all">All Status</SelectItem>
+                              <SelectItem value="Not Started">Not Started</SelectItem>
+                              <SelectItem value="In Progress">In Progress</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      </TableHead>
+                      <TableHead>Notes</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {submissions.map((submission) => (
+                      <TableRow key={submission.id}>
+                        <TableCell>
+                          <Checkbox />
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex space-x-2">
+                            <ArrowLeftToLine className="w-4 h-4" />
+                            <Eye className="w-4 h-4" />
+                          </div>
+                        </TableCell>
+                        <TableCell>{submission.name}</TableCell>
+                        <TableCell>
+                          <span className={`px-2 py-1 rounded text-sm ${getStatusColor(submission.status)}`}>
+                            {submission.status}
+                          </span>
+                        </TableCell>
+                        <TableCell>
+                          <span className={`px-2 py-1 rounded text-sm ${getStatusColor(submission.paymentStatus)}`}>
+                            {submission.paymentStatus}
+                          </span>
+                        </TableCell>
+                        <TableCell>
+                          <span className={`px-2 py-1 rounded text-sm ${getStatusColor(submission.curatorial)}`}>
+                            {submission.curatorial}
+                          </span>
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex items-center justify-between">
+                            {submission.notes.length > 0 ? (
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                className="text-blue-600 hover:text-blue-700"
+                                onClick={() => {
+                                  setSelectedSubmission(submission);
+                                  setViewingNotes(true);
+                                }}
+                              >
+                                View
+                              </Button>
+                            ) : (
+                              <span className="text-gray-500 italic">Empty</span>
+                            )}
+                            <DropdownMenu>
+                              <DropdownMenuTrigger asChild>
+                                <Button variant="ghost" size="sm">
+                                  <MoreVertical className="h-4 w-4" />
+                                </Button>
+                              </DropdownMenuTrigger>
+                              <DropdownMenuContent>
+                                <DropdownMenuItem
+                                  onClick={() => {
+                                    setSelectedSubmission(submission);
+                                    setIsAddingNote(true);
+                                  }}
+                                >
+                                  Add Note
+                                </DropdownMenuItem>
+                              </DropdownMenuContent>
+                            </DropdownMenu>
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="rejected">
+              <div className="flex items-center justify-center h-32 bg-white rounded-lg">
+                <p className="text-gray-500">No rejected applications</p>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="waitlist">
+              <div className="flex items-center justify-center h-32 bg-white rounded-lg">
+                <p className="text-gray-500">No applications in waitlist</p>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="accepted">
+              <div className="flex items-center justify-center h-32 bg-white rounded-lg">
+                <p className="text-gray-500">No accepted applications</p>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="placed">
+              <div className="flex items-center justify-center h-32 bg-white rounded-lg">
+                <p className="text-gray-500">No placed applications</p>
+              </div>
+            </TabsContent>
+          </Tabs>
         </div>
       </main>
 

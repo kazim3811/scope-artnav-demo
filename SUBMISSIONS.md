@@ -1,13 +1,37 @@
 
 # Gallery Submissions Management System
 
-This document outlines the key features and functionality of the Gallery Submissions page.
+This document outlines the key features and functionality of the Gallery Submissions system.
+
+## Application Process
+
+### Step 1: Welcome
+- Initial welcome screen
+- Introduction to the application process
+
+### Step 2: Gallery Details
+- Gallery information collection
+- Contact details
+- Gallery history and background
+
+### Step 3: Choose Booth
+- Interactive booth selection
+- Visual booth layout
+- "Proceed to Deposit" CTA button
+
+### Step 4: Payment
+- Secure payment processing interface
+- Stripe payment form integration
+- Deposit payment confirmation
+- "Proceed to Curatorial" CTA
+- Payment status tracking
 
 ## Features
 
 ### Navigation
 - Located at the route: `/submissions`
 - Breadcrumb navigation showing: Fair Submissions > SCOPE DEMO > application
+- Step-by-step progress indicator
 
 ### Tab Navigation
 - Gallery Applications
@@ -50,8 +74,16 @@ This document outlines the key features and functionality of the Gallery Submiss
 - Rejected (red)
 
 ## Layout
-The page uses a main layout component that includes:
-- Left sidebar navigation
+The application uses a main layout component that includes:
+- Left sidebar navigation with progress tracking
 - Top header with breadcrumb navigation
-- Main content area with filters, actions, and submissions table
+- Main content area for each step
+- Responsive design for various screen sizes
+
+## Payment Processing
+- Secure payment integration
+- Deposit collection
+- Payment confirmation system
+- Transaction tracking
+- Receipt generation
 

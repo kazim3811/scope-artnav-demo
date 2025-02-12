@@ -1,16 +1,16 @@
-
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import ApplicationLayout from "@/components/layouts/ApplicationLayout";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
-import { ImagePlus, X, ArrowRight } from "lucide-react";
+import { ImagePlus, X, ArrowRight, CheckCircle2 } from "lucide-react";
 
 const Curatorial = () => {
   const navigate = useNavigate();
   const [images, setImages] = useState<File[]>([]);
   const [showForm, setShowForm] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleImageDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -29,22 +29,67 @@ const Curatorial = () => {
     setImages(prev => prev.filter((_, i) => i !== index));
   };
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitted(true);
+  };
+
+  const getCurrentStep = () => {
+    if (isSubmitted) return 7;
+    if (showForm) return 6;
+    return 5;
+  };
+
   return (
-    <ApplicationLayout currentStep={showForm ? 6 : 5}>
+    <ApplicationLayout currentStep={getCurrentStep()}>
       <header className="bg-white border-b border-gray-200">
         <div className="flex items-center justify-between px-6 py-3">
           <div className="flex items-center space-x-3">
             <span className="text-[#8E9196] text-sm">Application</span>
             <span className="text-[#8E9196] text-sm">/</span>
             <span className="text-[#1A1F2C] font-medium text-sm">
-              {showForm ? "Gallery Presentation" : "Curatorial Review"}
+              {isSubmitted ? "Next Steps" : showForm ? "Gallery Presentation" : "Curatorial Review"}
             </span>
           </div>
         </div>
       </header>
 
       <div className="p-6 max-w-3xl">
-        {!showForm ? (
+        {isSubmitted ? (
+          <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-100">
+            <div className="text-center mb-6">
+              <CheckCircle2 className="h-16 w-16 text-green-500 mx-auto mb-4" />
+              <h1 className="text-2xl font-bold text-[#1A1F2C] mb-2">Thank You for Your Submission!</h1>
+              <p className="text-gray-600">Your gallery presentation has been successfully submitted.</p>
+            </div>
+            
+            <div className="space-y-6 text-gray-600">
+              <div>
+                <h2 className="text-lg font-semibold text-[#1A1F2C] mb-2">What Happens Next?</h2>
+                <ul className="list-disc pl-5 space-y-3">
+                  <li>The SCOPE team will review your gallery presentation within 5-7 business days.</li>
+                  <li>You will receive an email notification once the review is complete.</li>
+                  <li>If additional information is needed, our team will contact you directly.</li>
+                  <li>Upon approval, you will receive detailed instructions about the next steps in the exhibition process.</li>
+                </ul>
+              </div>
+
+              <div>
+                <h2 className="text-lg font-semibold text-[#1A1F2C] mb-2">Need Assistance?</h2>
+                <p>If you have any questions or need to make changes to your submission, please contact our support team at <a href="mailto:support@scope-art.com" className="text-[#1A1F2C] underline">support@scope-art.com</a></p>
+              </div>
+
+              <div className="pt-4">
+                <Button 
+                  onClick={() => navigate("/dashboard")}
+                  className="bg-[#1A1F2C] hover:bg-[#2A2F3C] text-white"
+                >
+                  Return to Dashboard
+                </Button>
+              </div>
+            </div>
+          </div>
+        ) : !showForm ? (
           <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-100">
             <h1 className="text-2xl font-bold mb-6 text-[#1A1F2C]">Curatorial Review Process</h1>
             
@@ -85,7 +130,7 @@ const Curatorial = () => {
             <h1 className="text-2xl font-bold mb-4 text-[#1A1F2C]">Gallery Presentation</h1>
             
             <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
-              <form className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label className="text-sm font-medium text-[#1A1F2C] block mb-2">
                     About the Presentation

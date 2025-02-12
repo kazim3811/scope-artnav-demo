@@ -117,6 +117,28 @@ const ApplicationLayout = ({ children, currentStep }: ApplicationLayoutProps) =>
                   Gallery Presentation
                 </span>
               </div>
+              <div className={cn(
+                "ml-3 pl-2 mt-1 mb-1 border-l-2 h-3 transition-colors duration-300",
+                currentStep > 6 ? "border-[#1A1F2C]" : "border-gray-200"
+              )} />
+              <div className="flex items-center">
+                <div className={cn(
+                  "w-6 h-6 rounded-full flex items-center justify-center mr-2 text-sm transition-colors duration-300",
+                  currentStep === 7 ? "bg-[#1A1F2C] text-white" :
+                  currentStep > 7 ? "bg-[#1A1F2C] text-white" :
+                  "bg-gray-200 text-gray-600"
+                )}>
+                  7
+                </div>
+                <span className={cn(
+                  "text-sm transition-colors duration-300",
+                  currentStep === 7 ? "font-semibold text-[#1A1F2C]" :
+                  currentStep > 7 ? "font-medium text-[#1A1F2C]" :
+                  "text-[#8E9196]"
+                )}>
+                  Next Steps
+                </span>
+              </div>
             </div>
           </div>
         </div>

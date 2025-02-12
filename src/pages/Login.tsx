@@ -89,10 +89,12 @@ const Login = () => {
           </div>
         </div>
 
-        <div className="w-1/2 relative bg-[#f3f3f3]">
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-[#8E9196]">Placeholder Image</div>
-          </div>
+        <div className="w-1/2 relative">
+          <img 
+            src="/lovable-uploads/a9ead237-4299-475c-af06-38c4efe81266.png" 
+            alt="SCOPE International Contemporary"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
         </div>
       </div>
     </div>

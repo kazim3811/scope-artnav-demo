@@ -141,9 +141,32 @@ const Submissions = () => {
     submission.curatorial === "Not Started"
   );
 
-  const approvedSubmissions = submissions.filter(submission => 
-    submission.curatorial === "Approved"
-  );
+  const approvedSubmissions = [
+    { 
+      id: 6, 
+      name: "ARTNAV gallery 6 2025", 
+      status: "Completed",
+      paymentStatus: "Paid",
+      curatorial: "Approved",
+      invoicingStatus: "Paid"
+    },
+    { 
+      id: 12, 
+      name: "ARTNAV gallery 12 2025", 
+      status: "Completed",
+      paymentStatus: "Part Paid",
+      curatorial: "Approved",
+      invoicingStatus: "Part Paid"
+    },
+    { 
+      id: 13, 
+      name: "ARTNAV gallery 13 2025", 
+      status: "Completed",
+      paymentStatus: "Unpaid",
+      curatorial: "Approved",
+      invoicingStatus: "Unpaid"
+    }
+  ];
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -851,6 +874,27 @@ const Submissions = () => {
     },
   ];
 
+  const handleReminder = (submissionId: number) => {
+    toast({
+      title: "Reminder Sent",
+      description: `Payment reminder sent for submission ${submissionId}`,
+    });
+  };
+
+  const handleAutomatedReminders = (submissionId: number) => {
+    toast({
+      title: "Automated Reminders Updated",
+      description: `Automated reminders configured for submission ${submissionId}`,
+    });
+  };
+
+  const handleMarkAsPaid = (submissionId: number) => {
+    toast({
+      title: "Payment Status Updated",
+      description: `Submission ${submissionId} marked as paid`,
+    });
+  };
+
   return (
     <MainLayout>
       <header className="bg-white border-b border-gray-200">
@@ -955,6 +999,24 @@ const Submissions = () => {
                                 className="w-4 h-4 cursor-pointer hover:text-blue-600" 
                                 onClick={() => setPreviewApplication(submission.id)}
                               />
+                              <DropdownMenu>
+                                <DropdownMenuTrigger asChild>
+                                  <Button variant="ghost" size="icon" className="h-8 w-8 p-0">
+                                    <Settings className="h-4 w-4" />
+                                  </Button>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent align="end">
+                                  <DropdownMenuItem onClick={() => handleReminder(submission.id)}>
+                                    Send Payment Reminder
+                                  </DropdownMenuItem>
+                                  <DropdownMenuItem onClick={() => handleAutomatedReminders(submission.id)}>
+                                    Configure Automated Reminders
+                                  </DropdownMenuItem>
+                                  <DropdownMenuItem onClick={() => handleMarkAsPaid(submission.id)}>
+                                    Mark as Paid
+                                  </DropdownMenuItem>
+                                </DropdownMenuContent>
+                              </DropdownMenu>
                             </div>
                           </TableCell>
                         </TableRow>

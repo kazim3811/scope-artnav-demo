@@ -9,6 +9,8 @@ import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import Submissions from "./pages/Submissions";
 import Applications from "./pages/Applications";
+import GalleryDetails from "./pages/GalleryDetails";
+import ChooseBooth from "./pages/ChooseBooth";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +25,8 @@ const App = () => (
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/submissions" element={<Submissions />} />
           <Route path="/applications" element={<Applications />} />
+          <Route path="/gallery-details" element={<GalleryDetails />} />
+          <Route path="/choose-booth" element={<ChooseBooth />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
